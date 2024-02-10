@@ -95,7 +95,7 @@ El soporte para navegadores será limitado a las últimas versiones de Chrome, F
 
 # **Roles:**
 -Backend: Rubén Ledesma / Lucas Caro
--Frontend:Lesly Sharom Cueto Tipte / Leandro Lanza /
+-Frontend:Lesly Sharom Cueto Tipte / Leandro Lanza / Jessica Ortiz Ospina
 -Tester: Giorgina Spezia /
 -Diseño UX/UI: Lesly Sharom Cueto Tipte / Leandro Lanza / Florencia Alvarez
 
