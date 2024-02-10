@@ -2,7 +2,7 @@
 
 # 1. Objetivos Principales
 
-Desarrollar un sistema de registro de usuarios y profesionales.
+1.1 Desarrollar un sistema de registro de usuarios y profesionales.
 Implementar la funcionalidad de búsqueda de servicios.
 Permitir a los profesionales ofrecer sus servicios.
 Habilitar la filtración de profesionales por tipo de servicio.
@@ -12,7 +12,7 @@ Iniciar un chat entre usuario y profesional para coordinar servicios.
 Permitir a los usuarios dejar feedback y calificaciones sobre el servicio del profecional.
 Permitir a los profesionales dejar feedback y calificaciones sobre el usuario solicitante de su servicio.
 
-1.4 Criterios de Éxito
+1.2 Criterios de Éxito
 90% de usuarios están satisfechos con la plataforma.
 Reducción del tiempo medio de respuesta entre usuarios y profesionales en un 20%.
 Aumento del 30% en el número de servicios coordinados a través de la plataforma.
