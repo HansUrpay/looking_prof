@@ -22,6 +22,7 @@ Aumento del 30% en el número de servicios coordinados a través de la plataform
 2.1 Funcionalidades Principales
 Registro y autenticación de usuarios y profesionales.
 Búsqueda y filtrado de profesionales por tipo de servicio.
+Bñusqueda y filtrado de profesionales por ubicación geografica. 
 Sistema de solicitud de contacto.
 Inicio y gestión de chats entre usuarios y profesionales.
 Sistema de feedback y calificaciones entre usuarios y profesionales.
