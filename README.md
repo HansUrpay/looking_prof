@@ -11,6 +11,7 @@ Establecer un sistema de notificaciones para usuarios y profesionales.
 Iniciar un chat entre usuario y profesional para coordinar servicios.
 Permitir a los usuarios dejar feedback y calificaciones sobre el servicio del profecional.
 Permitir a los profesionales dejar feedback y calificaciones sobre el usuario solicitante de su servicio.
+Permitir modificaciones y eliminaciones de usuarios y profesionales.
 
 1.2 Criterios de Éxito
 90% de usuarios están satisfechos con la plataforma.
