@@ -2,21 +2,15 @@
 
 # 1. Objetivos Principales
 
-1.1 Objetivos a Corto Plazo (Primera Iteración)
 Desarrollar un sistema de registro de usuarios y profesionales.
 Implementar la funcionalidad de búsqueda de servicios.
 Permitir a los profesionales ofrecer sus servicios.
 Habilitar la filtración de profesionales por tipo de servicio.
-
-1.2 Objetivos a Mediano Plazo (Iteraciones Siguientes)
 Introducir la funcionalidad de solicitud de contacto entre usuarios y profesionales.
 Establecer un sistema de notificaciones para usuarios y profesionales.
 Iniciar un chat entre usuario y profesional para coordinar servicios.
-
-1.3 Objetivos a Largo Plazo (Iteraciones Posteriores)
 Permitir a los usuarios dejar feedback y calificaciones sobre el servicio del profecional.
 Permitir a los profesionales dejar feedback y calificaciones sobre el usuario solicitante de su servicio.
-Mejorar la experiencia de usuario en la plataforma.
 
 1.4 Criterios de Éxito
 90% de usuarios están satisfechos con la plataforma.
