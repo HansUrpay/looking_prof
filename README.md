@@ -53,91 +53,36 @@ Escalabilidad: la plataforma debe manejar un crecimiento del 50% en usuarios con
 4.1 Requisitos Funcionales
 
 4.1.1 Funcionalidades Principales
-Requisito
-Descripción
-Prioridad
-Estado
-RF-001
-Registro y Autenticación de Usuarios y Profesionales
-Alta
-En Desarrollo
-RF-002
-Búsqueda y Filtrado de Profesionales por Tipo de Servicio
-Alta
-Pendiente
-RF-003
-Sistema de Solicitud de Contacto
-Media
-Pendiente
-RF-004
-Inicio y Gestión de Chats entre Usuarios y Profesionales
-Alta
-Pendiente
-RF-005
-Sistema de Feedback y Calificaciones
-Alta
-Pendiente
 
+|RF-001|Registro y Autenticación de Usuarios y Profesionales|Alta|En Desarrollo
+|RF-002|Búsqueda y Filtrado de Profesionales por Tipo de Servicio|Alta|Pendiente
+|RF-003|Sistema de Solicitud de Contacto|Media|Pendiente|
+|RF-004|Inicio y Gestión de Chats entre Usuarios y Profesionales|Alta|Pendiente|
+|RF-005|Sistema de Feedback y Calificaciones|Alta|Pendiente|
 
 4.1.2 Funcionalidades Iterativas (Según Iteraciones Posteriores)
-Requisito
-Descripción
-Prioridad
-Estado
-RF-006
-Notificaciones Push para Usuarios y Profesionales
-Media
-Pendiente
-RF-007
-Mejoras en la Interfaz de Usuario
-Alta
-Pendiente
-RF-008
-Programación de Citas y Recordatorios
-Alta
-Pendiente
-
+|Requisito|Descripción|Prioridad|Estado|
+| --- | --- | --- | --- |
+|RF-006|Notificaciones Push para Usuarios y Profesionales|Media|Pendiente|
+|RF-007|Mejoras en la Interfaz de Usuario|Alta|Pendiente|
+|RF-008|Programación de Citas y Recordatorios|Alta|Pendiente|
 
 4.1.3 Funcionalidades Avanzadas (Iteraciones Posteriores)
-Requisito
-Descripción
-Prioridad
-Estado
-RF-009
-Integración con Servicios de Pago
-Alta
-Pendiente
-RF-010
-Ampliación de Categorías de Servicios
-Alta
-Pendiente
-RF-011
-Desarrollo de una Aplicación Móvil Complementaria
-Media
-Pendiente
+|Requisito|Descripción|Prioridad|Estado|
+| --- | --- | --- | --- |
+|RF-009|Integración con Servicios de Pago|Alta|Pendiente|
+|RF-010|Ampliación de Categorías de Servicios|Alta|Pendiente|
+|RF-011|Desarrollo de una Aplicación Móvil Complementaria|Media|Pendiente|
+
 
 
 4.2 Requisitos No Funcionales
-Requisito
-Descripción
-Prioridad
-Estado
-RNF-001
-Tiempo de Respuesta del Sistema: Menos de 2 Segundos
-Alta
-Pendiente
-RNF-002
-Disponibilidad del Sistema: 99.9% del Tiempo
-Alta
-Pendiente
-RNF-003
-Seguridad de la Información: Encriptación de Extremo a Extremo
-Alta
-Pendiente
-RNF-004
-Escalabilidad: Manejar un Crecimiento del 50% en Usuarios Concurrentes
-Alta
-Pendiente
+|Requisito|Descripción|Prioridad|Estado|
+| --- | --- | --- | --- |
+|RNF-001|Tiempo de Respuesta del Sistema: Menos de 2 Segundos|Alta|Pendiente|
+|RNF-002|Disponibilidad del Sistema: 99.9% del Tiempo|Alta|Pendiente|
+|RNF-003|Seguridad de la Información: Encriptación de Extremo a Extremo|Alta|Pendiente|
+|RNF-004|Escalabilidad: Manejar un Crecimiento del 50% en Usuarios Concurrentes|Alta|Pendiente|
 
 # 5. Establecimiento de Límites del Proyecto y Expectativas del Cliente
 
