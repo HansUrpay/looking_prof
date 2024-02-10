@@ -24,12 +24,12 @@ Registro y autenticación de usuarios y profesionales.
 Búsqueda y filtrado de profesionales por tipo de servicio.
 Búsqueda y filtrado de profesionales por ubicación geográfica. 
 Sistema de solicitud de contacto.
-Inicio y gestión de chats entre usuarios y profesionales.
 Sistema de feedback y calificaciones entre usuarios y profesionales.
 
 2.2 Funcionalidades Iterativas (Según Iteraciones Posteriores)
 Notificaciones push para usuarios y profesionales.
 Mejoras en la interfaz de usuario.
+Inicio y gestión de chats entre usuarios y profesionales.
 Programación de citas y recordatorios.
 
 2.3 Funcionalidades Avanzadas (Iteraciones Posteriores)
