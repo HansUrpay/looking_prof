@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   text-align: center;
 }
@@ -26,6 +30,21 @@
 
 .App-link {
   color: #61dafb;
+}
+.active-nav {
+  @apply relative;
+}
+
+.active-nav::after {
+  @apply block;
+  content: '';
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: var(--color-primary); /* No se puede convertir directamente, asegúrate de definir --color-primary en tu configuración de Tailwind */
+  @apply absolute;
+  left: calc(50% - 0.6rem);
+  transform: rotate(45deg);
+  margin-top: 0.9rem;
 }
 
 @keyframes App-logo-spin {
