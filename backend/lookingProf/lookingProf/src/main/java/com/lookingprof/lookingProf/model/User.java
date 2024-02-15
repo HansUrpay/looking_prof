@@ -14,11 +14,24 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Role {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String lastName;
+    private String userName;
+    private String email;
+    private String password;
+    //private Role idRole;
+    private String phone;
+    private String address;
+    private String country;
+    private String province;
+    private String city;
+    private Integer qualification;
+    //private Profession idProfession;
+
+    //private String redes;
 
 }

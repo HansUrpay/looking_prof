@@ -14,11 +14,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Role {
+
+
+public class AnnouncementStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String name;
 
+    private Integer id;
+
+    private String name;
 }
