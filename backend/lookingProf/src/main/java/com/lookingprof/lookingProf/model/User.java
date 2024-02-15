@@ -22,8 +22,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @NotEmpty(message = "El apellido no puede estar vacío")
+
     private String lastName;
     @NotEmpty(message = "El nombre de usuario no puede estar vacío")
     private String userName;

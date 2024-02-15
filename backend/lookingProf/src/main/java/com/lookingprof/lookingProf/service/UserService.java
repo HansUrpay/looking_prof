@@ -38,9 +38,9 @@ public class UserService implements IUserService{
     public List<User> findByQualification() {
         return userRepository.findByQualification();
     }
+
     @Override
     public List<User> listAll() {
         return userRepository.findAll();
     }
-
 }
