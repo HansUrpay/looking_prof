@@ -8,7 +8,6 @@ public class LookingProfApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LookingProfApplication.class, args);
-
 	}
 
 }

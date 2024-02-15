@@ -1,6 +1,5 @@
 package com.lookingprof.lookingProf.model;
 
-public class AnnouncementStatus {
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,21 +7,18 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-
-
-public class AnnouncementStatus {
+public class Advertisement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idAdvertisement;
+    private String description;
+    private int idUser;
+    private int idAnnouncement;
 
-    private Integer id;
-
-    private String name;
 }
