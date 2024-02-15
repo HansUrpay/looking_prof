@@ -14,39 +14,33 @@ public class UserService implements IUserService{
     @Autowired
     IUserRepository userRepository;
 
-
     @Override
-    public List<User> findByName(String userName) {
-        return null;
+    public List<User> findByUserName(String userName) {
+        return userRepository.findByUserName(userName);
     }
-
     @Override
-    public List<User> listAllByProfession(Profession profession) {
-        return null;
+    public List<User> findAllByProfession(Profession profession) {
+        return userRepository.findAllByProfession(profession);
     }
-
     @Override
-    public List<User> listByProvince(String province) {
-        return null;
+    public List<User> findByProvince(String province) {
+        return userRepository.findByProvince(province);
     }
-
     @Override
-    public List<User> listByCountry(String country) {
-        return null;
+    public List<User> findByCountry(String country) {
+        return userRepository.findByCountry(country);
     }
-
     @Override
-    public List<User> listByCity(String city) {
-        return null;
+    public List<User> findByCity(String city) {
+        return userRepository.findByCity(city);
     }
-
     @Override
-    public List<User> listByQualification() {
-        return null;
+    public List<User> findByQualification() {
+        return userRepository.findByQualification();
     }
-
     @Override
     public List<User> listAll() {
         return userRepository.findAll();
     }
+
 }
