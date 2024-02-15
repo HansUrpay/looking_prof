@@ -92,7 +92,7 @@ La plataforma estará disponible solo en español inicialmente.
 El soporte para navegadores será limitado a las últimas versiones de Chrome, Firefox y Safari.
 
 # **Roles:**
-- Backend: Rubén Ledesma / Lucas Caro / Mauro Caceres / Hans Urpay
+- Backend: Rubén Ledesma / Lucas Caro / Mauro Caceres / Hans Urpay / Elián Bargaz
 - Frontend: Lesly Sharom Cueto Tipte / Leandro Lanza / Jessica Ortiz Ospina
 - Tester: Giorgina Spezia /
 - Diseño UX/UI: Lesly Sharom Cueto Tipte / Leandro Lanza / Florencia Alvarez

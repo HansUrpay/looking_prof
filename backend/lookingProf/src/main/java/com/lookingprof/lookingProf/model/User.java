@@ -18,7 +18,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String lastName;
     private String userName;
     private String email;
@@ -26,6 +26,10 @@ public class User {
     //private Role idRole;
     private String phone;
     private String address;
+    private String country;
+    private String province;
+    private String city;
+    private Integer qualification;
     //private Profession idProfession;
 
     //private String redes;
