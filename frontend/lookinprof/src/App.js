@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/Home/Home'
 import Services from './components/Services/Services'
 import Contact from './components/Contact/Contact'
@@ -7,7 +7,7 @@ import Register from './components/Register/Register'
 import NotFound from './components/NotFound/NotFound'
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/Footer'
-import ProtectedRoutes from './Routes/ProtectedRoutes'
+// import ProtectedRoutes from './Routes/ProtectedRoutes'
 import Profile from "./components/Profile/Profile";
 import CheckOut from './components/Checkout/Checkout.jsx'
 function App() {
