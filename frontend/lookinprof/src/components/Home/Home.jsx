@@ -20,7 +20,7 @@ const Home = () => {
       {/* Section 1 de la pagina principal */}
       <div className='m-6 p-6 flex flex-col md:flex-row justify-center items-center lg:w-[1100px] min-w-[320px] p-auto '>
         <div className=' lg:p-6 w-full md:w-[60%] flex flex-col items-center lg:items-start lg:justify-between gap-6'>          
-          <h2 className='lg:mt-4 text-2xl text-[#004466] font-black'>¿Necesitas ayuda? Encuentra al profesional perfecto aquí</h2>
+          <h2 className='lg:mt-4 text-3xl text-[#004466] font-black'>¿Necesitas ayuda? Encuentra al profesional perfecto aquí</h2>
           <p className=''>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus nullam eget felis eget nunc lobortis mattis aliquam. </p>
           <div className='w-26'>
             <Button variant='contained' color='primary' onClick={handleClickContact}>Quiero Contactar</Button>
@@ -41,15 +41,14 @@ const Home = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-auto max-w-[1100px] min-w-[320px] p-2 justify-center'>
           {servicesHome.map((item, index) => (
             <div key={index} className='m-2 border-[#004466] border-2 rounded-lg h-auto'>
-              <Cards className='p-4'>
+              <Cards className='p-4 flex flex-col items-center'>
                 <div>
                   <img src={item.image} alt={item.title} className='w-full h-[200px] object-cover rounded-lg mb-4' />
-                </div>
-                <div className='flex flex-col text-start'>
-                  <h4 className='font-semibold text-xl'>{item.title}</h4>
+                  <h4 className='font-semibold text-xl'>{item.name}</h4>
                   <p className='text-sm'>{item.prof}</p>
+                  <span className='text-xs'>{item.city}</span>
                   <div className='flex flex-row gap-1 items-center'>
-                    {[...Array(Math.floor(item.starts))].map((_, i) => (
+                    {item.starts}{[...Array(Math.floor(item.starts))].map((_, i) => (
                       <RiStarSFill key={i} className='text-yellow-500' />
                     ))}
                     {item.starts % 1 !== 0 && (
@@ -57,6 +56,7 @@ const Home = () => {
                     )}
                   </div>
                 </div>
+                
                 <div className='flex py-2'>
                   <Button variant='contained' color='primary'onClick={() => navigate('/login')}>
                     Contactar

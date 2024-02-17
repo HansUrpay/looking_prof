@@ -1,6 +1,6 @@
-import { Button } from '@mui/material'
-import React, { useState, useEffect, useRef } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Button } from '@mui/material';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 export const links = [
     {
@@ -29,10 +29,19 @@ const NavBar = () => {
     const [active, setActive] = useState(0);
     const [menuOpen, setMenuOpen] = useState(false);
     const navRef = useRef(null);
+    const location = useLocation();
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
+
+    useEffect(() => {
+        const currentPath = location.pathname;
+        const activeIndex = links.findIndex(link => link.path === currentPath);
+        if (activeIndex !== -1) {
+            setActive(activeIndex);
+        }
+    }, [location]);
 
     useEffect(() => {
         const closeMenuOnScroll = () => {
@@ -112,7 +121,7 @@ const NavBar = () => {
                 </div>
             )}
         </nav>
-    )
-}
+    );
+};
 
-export default NavBar
+export default NavBar;

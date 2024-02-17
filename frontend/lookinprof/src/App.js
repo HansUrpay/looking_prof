@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/Home/Home'
 import Services from './components/Services/Services'
+import ServicesDetails from './components/ServicesDetails/ServicesDetails.jsx'
 import Contact from './components/Contact/Contact'
 import Login from './components/Login/Login'
 import Register from './components/Register/Register'
@@ -21,6 +22,7 @@ function App() {
       <Route path='register' element={<Register/>}/>
       {/* <Route path='/*' element={<ProtectedRoutes/>}> */}
         <Route path='services' element={<Services/>}/>
+        <Route path='services/:id' element={<ServicesDetails />} />
         <Route path='profile' element={<Profile/>}/>
         <Route path='checkout' element={<CheckOut/>}/>
 
