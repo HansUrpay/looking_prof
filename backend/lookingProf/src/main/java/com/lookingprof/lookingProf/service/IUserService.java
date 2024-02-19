@@ -20,4 +20,6 @@ public interface IUserService {
 
     public ResponseEntity<String> loginUser(User user);
 
+    public ResponseEntity<String> loginUser(User user);
+
 }

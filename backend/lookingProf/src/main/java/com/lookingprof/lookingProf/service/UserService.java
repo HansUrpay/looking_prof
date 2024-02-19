@@ -69,7 +69,7 @@ public class UserService implements IUserService {
         return userRepository.findById(id);
     }
 
-    public ResponseEntity<String> loginUser (User user){
+    public ResponseEntity<String> loginUser(User user) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         String token = jwtService.getToken(user);
         return new ResponseEntity<>(token, HttpStatus.OK);
