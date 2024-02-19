@@ -7,21 +7,17 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-
-
-public class AnnouncementStatus {
+public class Province {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idProvince;
+    private String nombreProvince;
 
-    private Integer id;
-
-    private String name;
 }
