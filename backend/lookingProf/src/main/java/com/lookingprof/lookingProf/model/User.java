@@ -21,10 +21,13 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idUser;
     private String lastName;
     private String userName;
+
+    @Column(unique = true)
     private String email;
+
     private String password;
     private String phone;
     private String address;
