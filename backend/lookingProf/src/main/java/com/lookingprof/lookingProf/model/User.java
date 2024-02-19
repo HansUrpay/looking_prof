@@ -40,13 +40,11 @@ public class User implements UserDetails {
     @OneToMany
     @JoinColumn(name = "fk_idProfession")
     private Profession profession;
-    @OneToOne
-    @JoinColumn(name = "rol")
     @Enumerated(EnumType.STRING)
     private Role role;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority((role.getName())));
+        return List.of(new SimpleGrantedAuthority((role.name())));
     }
 
     @Override
