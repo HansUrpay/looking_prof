@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,9 +63,22 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public ResponseEntity<String> loginUser(User user) {
+    public ResponseEntity<String> loginUser(UserDetails user) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+        UserDetails userDetails = userRepository.findByEmail(user.getUsername()).orElseThrow();
         String token = jwtService.getToken(user);
         return new ResponseEntity<>(token, HttpStatus.OK);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserDetails userDetails = userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("The user does not exists"));
+
+        return new org.springframework.security.core.userdetails.User(
+                userDetails.getUsername(),
+                "",
+                userDetails.getAuthorities()
+        );
     }
 }
