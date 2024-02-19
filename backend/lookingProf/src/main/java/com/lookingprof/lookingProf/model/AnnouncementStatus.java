@@ -1,6 +1,5 @@
 package com.lookingprof.lookingProf.model;
 
-public class AnnouncementStatus {
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
