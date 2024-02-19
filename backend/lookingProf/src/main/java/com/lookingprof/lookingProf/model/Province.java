@@ -18,6 +18,6 @@ public class Province {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idProvince;
-    private String nombreProvince;
+    private String nameProvince;
 
 }
