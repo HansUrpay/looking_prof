@@ -1,7 +1,6 @@
 package com.lookingprof.lookingProf.controller;
 
 
-import com.lookingprof.lookingProf.model.Role;
 import com.lookingprof.lookingProf.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

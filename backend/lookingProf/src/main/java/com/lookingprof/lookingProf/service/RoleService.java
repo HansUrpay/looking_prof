@@ -1,7 +1,6 @@
 package com.lookingprof.lookingProf.service;
 
 
-import com.lookingprof.lookingProf.model.Role;
 import com.lookingprof.lookingProf.repository.IRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

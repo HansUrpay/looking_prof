@@ -35,15 +35,15 @@ public class User implements UserDetails {
     @OneToOne
     @JoinColumn(name = "fk_idCity")
     private City city;
-    @OneToOne
-    @JoinColumn(name = "fk_idRole")
-    private Role role;
     private Integer qualification;
     private String imageUrl;
     @OneToMany
-    @JoinColumn(name = "idProfession")
+    @JoinColumn(name = "fk_idProfession")
     private Profession profession;
-
+    @OneToOne
+    @JoinColumn(name = "rol")
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority((role.getName())));
