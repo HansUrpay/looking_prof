@@ -44,7 +44,7 @@ public class ApplicationConfig {
      * @return devuelve una instancia de BCryptPasswordEncoder
      */
     @Bean
-    private PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -52,7 +52,7 @@ public class ApplicationConfig {
      * TODO: pendiente de configurar el UserDetailService con el User model, definir si va ser busqueda por userName o por email
      */
     @Bean
-    private UserDetailsService userDetailService() {
+    public UserDetailsService userDetailService() {
         return username -> (UserDetails) iUserService.findByName(username);
     }
 
