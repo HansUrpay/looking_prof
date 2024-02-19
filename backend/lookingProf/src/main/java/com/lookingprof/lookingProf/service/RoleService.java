@@ -63,7 +63,7 @@ public class RoleService implements IRoleService {
     public HashMap<String, String> deleteRole(Integer id) {
         try{
             HashMap<String, String> response = new HashMap<>();
-            response.put("message", "Role deleted succesfully");
+            response.put("message", "Role was deleted succesfully");
             iRoleRepository.deleteById(id);
             return response;
         }catch (Exception e){
