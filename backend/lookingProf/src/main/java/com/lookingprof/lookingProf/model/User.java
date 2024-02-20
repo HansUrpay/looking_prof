@@ -41,7 +41,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "fk_idProfession")
     private List<Profession> listProfession;
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Enum role;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority((role.name())));
