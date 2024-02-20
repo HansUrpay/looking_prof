@@ -1,5 +1,7 @@
 package com.lookingprof.lookingProf.service;
 
+import com.lookingprof.lookingProf.exceptions.UserDeleteException;
+import com.lookingprof.lookingProf.exceptions.UserNotFoundException;
 import com.lookingprof.lookingProf.jwt.JwtService;
 import com.lookingprof.lookingProf.model.Profession;
 import com.lookingprof.lookingProf.model.User;
@@ -29,8 +31,55 @@ public class UserService implements IUserService {
     JwtService jwtService;
 
     @Override
+    public List<User> listAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<User> findByName(String userName) {
-        return null;
+        List<User> users = userRepository.findByUserName(userName);
+            if (users.isEmpty()) {
+                throw new UserNotFoundException("Error al buscar usuarios por nombre: " + userName);
+            }
+        return users;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<User> findByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("Error al buscar el usuario con email: " + email);
+        }
+        return user;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<User> findById(Integer id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("Error al buscar el usuario con id: " + id);
+        }
+        return user;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Optional<User> deleteUser(Integer id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("Error al buscar el usuario con id: " + id);
+        }
+        User userDelete = user.get();
+            try {
+                userRepository.delete(userDelete);
+                return user;
+            } catch (Exception e){
+                e.printStackTrace();
+                throw new UserDeleteException("Error al eliminar el usuario con ID: " + id, e);
+            }
     }
 
     @Override
@@ -58,16 +107,6 @@ public class UserService implements IUserService {
         return null;
     }
 
-    @Override
-    public List<User> listAll() {
-        return userRepository.findAll();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<User> findById(Integer id) {
-        return userRepository.findById(id);
-    }
 
     public ResponseEntity<String> loginUser(User user) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));

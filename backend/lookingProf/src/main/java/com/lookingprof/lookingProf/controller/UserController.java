@@ -25,6 +25,6 @@ public class UserController {
     public List<User> getAllUser(){
         var users = userService.listAll();
         return users;
-    }
+      }
 
 }
