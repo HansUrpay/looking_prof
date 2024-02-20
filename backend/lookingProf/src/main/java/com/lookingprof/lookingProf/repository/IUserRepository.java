@@ -1,15 +1,18 @@
 package com.lookingprof.lookingProf.repository;
 
 import com.lookingprof.lookingProf.model.Profession;
+import com.lookingprof.lookingProf.model.Province;
 import com.lookingprof.lookingProf.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface IUserRepository extends JpaRepository<User, Integer> {
 
     List<User> findByUserName(String userName);
@@ -18,12 +21,12 @@ public interface IUserRepository extends JpaRepository<User, Integer> {
 
     List<User> findAllByProfession(Profession profession);
 
-    List<User> findByProvince(String province);
+    List<User> findByProvince(Province province);
 
     List<User> findByCountry(String country);
 
-    List<User> findByCity(String city);
-
     //@Query("SELECT u FROM User u WHERE u.qualification IS NOT NULL")
-    List<User> findByQualification();
+    //List<User> findByQualification();
+
+
 }
