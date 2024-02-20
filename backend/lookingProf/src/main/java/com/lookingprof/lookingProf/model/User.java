@@ -39,7 +39,7 @@ public class User implements UserDetails {
     private String imageUrl;
     @OneToMany
     @JoinColumn(name = "fk_idProfession")
-    private Profession profession;
+    private List<Profession> listProfession;
     @Enumerated(EnumType.STRING)
     private Role role;
     @Override
