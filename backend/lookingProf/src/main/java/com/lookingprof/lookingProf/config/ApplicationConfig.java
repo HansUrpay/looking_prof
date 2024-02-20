@@ -1,5 +1,6 @@
 package com.lookingprof.lookingProf.config;
 
+import com.lookingprof.lookingProf.repository.IUserRepository;
 import com.lookingprof.lookingProf.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,8 +9,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -17,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ApplicationConfig {
 
     @Autowired
-    IUserService iUserService;
+    IUserRepository iUserRepository;
 
     /**
      * Personaliza el administrador de autenticación que va usar la aplicación.
@@ -34,13 +35,13 @@ public class ApplicationConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailService());
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService());
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
     }
 
     /**
-     * Personaliza el encriptador que va usar la apliccción para las contraseñas de usuarios antes de alamcenar en la BD
+     * Personaliza el encriptador que va usar la apliccción para las contraseñas de usuarios antes de alamacenar en la BD
      * @return devuelve una instancia de BCryptPasswordEncoder
      */
     @Bean
@@ -49,11 +50,12 @@ public class ApplicationConfig {
     }
 
     /**
-     * TODO: pendiente de configurar el UserDetailService con el User model, definir si va ser busqueda por userName o por email
+     * Retorna al usuario luego de buscar en la BD mendiante email. (Se ha configurado el email como username en el modelo User)
      */
     @Bean
-    public UserDetailsService userDetailService() {
-        return username -> (UserDetails) iUserService.findByName(username);
+    public UserDetailsService userDetailsService() {
+        return username -> iUserRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
 }

@@ -45,7 +45,7 @@ public class User implements UserDetails {
     private String imageUrl;
     @OneToMany
     @JoinColumn(name = "idProfession")
-    private Profession profession;
+    private List<Profession> profession;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -59,7 +59,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.email;
     }
 
     @Override
