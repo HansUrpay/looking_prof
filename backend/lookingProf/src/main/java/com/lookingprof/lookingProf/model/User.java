@@ -45,7 +45,7 @@ public class User implements UserDetails {
     private String imageUrl;
     @OneToMany
     @JoinColumn(name = "idProfession")
-    private Profession profession;
+    private List<Profession> profession;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

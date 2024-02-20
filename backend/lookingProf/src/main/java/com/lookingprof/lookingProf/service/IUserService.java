@@ -18,6 +18,7 @@ public interface IUserService extends UserDetailsService {
     public List<User> listByCity(String city);
     public List<User> listByQualification();
     public List<User> listAll();
+    public Optional<User> findById(Integer id);
     public ResponseEntity<String> loginUser(UserDetails user);
     public UserDetails loadUserByUsername(String username);
 

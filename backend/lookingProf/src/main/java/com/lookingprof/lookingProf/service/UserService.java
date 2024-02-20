@@ -12,11 +12,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
     @Autowired
     IUserRepository userRepository;
@@ -60,6 +62,12 @@ public class UserService implements IUserService{
     @Override
     public List<User> listAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<User> findById(Integer id) {
+        return userRepository.findById(id);
     }
 
     @Override
