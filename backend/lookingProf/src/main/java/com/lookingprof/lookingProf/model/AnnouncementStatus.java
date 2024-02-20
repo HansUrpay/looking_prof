@@ -15,7 +15,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-
 public class AnnouncementStatus {
 
     @Id

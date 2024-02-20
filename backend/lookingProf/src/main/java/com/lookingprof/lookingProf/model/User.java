@@ -1,6 +1,9 @@
 package com.lookingprof.lookingProf.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,27 +24,43 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idUser;
+    @NotEmpty(message = "El apellido no puede estar vacío")
     private String lastName;
+    @NotEmpty(message = "El nombre de usuario no puede estar vacío")
     private String userName;
+
+    @Column(unique = true)
+    @NotEmpty(message = "El email no puede estar vacío")
     private String email;
+    @NotEmpty(message = "La contraseña no puede estar vacía")
     private String password;
+    @Size(max=20 , message = "El número de teléfono debe tener 10 dígitos")
     private String phone;
     private String address;
+    @NotEmpty(message = "El país no puede estar vacío")
     private String country;
     @OneToOne
     @JoinColumn(name = "fk_idProvince")
+    @NotEmpty(message = "Debe seleccionar una provincia")
     private Province province;
     @OneToOne
     @JoinColumn(name = "fk_idCity")
+    @NotEmpty(message = "Debe seleccionar una ciudad")
     private City city;
     private Integer qualification;
     private String imageUrl;
     @OneToMany
+
     @JoinColumn(name = "fk_idProfession")
     private List<Profession> listProfession;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @JoinColumn(name = "idProfession")
+    private List<Profession> profession;
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority((role.name())));
@@ -54,7 +73,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.email;
     }
 
     @Override
