@@ -1,8 +1,8 @@
 package com.lookingprof.lookingProf.model;
 
+import com.lookingprof.lookingProf.model.Enum.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,26 +41,20 @@ public class User implements UserDetails {
     @NotEmpty(message = "El país no puede estar vacío")
     private String country;
     @OneToOne
-    @JoinColumn(name = "fk_idProvince")
+    @JoinColumn(name = "idProvince", referencedColumnName = "idProvince")
     @NotEmpty(message = "Debe seleccionar una provincia")
     private Province province;
     @OneToOne
-    @JoinColumn(name = "fk_idCity")
+    @JoinColumn(name = "city")
     @NotEmpty(message = "Debe seleccionar una ciudad")
     private City city;
     private Integer qualification;
     private String imageUrl;
-    @OneToMany
-
-    @JoinColumn(name = "fk_idProfession")
-    private List<Profession> listProfession;
+    @ManyToOne
+    @JoinColumn(name = "idProfession")
+    private Profession profession;
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @JoinColumn(name = "idProfession")
-    private List<Profession> profession;
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority((role.name())));
