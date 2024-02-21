@@ -1,5 +1,8 @@
 package com.lookingprof.lookingProf.service;
 
+import com.lookingprof.lookingProf.Auth.AuthResponse;
+import com.lookingprof.lookingProf.Auth.LoginRequest;
+import com.lookingprof.lookingProf.Auth.RegisterRequest;
 import com.lookingprof.lookingProf.model.Profession;
 import com.lookingprof.lookingProf.model.User;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +25,8 @@ public interface IUserService extends UserDetailsService {
     public List<User> listByQualification();
     public List<User> listAll();
     public Optional<User> findById(Integer id);
-    public ResponseEntity<String> loginUser(UserDetails user);
+    public AuthResponse loginUser(LoginRequest user);
+    public AuthResponse registerUser(RegisterRequest user);
     public UserDetails loadUserByUsername(String username);
 
 }

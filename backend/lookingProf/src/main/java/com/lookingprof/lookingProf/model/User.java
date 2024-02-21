@@ -38,15 +38,15 @@ public class User implements UserDetails {
     @Size(max=20 , message = "El número de teléfono debe tener 10 dígitos")
     private String phone;
     private String address;
-    @NotEmpty(message = "El país no puede estar vacío")
+//    @NotEmpty(message = "El país no puede estar vacío")
     private String country;
     @OneToOne
     @JoinColumn(name = "idProvince", referencedColumnName = "idProvince")
-    @NotEmpty(message = "Debe seleccionar una provincia")
+//    @NotEmpty(message = "Debe seleccionar una provincia")
     private Province province;
     @OneToOne
     @JoinColumn(name = "city")
-    @NotEmpty(message = "Debe seleccionar una ciudad")
+//    @NotEmpty(message = "Debe seleccionar una ciudad")
     private City city;
     private Integer qualification;
     private String imageUrl;
