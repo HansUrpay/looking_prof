@@ -34,22 +34,23 @@ const Register = () => {
     setProfesionalChecked(true);
   };
   return (
-    <div className="flex justify-center">
-      <div className="shadow-2xl rounded-3xl shadow-gray-400 bg-slate-300 w-1/3 relative z-5 left-40">
-        <img
-          src={deliveryMan}
-          alt="Man delivery"
-          className="relative right-32 mt-12"
-        ></img>
-      </div>
+    <div className="flex flex-row items-center justify-center p-10">
+      <div className="flex justify-center">
+        <div className="shadow-2xl rounded-3xl shadow-gray-400 bg-slate-300 h-[500px] flex flex-col items-center justify-center">
+          <img
+            src={deliveryMan}
+            alt="Man delivery"
+            className="relative h-[450px] z-20"
+          ></img>
+        </div>
 
-      <div className="shadow-2xl rounded-3xl shadow-gray-400 px-20 py-20 flex flex-col justify-between w-1/3 relative left-24 z-10 bg-white">
-        <Typography variant="h3" gutterBottom>
-          Registrarse
-        </Typography>
+        <div className="shadow-2xl rounded-3xl shadow-gray-400 p-10 flex flex-col justify-between h-[500px] relative right-28 z-10 bg-white">
+          <Typography variant="h3" gutterBottom>
+            Registrarse
+          </Typography>
 
-        <form className="flex flex-col align-items: center justify-content: center space-y-5">
-          {/* <FormGroup>
+          <form className="flex flex-col align-items: center justify-content: center space-y-5">
+            {/* <FormGroup>
               <FormControlLabel
                 control={<Checkbox checked={usuarioChecked} onChange={handleUsuarioChange} />}
                 label="Usuario"
@@ -60,68 +61,75 @@ const Register = () => {
               />
             </FormGroup> */}
 
-          {/* <Button variant="outlined" startIcon={<DeleteIcon />}>
+            {/* <Button variant="outlined" startIcon={<DeleteIcon />}>
   Delete
 </Button>
 <Button variant="contained" endIcon={<SendIcon />}>
   Send
 </Button> */}
-          <TextField
-            label="Correo Electrónico"
-            placeholder="Correo Electrónico"
-            variant="outlined"
-            required
-          />
-
-          <TextField
-            label="Nombres"
-            required
-            placeholder="Nombres"
-            variant="outlined"
-          />
-
-          <TextField
-            label="Apellidos"
-            required
-            placeholder="Apellidos"
-            variant="outlined"
-          />
-
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">
-              Password
-            </InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-password"
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Password"
+            <TextField
+              label="Correo Electrónico"
+              placeholder="Correo Electrónico"
+              variant="outlined"
+              size='small'
+              required
             />
-          </FormControl>
 
-          <Button variant="contained" className="shadow-2xl">
-            Registrarme
-          </Button>
-        </form>
-        <p className="pt-5">
-          Ya tienes una cuenta,{" "}
-          <Link to={`/login`} className="text-blue-700 blod font-semibold ">
-            click aquí.
-          </Link>
-        </p>
+            <TextField
+              label="Nombres"
+              required
+              placeholder="Nombres"
+              variant="outlined"
+              size='small'
+            />
+
+            <TextField
+              label="Apellidos"
+              required
+              placeholder="Apellidos"
+              variant="outlined"
+              size='small'
+            />
+
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password" size="small">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end" size='small'>
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                      size="small"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+                size="small"
+              />
+            </FormControl>
+
+            <Button variant="contained" className="shadow-2xl">
+              Registrarme
+            </Button>
+          </form>
+          <p className="pt-5 text-xs font-medium">
+            Ya tienes una cuenta,{" "}
+            <Link to={`/login`} className="text-blue-700 blod font-semibold ">
+              click aquí.
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
+
   );
 };
 

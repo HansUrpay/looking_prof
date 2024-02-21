@@ -1,14 +1,11 @@
 {
   "name": "lookinprof",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-<<<<<<< HEAD
-=======
     "@mui/icons-material": "^5.15.10",
->>>>>>> 0965297ae0a876c4309a58024f660d4903a8fa11
     "@mui/material": "^5.15.10",
     "@mui/styled-engine-sc": "^6.0.0-alpha.16",
     "@testing-library/jest-dom": "^5.17.0",
