@@ -1,8 +1,12 @@
 package com.lookingprof.lookingProf.service;
 
+import com.lookingprof.lookingProf.Auth.AuthResponse;
+import com.lookingprof.lookingProf.Auth.LoginRequest;
+import com.lookingprof.lookingProf.Auth.RegisterRequest;
 import com.lookingprof.lookingProf.exceptions.UserDeleteException;
 import com.lookingprof.lookingProf.exceptions.UserNotFoundException;
 import com.lookingprof.lookingProf.jwt.JwtService;
+import com.lookingprof.lookingProf.model.Enum.Role;
 import com.lookingprof.lookingProf.model.Profession;
 import com.lookingprof.lookingProf.model.User;
 import com.lookingprof.lookingProf.repository.IUserRepository;
@@ -13,6 +17,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +32,9 @@ public class UserService implements IUserService {
 
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     JwtService jwtService;
@@ -110,11 +118,26 @@ public class UserService implements IUserService {
 
 
     @Override
-    public ResponseEntity<String> loginUser(UserDetails user) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-        UserDetails userDetails = userRepository.findByEmail(user.getUsername()).orElseThrow();
+    public AuthResponse loginUser(LoginRequest request) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        UserDetails userDetails = userRepository.findByEmail(request.getUsername()).orElseThrow();
+        String token = jwtService.getToken(userDetails);
+        return AuthResponse.builder().token(token).build();
+    }
+
+    @Override
+    public AuthResponse registerUser(RegisterRequest request) {
+        User user = new User();
+        user.setEmail(request.getEmail());
+        user.setUserName(request.getUserName());
+        user.setLastName(request.getLastName());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(Role.USER);
+        userRepository.save(user);
         String token = jwtService.getToken(user);
-        return new ResponseEntity<>(token, HttpStatus.OK);
+        return AuthResponse.builder()
+                .token(jwtService.getToken(user))
+                .build();
     }
 
     @Override
