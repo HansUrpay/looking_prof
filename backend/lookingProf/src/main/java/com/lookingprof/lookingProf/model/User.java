@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -28,7 +29,7 @@ public class User implements UserDetails {
     @NotEmpty(message = "El apellido no puede estar vacío")
     private String lastName;
     @NotEmpty(message = "El nombre de usuario no puede estar vacío")
-    private String userName;
+    private String firstName;
 
     @Column(unique = true)
     @NotEmpty(message = "El email no puede estar vacío")
@@ -55,6 +56,23 @@ public class User implements UserDetails {
     private Profession profession;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Size(max = 250)
+    private String description;
+
+    @OneToMany(mappedBy = "userOrigin")
+    private List<Comment> commentsSubmitted;
+
+    @OneToMany(mappedBy = "userDestination")
+    private List<Comment> commentsReceived;
+
+    @Temporal(TemporalType.DATE)
+    private Date createAt;
+    @Temporal(TemporalType.DATE)
+    private Date updateAt;
+
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority((role.name())));

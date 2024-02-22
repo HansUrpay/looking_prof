@@ -3,6 +3,7 @@ package com.lookingprof.lookingProf.service;
 import com.lookingprof.lookingProf.Auth.AuthResponse;
 import com.lookingprof.lookingProf.Auth.LoginRequest;
 import com.lookingprof.lookingProf.Auth.RegisterRequest;
+import com.lookingprof.lookingProf.dto.UserResponseDTO;
 import com.lookingprof.lookingProf.exceptions.UserDeleteException;
 import com.lookingprof.lookingProf.exceptions.UserNotFoundException;
 import com.lookingprof.lookingProf.jwt.JwtService;
@@ -21,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,11 +48,17 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<User> findByName(String userName) {
-        List<User> users = userRepository.findByUserName(userName);
+    public List<User> findByName(String firstName) {
+        List<User> users = userRepository.findByFirstName(firstName);
+
             if (users.isEmpty()) {
-                throw new UserNotFoundException("Error al buscar usuarios por nombre: " + userName);
+                throw new UserNotFoundException("Error al buscar usuarios por nombre: " + firstName);
             }
+        List<UserResponseDTO> listUserDTO = new ArrayList<>();
+        users.forEach(user -> {
+            UserResponseDTO userResponseDTO = new UserResponseDTO(user);
+            listUserDTO.add(userResponseDTO);
+        } );
         return users;
     }
 
@@ -120,8 +128,8 @@ public class UserService implements IUserService {
     @Override
     public AuthResponse loginUser(LoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails userDetails = userRepository.findByEmail(request.getUsername()).orElseThrow();
-        String token = jwtService.getToken(userDetails);
+        User user = userRepository.findByEmail(request.getUsername()).orElseThrow();
+        String token = jwtService.getToken(user);
         return AuthResponse.builder().token(token).build();
     }
 
@@ -129,14 +137,14 @@ public class UserService implements IUserService {
     public AuthResponse registerUser(RegisterRequest request) {
         User user = new User();
         user.setEmail(request.getEmail());
-        user.setUserName(request.getUserName());
+        user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.USER);
         userRepository.save(user);
         String token = jwtService.getToken(user);
         return AuthResponse.builder()
-                .token(jwtService.getToken(user))
+                .token(token)
                 .build();
     }
 
