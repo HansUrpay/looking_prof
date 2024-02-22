@@ -7,10 +7,10 @@ const UserProfile = () => {
   return (
     <div className="flex justify-center m-10">
       <div className="shadow-2xl rounded-3xl shadow-gray-400 bg-slate-200 w-1/3 flex items-center relative left-40">
-        <img src={profile} alt="man with laptop" className="max-w-64 ml-10"></img>
+        <img src={profile} alt="man with laptop" className="max-w-64 ml-20 mr-70 z-20"></img>
       </div>
 
-      <div className="shadow-2xl rounded-3xl shadow-gray-400 px-20 py-20 flex flex-col justify-between w-1/3 z-10  bg-white">
+      <div className="shadow-2xl rounded-3xl shadow-gray-400 px-20 py-20 flex flex-col justify-between w-[600] z-10  bg-white">
         <div className="text-center">
           <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold", mb:8 }}>
             Ivanna Roxanne

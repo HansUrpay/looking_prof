@@ -26,7 +26,7 @@ const Login = () => {
         <img src={man} alt="man with laptop" className="z-20"></img>
       </div>
 
-      <div className="shadow-2xl rounded-3xl shadow-gray-400 px-20 py-20 flex flex-col justify-between w-1/3 z-10  bg-white">
+      <div className="w-[600] shadow-2xl rounded-3xl shadow-gray-400 px-20 py-20 flex flex-col justify-between z-10  bg-white">
         <div className="m-5">
           <Typography variant="h3" gutterBottom>
             Iniciar Sesión
@@ -38,6 +38,7 @@ const Login = () => {
             label="Correo Electrónico"
             placeholder="Correo Electrónico"
             variant="outlined"
+            type="email"
           />
 
           <FormControl variant="outlined">
@@ -63,7 +64,7 @@ const Login = () => {
             />
           </FormControl>
 
-          <Button variant="contained">Iniciar Sesión</Button>
+          <Button type= "submit" variant="contained">Iniciar Sesión</Button>
         </form>
         <p>
           No tienes una cuenta aún,{" "}
