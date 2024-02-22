@@ -10,6 +10,7 @@ import Footer from './components/Footer/Footer'
 // import ProtectedRoutes from './Routes/ProtectedRoutes'
 import Profile from "./components/Profile/Profile";
 import CheckOut from './components/Checkout/Checkout.jsx'
+import UserProfile from "./components/UserProfile/UserProfile.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
       <Route path='contact' element={<Contact/>}/>
       <Route path='login' element={<Login/>}/>
       <Route path='register' element={<Register/>}/>
+      <Route path='profile' element={<UserProfile/>}/>
       {/* <Route path='/*' element={<ProtectedRoutes/>}> */}
         <Route path='services' element={<Services/>}/>
         <Route path='profile' element={<Profile/>}/>

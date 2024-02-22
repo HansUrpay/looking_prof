@@ -22,7 +22,11 @@ export const links = [
     {
         path: '/register',
         name: 'Registrarme',
-    }
+    },
+    {
+        path: '/profile',
+        name: 'Perfil',
+    },
 ]
 
 const NavBar = () => {
@@ -55,7 +59,7 @@ const NavBar = () => {
     }, []);
 
     return (
-        <nav ref={navRef} className='w-full h-24 sticky top-0 bg-white flex items-center justify-between px-4 md:px-20 z-10'>
+        <nav ref={navRef} className='w-full h-24 sticky top-0 bg-white flex items-center justify-between px-4 md:px-20 z-20'>
             <div className='flex items-center'>
                 <Link to={'/'} className='font-bold text-xl'>
                     LookingProf
