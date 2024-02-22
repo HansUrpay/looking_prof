@@ -3,6 +3,7 @@ package com.lookingprof.lookingProf.service;
 import com.lookingprof.lookingProf.Auth.AuthResponse;
 import com.lookingprof.lookingProf.Auth.LoginRequest;
 import com.lookingprof.lookingProf.Auth.RegisterRequest;
+import com.lookingprof.lookingProf.dto.UserResponseDTO;
 import com.lookingprof.lookingProf.exceptions.UserDeleteException;
 import com.lookingprof.lookingProf.exceptions.UserNotFoundException;
 import com.lookingprof.lookingProf.jwt.JwtService;
@@ -21,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,9 +50,15 @@ public class UserService implements IUserService {
     @Transactional(readOnly = true)
     public List<User> findByName(String firstName) {
         List<User> users = userRepository.findByFirstName(firstName);
+
             if (users.isEmpty()) {
                 throw new UserNotFoundException("Error al buscar usuarios por nombre: " + firstName);
             }
+        List<UserResponseDTO> listUserDTO = new ArrayList<>();
+        users.forEach(user -> {
+            UserResponseDTO userResponseDTO = new UserResponseDTO(user);
+            listUserDTO.add(userResponseDTO);
+        } );
         return users;
     }
 
