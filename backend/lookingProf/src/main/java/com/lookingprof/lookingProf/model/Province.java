@@ -1,21 +1,20 @@
 package com.lookingprof.lookingProf.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Profession {
+public class Province {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idProfession;
-    private String nameProfession;
-    @OneToMany
-    private List<User> listUsers;
+    private int idProvince;
+    private String nameProvince;
 
 }
