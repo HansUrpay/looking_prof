@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -64,6 +65,11 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "userDestination")
     private List<Comment> commentsReceived;
+
+    @Temporal(TemporalType.DATE)
+    private Date createAt;
+    @Temporal(TemporalType.DATE)
+    private Date updateAt;
 
 
 
