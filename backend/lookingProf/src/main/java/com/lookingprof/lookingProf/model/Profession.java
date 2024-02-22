@@ -1,10 +1,9 @@
 package com.lookingprof.lookingProf.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -16,5 +15,7 @@ public class Profession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idProfession;
     private String nameProfession;
+    @OneToMany
+    private List<User> listUsers;
 
 }

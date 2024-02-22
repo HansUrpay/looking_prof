@@ -1,5 +1,6 @@
 package com.lookingprof.lookingProf.controller;
 
+import com.lookingprof.lookingProf.model.Province;
 import com.lookingprof.lookingProf.model.User;
 import com.lookingprof.lookingProf.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/province")
-    public List<User> findByProvince(@RequestParam String province){
+    public List<User> findByProvince(@RequestParam Province province){
         return userService.findByProvince(province);
     }
 

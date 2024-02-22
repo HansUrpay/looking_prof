@@ -1,0 +1,34 @@
+package com.lookingprof.lookingProf.dto;
+
+import com.lookingprof.lookingProf.model.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.util.Date;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserResponseDTO {
+
+    private int idUser;
+    private Date createAt;
+    private String address;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String imageUrl;
+
+    public UserResponseDTO (User user){
+        this.idUser=user.getIdUser();
+        this.createAt=user.getCreateAt();
+        this.address= user.getAddress();
+        this.email= user.getEmail();
+        this.firstName= user.getFirstName();
+        this.lastName= user.getLastName();
+        this.imageUrl= user.getImageUrl();
+    }
+
+}

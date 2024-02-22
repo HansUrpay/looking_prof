@@ -1,14 +1,15 @@
 package com.lookingprof.lookingProf.model;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
-
+import com.lookingprof.lookingProf.model.Enum.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 
@@ -33,37 +35,53 @@ public class User implements UserDetails {
         @NotEmpty(message = "El apellido no puede estar vacío")
     private String lastName;
     @NotEmpty(message = "El nombre de usuario no puede estar vacío")
-    private String userName;
+    private String firstName;
+
     @Column(unique = true)
     @NotEmpty(message = "El email no puede estar vacío")
     private String email;
     @NotEmpty(message = "La contraseña no puede estar vacía")
     private String password;
-    @Pattern(regexp = "\\d{10}", message = "El número de teléfono debe tener 10 dígitos")
+    @Size(max=20 , message = "El número de teléfono debe tener 10 dígitos")
     private String phone;
     private String address;
-    @NotEmpty(message = "El país no puede estar vacío")
+//    @NotEmpty(message = "El país no puede estar vacío")
     private String country;
     @OneToOne
-    @JoinColumn(name = "fk_idProvince")
-    @NotEmpty(message = "Debe seleccionar una provincia")
+    @JoinColumn(name = "idProvince", referencedColumnName = "idProvince")
+//    @NotEmpty(message = "Debe seleccionar una provincia")
     private Province province;
     @OneToOne
-    @JoinColumn(name = "fk_idCity")
-    @NotEmpty(message = "Debe seleccionar una ciudad")
+    @JoinColumn(name = "city")
+//    @NotEmpty(message = "Debe seleccionar una ciudad")
     private City city;
-    @OneToOne
-    @JoinColumn(name = "fk_idRole")
-    private Role role;
     private Integer qualification;
     private String imageUrl;
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "idProfession")
-    private List<Profession> profession;
+    private Profession profession;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Size(max = 250)
+    private String description;
+
+    @OneToMany(mappedBy = "userOrigin")
+    private List<Comment> commentsSubmitted;
+
+    @OneToMany(mappedBy = "userDestination")
+    private List<Comment> commentsReceived;
+
+    @Temporal(TemporalType.DATE)
+    private Date createAt;
+    @Temporal(TemporalType.DATE)
+    private Date updateAt;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority((role.getName())));
+        return List.of(new SimpleGrantedAuthority((role.name())));
     }
 
     @Override
