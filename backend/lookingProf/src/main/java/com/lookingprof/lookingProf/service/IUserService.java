@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public interface IUserService extends UserDetailsService {
 
-    public List<User> findByName(String userName);
+    public List<User> findByName(String firsName);
     public Optional<User> deleteUser(Integer id);
     public Optional<User> findByEmail(String email);
     public List<User> listAllByProfession(Profession profession);
