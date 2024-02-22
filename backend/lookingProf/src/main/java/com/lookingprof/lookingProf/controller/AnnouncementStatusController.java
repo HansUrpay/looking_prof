@@ -22,7 +22,7 @@ public class AnnouncementStatusController {
     private final AnnouncementStatusService announcementStatusService;
 
 
-    @GetMapping()
+    @GetMapping("/get")
     public ResponseEntity<List<AnnouncementStatus>> getAllAnnouncementStatusService() {
         try{
 
@@ -36,7 +36,7 @@ public class AnnouncementStatusController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{idAnnouncementStatus}")
     public ResponseEntity<AnnouncementStatus> getAnnouncementStatusServiceById(@PathVariable Integer id){
         try{
 
@@ -50,7 +50,7 @@ public class AnnouncementStatusController {
         }
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/get/{nameAnnouncementStatus}")
     public ResponseEntity<List<AnnouncementStatus>> getAnnouncementStatusServiceByName(@PathVariable String name){
         try{
 
@@ -64,7 +64,7 @@ public class AnnouncementStatusController {
         }
     }
 
-    @PostMapping()
+    @PostMapping("/create")
     public ResponseEntity<AnnouncementStatus> createAnnouncementStatus(@RequestBody AnnouncementStatus entity){
         try {
 
@@ -78,7 +78,7 @@ public class AnnouncementStatusController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{edit}")
     public ResponseEntity<AnnouncementStatus> updateAnnouncementStatus(@PathVariable Integer id, @RequestBody AnnouncementStatus entity){
         try{
 
@@ -93,7 +93,7 @@ public class AnnouncementStatusController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{idPublication}")
     public ResponseEntity<HashMap<String, String>> deleteAnnouncementStatus(@PathVariable Integer id){
         try{
 
