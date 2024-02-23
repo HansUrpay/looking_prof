@@ -78,7 +78,7 @@ public class User implements UserDetails {
     @Temporal(TemporalType.DATE)
     private Date updateAt;
 
-
+    private String title;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

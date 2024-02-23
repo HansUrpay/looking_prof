@@ -29,7 +29,6 @@ public class UserResponseDTO {
         this.email= user.getEmail();
         this.firstName= user.getFirstName();
         this.lastName= user.getLastName();
-        this.imageUrl= user.getImageUrl();
     }
 
 }
