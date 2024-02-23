@@ -4,6 +4,7 @@ import com.lookingprof.lookingProf.model.User;
 import com.lookingprof.lookingProf.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,6 @@ public class UserController {
     public List<User> getAllUser(){
         var users = userService.listAll();
         return users;
-    }
+      }
 
 }

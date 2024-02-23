@@ -1,6 +1,5 @@
 package com.lookingprof.lookingProf.service;
 
-import com.lookingprof.lookingProf.model.AnnouncementStatus;
 import com.lookingprof.lookingProf.model.Publication;
 import com.lookingprof.lookingProf.repository.IPublicationRepository;
 import lombok.RequiredArgsConstructor;
