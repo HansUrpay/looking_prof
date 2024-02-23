@@ -1,5 +1,6 @@
 package com.lookingprof.lookingProf.repository;
 
+import com.lookingprof.lookingProf.model.City;
 import com.lookingprof.lookingProf.model.Profession;
 import com.lookingprof.lookingProf.model.Province;
 import com.lookingprof.lookingProf.model.User;
@@ -16,15 +17,15 @@ public interface IUserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByEmail(String email);
 
-    List<User> findAllByProfession(Profession profession);
+    List<User> findByProfession(Profession profession);
 
     List<User> findByProvince(Province province);
 
-    List<User> findByCountry(String country);
+    List<User> findByCity(City city);
 
     //@Query("SELECT u FROM User u WHERE u.qualification IS NOT NULL")
 
-    //List<User> findByQualification();
+    List<User> findByQualification();
 
 
 
