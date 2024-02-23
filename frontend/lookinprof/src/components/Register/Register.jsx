@@ -17,6 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const Register = () => {
     event.preventDefault();
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     setValue(event.target.value);
     let errors = {};
@@ -78,14 +79,19 @@ const Register = () => {
       formIsValid = false;
     }
 
-    if (formIsValid) {
-      localStorage.setItem("currentUser", JSON.stringify(formData));
-      dispatch(setCurrentUser(formData));
-      setLoggedIn(true);
+    try {
+      const responseData = await axios.post('http://localhost:8080/auth/register' ,formData)
+      const token = responseData.data.token;
+      localStorage.setItem('jwt', token)
+      const [header, payload, signature] = token.split('.');
+      const decodedPayload = JSON.parse(atob(payload));
+      dispatch(setCurrentUser(decodedPayload));
+      alert(`Gracias ${decodedPayload.firstName} por registrarte`)
       navigate('/');
-    } else {
-      setFormErrors(errors);
+    } catch (error) {
+      
     }
+
   };
 
 
