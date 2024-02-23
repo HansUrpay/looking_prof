@@ -40,7 +40,6 @@ const NavBar = () => {
     const dispatch = useDispatch(); // Acceso a la función de despacho de Redux
     const navigate = useNavigate(); // Acceso a la función de navegación proporcionada por React Router
     const { currentUser } = useSelector(({user}) => user); // Extracción de la información del usuario del almacen de Redux
-
     // Función para alternar la apertura/cierre del menú
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -72,7 +71,7 @@ const NavBar = () => {
         <nav ref={navRef} className='w-full h-24 sticky top-0 bg-white flex items-center justify-between px-4 md:px-20 z-50'>
             {/* Logo y marca */}
             <div className='flex items-center'>
-                <Link to={'/'} className='font-bold text-xl'>
+                <Link to={'/'} className='font-bold text-xl text-[#004466]'>
                     LookingProf
                 </Link>
             </div>
@@ -80,9 +79,9 @@ const NavBar = () => {
                 {/* Menú hamburguesa para vista móvil */}
                 <div className="lg:hidden p-2">
                     <button className="text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none" onClick={toggleMenu}>
-                        <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-                            <TiThMenu/>
-                        </svg>
+                        
+                            <TiThMenu className='text-[#004466] text-2xl'/>
+                       
                     </button>
                 </div>
                 {/* Enlaces de navegación */}
@@ -91,7 +90,7 @@ const NavBar = () => {
                         <div key={index} className={`${active === index && 'text-[#004466] after:w-full after:bg-[#004466] font-bold'} ${item.name !== "Iniciar sesión" && item.name !== "Registrarme" && 'after:h-[2px] after:w-0 after:bg-[#004466] relative after:absolute after:-bottom-1 after:left-0'}`}>
                             {/* Renderizado condicional de los enlaces según la autenticación del usuario */}
                             {currentUser ? (
-                                item.name === "Login" || item.name === "Registrarme" ? null : (
+                                item.name === "Iniciar sesión" || item.name === "Registrarme" ? null : (
                                     <NavLink to={item.path} className='' onClick={() => setActive(index)}>
                                         {item.name}
                                     </NavLink>
@@ -113,7 +112,7 @@ const NavBar = () => {
                     {/* Renderizado condicional de componentes específicos del usuario */}
                     {currentUser && (
                         <div className='ml-4 relative'>
-                            <p className='w-[200px] font-bold cursor-pointer flex flex-row items-center justifr-center px-8 py-2 rounded-full bg-[#004466] text-white' onClick={toggleMenu}>
+                            <p className='font-bold cursor-pointer flex flex-row items-center justifr-center px-8 py-2 rounded-full bg-[#004466] text-white' onClick={toggleMenu}>
                                 <p>{currentUser.firstName}</p>
                                 <svg className="h-4 w-4 ml-1 fill-current" viewBox="0 0 24 24">
                                     <path d="M7 10l5 5 5-5z"/>
@@ -136,7 +135,7 @@ const NavBar = () => {
             </div>
             {/* Menú desplegable para vista móvil */}
             {menuOpen && (
-                <div className="lg:hidden absolute top-20 right-4 bg-white shadow-md rounded-md z-10">
+                <div className="lg:hidden absolute top-20 right-4 bg-white shadow-md rounded-xl z-10">
                      {links.map((item, index) => (
                         <div key={index} className={`${item.name !== "Iniciar sesión" && item.name !== "Registrarme" && 'after:h-[2px] after:w-0 after:bg-[#004466] relative after:absolute after:-bottom-1 after:left-0'}`}>
                             {/* Renderizado condicional de los enlaces según la autenticación del usuario */}
