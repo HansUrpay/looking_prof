@@ -2,7 +2,7 @@ package com.lookingprof.lookingProf.controller;
 
 
 
-import com.lookingprof.lookingProf.model.City;
+
 import com.lookingprof.lookingProf.service.PublicationService;
 import lombok.RequiredArgsConstructor;
 import com.lookingprof.lookingProf.model.Publication;
