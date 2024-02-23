@@ -14,10 +14,11 @@ import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../../redux/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Login = () => {
     const storedUser = JSON.parse(localStorage.getItem("currentUser"));
     if (storedUser) {
       // Si hay datos de usuario, establecer el correo electrónico en el estado
-      setEmail(storedUser.email);
+      setUsername(storedUser.username);
     }
   }, []);
 
@@ -38,27 +39,39 @@ const Login = () => {
   };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    setUsername(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
-  const signIn = (e) => {
+  const signIn = async (e) => {
     e.preventDefault();
     // Suponiendo que no hay una API real, simplemente compararemos los datos con los simulados.
-    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
-
-    if (storedUser && storedUser.email === email && storedUser.password === password) {
-      // Si los datos coinciden, iniciar sesión
-      dispatch(setCurrentUser(storedUser));
-      // Mostrar un mensaje de éxito y navegar al inicio
+    // if (storedUser && storedUser.username === username && storedUser.password === password) {
+    //   // Si los datos coinciden, iniciar sesión
+    //   dispatch(setCurrentUser(storedUser));
+    //   // Mostrar un mensaje de éxito y navegar al inicio
+    //   navigate('/');
+    // } else {
+    //   // Mostrar mensaje de error o manejar la situación de credenciales incorrectas
+    //   console.log("Credenciales incorrectas.");
+    // }
+    try {
+      const responseData = await axios.post('http://localhost:8080/auth/login' ,{username, password})
+      const token = responseData.data.token;
+      localStorage.setItem('jwt', token)
+      const [header, payload, signature] = token.split('.');
+      const decodedPayload = JSON.parse(atob(payload));
+      dispatch(setCurrentUser(decodedPayload));
+      alert(`Hola de nuevo!! ${decodedPayload.firstName}`)
       navigate('/');
-    } else {
-      // Mostrar mensaje de error o manejar la situación de credenciales incorrectas
-      console.log("Credenciales incorrectas.");
+    } catch (error) {
+      
     }
+
+
   };
 
   return (
@@ -80,7 +93,7 @@ const Login = () => {
               placeholder="Correo Electrónico"
               variant="outlined"
               size="small"
-              value={email}
+              value={username}
               onChange={handleEmailChange} 
             />
             <FormControl variant="outlined">
