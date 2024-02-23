@@ -99,7 +99,7 @@ public class UserController {
     }
 
     @GetMapping("/profession")
-    public ResponseEntity<?> findByCity(@RequestParam Profession profession){
+    public ResponseEntity<?> findByProfession(@RequestParam Profession profession){
         Optional<List<UserResponseDTO>> optionalUsers = userService.findByProfession(profession);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
