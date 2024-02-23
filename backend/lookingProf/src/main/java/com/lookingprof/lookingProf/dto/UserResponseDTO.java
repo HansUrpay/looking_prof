@@ -19,6 +19,8 @@ public class UserResponseDTO {
     private String email;
     private String firstName;
     private String lastName;
+    private String imageUrl;
+    private String phone;
 
     public UserResponseDTO (User user){
         this.idUser=user.getIdUser();
