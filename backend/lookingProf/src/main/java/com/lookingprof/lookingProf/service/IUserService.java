@@ -17,15 +17,15 @@ import java.util.Optional;
 public interface IUserService extends UserDetailsService {
 
     public Optional<List<UserResponseDTO>> listAll();
-    public Optional<UserResponseDTO> findById(Integer id);
+    public Optional<User> findById(Integer id);
     public Optional<User> deleteUser(Integer id);
     public Optional<UserResponseDTO> updateUser(Integer id, User user);
     public Optional<List<UserResponseDTO>> findByFirstname(String userName);
-    public Optional<List<UserResponseDTO>> findByEmail(String email);
+    public Optional<UserResponseDTO> findByEmail(String email);
     public Optional<List<UserResponseDTO>> findByProfession(Profession profession);
     public Optional<List<UserResponseDTO>> findByProvince(Province province);
     public Optional<List<UserResponseDTO>> findByCity(City city);
-    public Optional<List<UserResponseDTO>> findByQualification();
+    public Optional<List<UserResponseDTO>> findByQualification(int qualification);
 
     public AuthResponse loginUser(LoginRequest user);
     public AuthResponse registerUser(RegisterRequest user);

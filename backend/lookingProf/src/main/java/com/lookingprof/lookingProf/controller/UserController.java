@@ -7,6 +7,7 @@ import com.lookingprof.lookingProf.model.Province;
 import com.lookingprof.lookingProf.model.User;
 import com.lookingprof.lookingProf.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
 
+    @Value("${frontend}")
+    private String frontendUrl;
 
     private final UserService userService;
 
@@ -58,7 +61,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/users")
+    @GetMapping("/firstName")
     public ResponseEntity<?> findByFirstname(@RequestParam String userName){
         Optional<List<UserResponseDTO>> optionalUsers = userService.findByFirstname(userName);
         if (optionalUsers.isPresent()){
@@ -68,9 +71,10 @@ public class UserController {
         }
     }
 
-    @GetMapping("/users")
+    @GetMapping("/email")
     public ResponseEntity<?> findByEmail(@RequestParam String email){
-        Optional<List<UserResponseDTO>> optionalUsers = userService.findByEmail(email);
+        System.out.println(frontendUrl);
+        Optional<UserResponseDTO> optionalUsers = userService.findByEmail(email);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
         } else {

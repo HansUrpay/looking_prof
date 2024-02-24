@@ -22,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -73,30 +74,21 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<UserResponseDTO>> findByEmail(String email) {
-        List<User> users = userRepository.findByFirstName(email);
-        if (users.isEmpty()) {
-            return Optional.empty();
-        }
-        List<UserResponseDTO> listUserDTO = new ArrayList<>();
-        users.forEach(user -> {
-            UserResponseDTO userResponseDTO = new UserResponseDTO(user);
-            listUserDTO.add(userResponseDTO);
-        });
-        return Optional.of(listUserDTO);
+    public Optional<UserResponseDTO> findByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.map(UserResponseDTO::new);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<UserResponseDTO> findById(Integer id) {
+    public Optional<User> findById(Integer id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
             return Optional.empty();
         }
         User user = userOptional.get();
-        UserResponseDTO userDTO = new UserResponseDTO(user);
 
-        return Optional.of(userDTO);
+        return Optional.of(user);
     }
 
     @Override
@@ -183,8 +175,8 @@ public class UserService implements IUserService {
         }
 
     @Override
-    public Optional<List<UserResponseDTO>> findByQualification() {
-        List<User> users = userRepository.findByQualification();
+    public Optional<List<UserResponseDTO>> findByQualification(int qualification) {
+        List<User> users = userRepository.findByQualification(qualification);
         if (users.isEmpty()) {
             return Optional.empty();
         } else {
@@ -213,6 +205,7 @@ public class UserService implements IUserService {
         user.setLastName(request.getLastName());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.USER);
+        user.setCreateAt(LocalDateTime.now());
         userRepository.save(user);
         String token = jwtService.getToken(user);
         return AuthResponse.builder()

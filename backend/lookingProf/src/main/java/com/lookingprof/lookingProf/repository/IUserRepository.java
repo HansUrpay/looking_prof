@@ -5,6 +5,7 @@ import com.lookingprof.lookingProf.model.Profession;
 import com.lookingprof.lookingProf.model.Province;
 import com.lookingprof.lookingProf.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.List;
@@ -24,8 +25,7 @@ public interface IUserRepository extends JpaRepository<User, Integer> {
     List<User> findByCity(City city);
 
     //@Query("SELECT u FROM User u WHERE u.qualification IS NOT NULL")
-
-    List<User> findByQualification();
+    List<User> findByQualification(int qualification);
 
 
 

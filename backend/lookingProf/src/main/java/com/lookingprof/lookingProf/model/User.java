@@ -17,6 +17,8 @@ import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -73,10 +75,10 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "userDestination")
     private List<Comment> commentsReceived;
 
-    @Temporal(TemporalType.DATE)
-    private Date createAt;
-    @Temporal(TemporalType.DATE)
-    private Date updateAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime createAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime updateAt;
 
     private String title;
 
