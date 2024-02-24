@@ -29,7 +29,7 @@ const Register = () => {
     firstName: "",
     lastName: "",
     password: "",
-    role: "user",
+    role: "USER",
   });
   const [formErrors, setFormErrors] = useState({
     email: "",
@@ -89,7 +89,7 @@ const Register = () => {
       alert(`Gracias ${decodedPayload.firstName} por registrarte`)
       navigate('/');
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(error);
     }
 
   };
@@ -123,8 +123,8 @@ const Register = () => {
                 value={formData.role}
                 onChange={handleChange}
               >
-                <FormControlLabel value="user" control={<Radio />} label="Usuario" />
-                <FormControlLabel value="professional" control={<Radio />} label="Professional" />
+                <FormControlLabel value="USER" control={<Radio />} label="Usuario" />
+                <FormControlLabel value="PROFESSIONAL" control={<Radio />} label="Professional" />
               </RadioGroup>
             </FormControl>
             <TextField
