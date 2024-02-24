@@ -204,7 +204,7 @@ public class UserService implements IUserService {
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(Role.USER);
+        user.setRole(Role.valueOf(String.valueOf(request.getRole())));
         user.setCreateAt(LocalDateTime.now());
         userRepository.save(user);
         String token = jwtService.getToken(user);
