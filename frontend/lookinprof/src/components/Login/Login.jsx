@@ -18,7 +18,7 @@ import axios from 'axios';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const Login = () => {
     const storedUser = JSON.parse(localStorage.getItem("currentUser"));
     if (storedUser) {
       // Si hay datos de usuario, establecer el correo electrónico en el estado
-      setUsername(storedUser.username);
+      setEmail(storedUser.username);
     }
   }, []);
 
@@ -39,7 +39,7 @@ const Login = () => {
   };
 
   const handleEmailChange = (event) => {
-    setUsername(event.target.value);
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -59,7 +59,7 @@ const Login = () => {
     //   console.log("Credenciales incorrectas.");
     // }
     try {
-      const responseData = await axios.post('http://localhost:8080/auth/login' ,{username, password})
+      const responseData = await axios.post('http://localhost:8080/auth/login' ,{email, password})
       const token = responseData.data.token;
       localStorage.setItem('jwt', token)
       const [header, payload, signature] = token.split('.');
@@ -93,7 +93,7 @@ const Login = () => {
               placeholder="Correo Electrónico"
               variant="outlined"
               size="small"
-              value={username}
+              value={email}
               onChange={handleEmailChange} 
             />
             <FormControl variant="outlined">
