@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Integer id, @RequestBody User userUpdate) {
+    public ResponseEntity<?> updateUser(@PathVariable Integer id, @RequestBody UserResponseDTO userUpdate) {
         Optional<UserResponseDTO> updatedUser = userService.updateUser(id, userUpdate);
         if (updatedUser.isPresent()) {
             return ResponseEntity.ok(updatedUser.get());
@@ -62,8 +62,8 @@ public class UserController {
     }
 
     @GetMapping("/firstName")
-    public ResponseEntity<?> findByFirstname(@RequestParam String userName){
-        Optional<List<UserResponseDTO>> optionalUsers = userService.findByFirstname(userName);
+    public ResponseEntity<?> findByFirstname(@RequestParam String firstName){
+        Optional<List<UserResponseDTO>> optionalUsers = userService.findByFirstname(firstName);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
         } else {
@@ -83,7 +83,7 @@ public class UserController {
     }
 
     @GetMapping("/province")
-    public ResponseEntity<?> findByProvince(@RequestParam Province province){
+    public ResponseEntity<?> findByProvince(@RequestParam String province){
         Optional<List<UserResponseDTO>> optionalUsers = userService.findByProvince(province);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
@@ -93,7 +93,7 @@ public class UserController {
     }
 
     @GetMapping("/city")
-    public ResponseEntity<?> findByCity(@RequestParam City city){
+    public ResponseEntity<?> findByCity(@RequestParam String city){
         Optional<List<UserResponseDTO>> optionalUsers = userService.findByCity(city);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
@@ -103,7 +103,7 @@ public class UserController {
     }
 
     @GetMapping("/profession")
-    public ResponseEntity<?> findByProfession(@RequestParam Profession profession){
+    public ResponseEntity<?> findByProfession(@RequestParam String profession){
         Optional<List<UserResponseDTO>> optionalUsers = userService.findByProfession(profession);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
@@ -113,7 +113,7 @@ public class UserController {
     }
 
     @GetMapping("/qualification/{qualification}")
-    public ResponseEntity<?> findByCity(@PathVariable int qualification){
+    public ResponseEntity<?> findByQualification(@PathVariable int qualification){
         Optional<List<UserResponseDTO>> optionalUsers = userService.findByQualification(qualification);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());

@@ -38,7 +38,7 @@ public class CommentController {
         return commentService.findById(id);
     }
 
-    @GetMapping("/getByUserDestination/{idUser}")
+    /*@GetMapping("/getByUserDestination/{idUser}")
     public ResponseEntity<List<CommentResponseDto>> getByDestination(@PathVariable Integer idUser){
         try{
             User user = userService.findById(idUser).orElse(null);
@@ -47,9 +47,9 @@ public class CommentController {
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
 
-    @GetMapping("/getByUserOrigin/{idUser}")
+    /*@GetMapping("/getByUserOrigin/{idUser}")
     public ResponseEntity<List<CommentResponseDto>> getByOrigin(@PathVariable Integer idUser){
         try{
             User user = userService.findById(idUser).orElse(null);
@@ -58,7 +58,7 @@ public class CommentController {
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
 
     @PostMapping
     public ResponseEntity<CommentResponseDto> createComment(@RequestBody Comment dto){

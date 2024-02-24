@@ -18,11 +18,11 @@ public interface IUserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByEmail(String email);
 
-    List<User> findByProfession(Profession profession);
+    List<User> findByProfession_NameProfession(String profession);
 
-    List<User> findByProvince(Province province);
+    List<User> findByProvince_NameProvince(String province);
 
-    List<User> findByCity(City city);
+    List<User> findByCity_NameCity(String city);
 
     //@Query("SELECT u FROM User u WHERE u.qualification IS NOT NULL")
     List<User> findByQualification(int qualification);

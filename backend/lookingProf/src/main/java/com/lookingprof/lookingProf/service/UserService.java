@@ -110,7 +110,7 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Optional<UserResponseDTO> updateUser(Integer id, User userUpdate) {
+    public Optional<UserResponseDTO> updateUser(Integer id, UserResponseDTO userUpdate) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()){
             return Optional.empty();
@@ -130,8 +130,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Optional<List<UserResponseDTO>> findByProfession(Profession profession) {
-        List<User> users = userRepository.findByProfession(profession);
+    public Optional<List<UserResponseDTO>> findByProfession(String profession) {
+        List<User> users = userRepository.findByProfession_NameProfession(profession);
         if (users.isEmpty()) {
             return Optional.empty();
         }
@@ -145,8 +145,8 @@ public class UserService implements IUserService {
 
 
     @Override
-    public Optional<List<UserResponseDTO>> findByProvince(Province province) {
-        List<User> users = userRepository.findByProvince(province);
+    public Optional<List<UserResponseDTO>> findByProvince(String province) {
+        List<User> users = userRepository.findByProvince_NameProvince(province);
         if (users.isEmpty()) {
             return Optional.empty();
         } else {
@@ -160,8 +160,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Optional<List<UserResponseDTO>> findByCity(City city) {
-            List<User> users = userRepository.findByCity(city);
+    public Optional<List<UserResponseDTO>> findByCity(String city) {
+            List<User> users = userRepository.findByCity_NameCity(city);
             if (users.isEmpty()) {
                 return Optional.empty();
             } else {
