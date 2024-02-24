@@ -89,7 +89,7 @@ const Register = () => {
       alert(`Gracias ${decodedPayload.firstName} por registrarte`)
       navigate('/');
     } catch (error) {
-      
+      console.log(error.response.data.message);
     }
 
   };

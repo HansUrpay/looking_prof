@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import man from "../../assets/manLaptop.png";
+import bgCard from "../../assets/bgCard.svg";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -7,7 +8,6 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
@@ -74,19 +74,19 @@ const Login = () => {
 
   };
 
-  return (
-    <div className="flex flex-row items-center justify-center p-10">
-      <div className="flex justify-center items-center">
-        <div className="shadow-2xl rounded-3xl shadow-gray-400 bg-slate-200/50 flex items-center h-[500px] w-[400px]">
-          <img src={man} alt="man with laptop" className="z-10 h-[500px] relative left-10"></img>
-        </div>
 
-        <div className="h-[500px] shadow-2xl rounded-3xl shadow-gray-400 p-10 flex flex-col justify-between z-100 relative right-20  bg-white">
-          
-          <Typography variant="h3" gutterBottom>
+  return (
+    <div className="flex flex-row items-center justify-center p-10 h-[100vh]"  style={{ backgroundImage: `url(${bgCard})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}>
+      <div className="flex justify-between items-center w-[1100px]">
+          <div className="w-2/3">
+
+          </div>
+  
+
+        <div className="h-[400px] shadow-2xl rounded-3xl shadow-gray-400 p-10 flex flex-col justify-between   bg-white">
+          <h2 className="text-4xl text-[#004466] font-extrabold font-sans">
             Iniciar Sesión
-          </Typography>
-          
+          </h2>
           <form onSubmit={signIn} className="flex flex-col gap-5 z-10">
             <TextField
               label="Correo Electrónico"

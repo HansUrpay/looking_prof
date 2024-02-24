@@ -28,6 +28,7 @@
       }
           // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [profesion, servicesData]);
+    window.scrollTo(0, 0);
 
     const uniqueStars = useMemo(() => {
       if (profesion && location) {
