@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/SupportContact")
+@RequestMapping("/supportContact")
 public class SupportContactController {
 
     private final SupportContactService supportContactService;
@@ -40,7 +40,7 @@ public class SupportContactController {
     @PutMapping("/edit")
     public SupportContact editSupportContact(@RequestBody SupportContact supportContact){
         supportContactService.editSupportContact(supportContact);
-        return supportContactService.findSupportContactById(supportContact.getId());
+        return supportContactService.findSupportContactById(supportContact.getIdSuportContact());
     }
 
 }

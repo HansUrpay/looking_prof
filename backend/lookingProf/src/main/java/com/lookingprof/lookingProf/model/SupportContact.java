@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class SupportContact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idSuportContact;
 
     private String userName;
     private String lastName;
