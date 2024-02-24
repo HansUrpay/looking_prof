@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import man from "../../assets/manLaptop.png";
+import mountain from "../../assets/montain.png";
+import manSettings from "../../assets/manSettings.svg";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -11,15 +12,15 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { setCurrentUser } from '../../redux/slices/userSlice';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -59,34 +60,44 @@ const Login = () => {
     //   console.log("Credenciales incorrectas.");
     // }
     try {
-      const responseData = await axios.post('http://localhost:8080/auth/login' ,{username, password})
+      const responseData = await axios.post(
+        "http://localhost:8080/auth/login",
+        { username, password }
+      );
       const token = responseData.data.token;
-      localStorage.setItem('jwt', token)
-      const [header, payload, signature] = token.split('.');
+      localStorage.setItem("jwt", token);
+      const [header, payload, signature] = token.split(".");
       const decodedPayload = JSON.parse(atob(payload));
       dispatch(setCurrentUser(decodedPayload));
-      alert(`Hola de nuevo!! ${decodedPayload.firstName}`)
-      navigate('/');
-    } catch (error) {
-      
-    }
-
-
+      alert(`Hola de nuevo!! ${decodedPayload.firstName}`);
+      navigate("/");
+    } catch (error) {}
   };
 
+ 
+  
   return (
-    <div className="flex flex-row items-center justify-center p-10">
-      <div className="flex justify-center items-center">
-        <div className="shadow-2xl rounded-3xl shadow-gray-400 bg-slate-200/50 flex items-center h-[500px] w-[400px]">
-          <img src={man} alt="man with laptop" className="z-10 h-[500px] relative left-10"></img>
-        </div>
+    <div className=" flex flex-col-reverse lg:relative h-screen flex lg:justify-center items-center" style={{
+      backgroundImage: `url(${mountain})`,
+      backgroundSize: "cover",
+    }}>
 
-        <div className="h-[500px] shadow-2xl rounded-3xl shadow-gray-400 p-10 flex flex-col justify-between z-100 relative right-20  bg-white">
-          
-          <Typography variant="h3" gutterBottom>
-            Iniciar Sesión
-          </Typography>
-          
+<img
+        src={manSettings}
+        alt="manSettings"
+        className="absolute left-0 p-[43px] hidden lg:block"
+      />
+      <div className="lg:flex justify-center items-center">
+      
+        
+
+        <div className="h-auto relative sm:relative lg:rounded-3xl p-10 z-20  bg-white lg:bottom-[-1px] lg:h-[400px] justify-center">
+          <div className="sm:text-sm">
+            <Typography variant="h3" gutterBottom>
+              Iniciar Sesión
+            </Typography>
+          </div>
+
           <form onSubmit={signIn} className="flex flex-col gap-5 z-10">
             <TextField
               label="Correo Electrónico"
@@ -94,7 +105,7 @@ const Login = () => {
               variant="outlined"
               size="small"
               value={username}
-              onChange={handleEmailChange} 
+              onChange={handleEmailChange}
             />
             <FormControl variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password" size="small">
@@ -122,9 +133,11 @@ const Login = () => {
               />
             </FormControl>
 
-            <Button variant="contained" type="submit">Iniciar Sesión</Button>
+            <Button variant="contained" type="submit">
+              Iniciar Sesión
+            </Button>
           </form>
-          <p className="pt-5 text-xs font-medium"> 
+          <p className="pt-5 text-xs font-medium">
             No tienes una cuenta aún,{" "}
             <Link to={`/register`} className="text-blue-700 blod font-semibold">
               click aquí.
@@ -133,7 +146,6 @@ const Login = () => {
         </div>
       </div>
     </div>
-    
   );
 };
 

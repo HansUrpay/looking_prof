@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../redux/slices/userSlice";
-import deliveryMan from "../../assets/deliveryMan.png";
+import mountain from "../../assets/montain.png";
+import manWorking from "../../assets/manWorking.svg";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -14,14 +15,14 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import FormHelperText from "@mui/material/FormHelperText"; // Import FormHelperText
 import { Link, useNavigate } from "react-router-dom";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [value, setValue] = useState('user');
+  const [value, setValue] = useState("user");
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -82,26 +83,27 @@ const Register = () => {
       localStorage.setItem("currentUser", JSON.stringify(formData));
       dispatch(setCurrentUser(formData));
       setLoggedIn(true);
-      navigate('/');
+      navigate("/");
     } else {
       setFormErrors(errors);
     }
   };
 
-
-
   return (
-    <div className="flex flex-row items-center justify-center p-10">
-      <div className="flex justify-center">
-        <div className="shadow-2xl rounded-3xl shadow-gray-400 bg-slate-300 h-[500px] flex flex-col items-center justify-center">
-          <img
-            src={deliveryMan}
-            alt="Man delivery"
-            className="relative h-[450px]"
-          ></img>
-        </div>
-
-        <div className="shadow-2xl rounded-3xl shadow-gray-400 p-8 flex flex-col justify-between h-[500px] relative right-16 bg-white">
+    <div
+      className=" flex flex-col-reverse lg:relative h-screen flex lg:justify-center items-center"
+      style={{
+        backgroundImage: `url(${mountain})`,
+        backgroundSize: "cover",
+      }}
+    >
+      <img
+        src={manWorking}
+        alt="manWorking"
+        className="absolute left-0 p-[43px] hidden lg:block"
+      />
+      
+        <div className="flex flex-col lg:justify-center items-center relative sm:relative lg:rounded-3xl p-10 z-20  bg-white lg:bottom-[-1px] justify-center">
           <Typography variant="h3" gutterBottom>
             Registrarse
           </Typography>
@@ -117,8 +119,16 @@ const Register = () => {
                 value={formData.role}
                 onChange={handleChange}
               >
-                <FormControlLabel value="user" control={<Radio />} label="Usuario" />
-                <FormControlLabel value="professional" control={<Radio />} label="Professional" />
+                <FormControlLabel
+                  value="user"
+                  control={<Radio />}
+                  label="Usuario"
+                />
+                <FormControlLabel
+                  value="professional"
+                  control={<Radio />}
+                  label="Professional"
+                />
               </RadioGroup>
             </FormControl>
             <TextField
@@ -129,9 +139,11 @@ const Register = () => {
               size="small"
               onChange={handleChange}
               error={!!formErrors.email}
-              helperText={formErrors.email ? !formErrors.email : ''}
+              helperText={formErrors.email ? !formErrors.email : ""}
             />
-            <FormHelperText error className="text-xs">{formErrors.email}</FormHelperText>
+            <FormHelperText error className="text-xs">
+              {formErrors.email}
+            </FormHelperText>
 
             <TextField
               name="firstName"
@@ -142,12 +154,13 @@ const Register = () => {
               onChange={handleChange}
               error={!!formErrors.firstName}
             />
-            <FormHelperText error className="text-xs">{formErrors.firstName}</FormHelperText>
+            <FormHelperText error className="text-xs">
+              {formErrors.firstName}
+            </FormHelperText>
 
             <TextField
               name="lastName"
               label="Apellidos"
-
               placeholder="Apellidos"
               variant="outlined"
               size="small"
@@ -157,10 +170,7 @@ const Register = () => {
             <FormHelperText error>{formErrors.lastName}</FormHelperText>
 
             <FormControl variant="outlined">
-              <InputLabel
-                htmlFor="outlined-adornment-password"
-                size="small"
-              >
+              <InputLabel htmlFor="outlined-adornment-password" size="small">
                 Contraseña
               </InputLabel>
               <OutlinedInput
@@ -188,11 +198,7 @@ const Register = () => {
             </FormControl>
             <FormHelperText error>{formErrors.password}</FormHelperText>
 
-            <Button
-              variant="contained"
-              className="shadow-2xl"
-              type="submit"
-            >
+            <Button variant="contained" className="shadow-2xl" type="submit">
               Registrarme
             </Button>
           </form>
@@ -208,7 +214,7 @@ const Register = () => {
             </Link>
             .
           </p>
-        </div>
+       
       </div>
     </div>
   );
