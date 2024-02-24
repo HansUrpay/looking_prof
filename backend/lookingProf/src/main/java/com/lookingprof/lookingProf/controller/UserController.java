@@ -30,7 +30,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/users")
+    @GetMapping("/all")
     public ResponseEntity<?> getAllUsers() {
         Optional<List<UserResponseDTO>> optionalUsers = userService.listAll();
 
@@ -112,15 +112,14 @@ public class UserController {
         }
     }
 
-    /*
-    @GetMapping("/qualification")
-    public ResponseEntity<?> findByCity(@RequestParam Profession profession){
-        Optional<List<UserResponseDTO>> optionalUsers = userService.findByProfession(profession);
+    @GetMapping("/qualification/{qualification}")
+    public ResponseEntity<?> findByCity(@PathVariable int qualification){
+        Optional<List<UserResponseDTO>> optionalUsers = userService.findByQualification(qualification);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron usuarios");
         }
     }
-    */
+
 }
