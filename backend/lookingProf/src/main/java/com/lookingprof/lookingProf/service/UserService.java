@@ -81,14 +81,14 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<User> findById(Integer id) {
+    public Optional<UserResponseDTO> findById(Integer id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
             return Optional.empty();
         }
         User user = userOptional.get();
 
-        return Optional.of(user);
+        return Optional.of(new UserResponseDTO(user));
     }
 
     @Override
@@ -205,7 +205,6 @@ public class UserService implements IUserService {
         user.setLastName(request.getLastName());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.valueOf(String.valueOf(request.getRole())));
-        user.setCreateAt(LocalDateTime.now());
         userRepository.save(user);
         String token = jwtService.getToken(user);
         return AuthResponse.builder()

@@ -25,9 +25,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
 
-    @Value("${frontend}")
-    private String frontendUrl;
-
     private final UserService userService;
 
     @GetMapping("/all")
@@ -61,6 +58,15 @@ public class UserController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findUserById(@PathVariable int id){
+        Optional<UserResponseDTO> userResponseDTO = userService.findById(id);
+        if(userResponseDTO.isPresent()){
+            return new ResponseEntity<>(userResponseDTO, HttpStatus.OK);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron usuarios");
+    }
+
     @GetMapping("/firstName")
     public ResponseEntity<?> findByFirstname(@RequestParam String firstName){
         Optional<List<UserResponseDTO>> optionalUsers = userService.findByFirstname(firstName);
@@ -73,7 +79,6 @@ public class UserController {
 
     @GetMapping("/email")
     public ResponseEntity<?> findByEmail(@RequestParam String email){
-        System.out.println(frontendUrl);
         Optional<UserResponseDTO> optionalUsers = userService.findByEmail(email);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());

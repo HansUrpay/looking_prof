@@ -18,7 +18,7 @@ import java.util.Optional;
 public interface IUserService extends UserDetailsService {
 
     public Optional<List<UserResponseDTO>> listAll();
-    public Optional<User> findById(Integer id);
+    public Optional<UserResponseDTO> findById(Integer id);
     public Optional<User> deleteUser(Integer id);
     public Optional<UserResponseDTO> updateUser(Integer id, UserResponseDTO userDTO);
     public Optional<List<UserResponseDTO>> findByFirstname(String firstName);
