@@ -89,6 +89,8 @@ public class User implements UserDetails {
 
     private String title;
 
+    private Boolean isActive;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority((role.name())));

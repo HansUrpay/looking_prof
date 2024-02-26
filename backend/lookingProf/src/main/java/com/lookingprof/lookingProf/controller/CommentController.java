@@ -60,8 +60,13 @@ public class CommentController {
         }
     }*/
 
+
     @PostMapping("/create")
     public ResponseEntity<CommentResponseDto> createComment(@RequestBody Comment comment){
+
+    @PostMapping()
+    public ResponseEntity<CommentResponseDto> createComment(@RequestBody Comment dto){
+
         try{
             CommentResponseDto createdComment = commentService.createComment(comment);
             return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
