@@ -5,14 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponseDTO {
+public class UserRequestDTO {
 
     private int idUser;
     private LocalDateTime createAt;
@@ -23,7 +21,7 @@ public class UserResponseDTO {
     private String imageUrl;
     private String phone;
 
-    public UserResponseDTO (User user){
+    public UserRequestDTO(User user){
         this.idUser=user.getIdUser();
         this.createAt=user.getCreateAt();
         this.address= user.getAddress();
