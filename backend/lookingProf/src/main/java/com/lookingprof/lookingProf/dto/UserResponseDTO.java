@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRequestDTO {
+public class UserResponseDTO {
 
     private int idUser;
     private LocalDateTime createAt;
@@ -21,7 +21,7 @@ public class UserRequestDTO {
     private String imageUrl;
     private String phone;
 
-    public UserRequestDTO(User user){
+    public UserResponseDTO(User user){
         this.idUser=user.getIdUser();
         this.createAt=user.getCreateAt();
         this.address= user.getAddress();

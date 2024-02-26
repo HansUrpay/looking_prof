@@ -87,6 +87,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private LocalDateTime updateAt;
 
+    private Boolean isActive;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority((role.name())));

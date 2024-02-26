@@ -1,7 +1,6 @@
 package com.lookingprof.lookingProf.controller;
 
-import com.lookingprof.lookingProf.dto.UserRequestDTO;
-import com.lookingprof.lookingProf.model.User;
+import com.lookingprof.lookingProf.dto.UserResponseDTO;
 import com.lookingprof.lookingProf.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,7 +23,7 @@ public class UserController {
 
     @GetMapping("/all")
     public ResponseEntity<?> getAllUsers() {
-        Optional<List<UserRequestDTO>> optionalUsers = userService.listAll();
+        Optional<List<UserResponseDTO>> optionalUsers = userService.listAll();
 
         if (optionalUsers.isPresent()) {
             return ResponseEntity.ok(optionalUsers.get());
@@ -35,17 +34,17 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
-        Optional<User> deletedUser = userService.deleteUser(id);
-        if (deletedUser.isPresent()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron usuarios");
+        try{
+            String response = userService.deleteUser(id);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Integer id, @RequestBody UserRequestDTO userUpdate) {
-        Optional<UserRequestDTO> updatedUser = userService.updateUser(id, userUpdate);
+    public ResponseEntity<?> updateUser(@PathVariable Integer id, @RequestBody UserResponseDTO userUpdate) {
+        Optional<UserResponseDTO> updatedUser = userService.updateUser(id, userUpdate);
         if (updatedUser.isPresent()) {
             return ResponseEntity.ok(updatedUser.get());
         } else {
@@ -55,7 +54,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findUserById(@PathVariable int id){
-        Optional<UserRequestDTO> userResponseDTO = userService.findById(id);
+        Optional<UserResponseDTO> userResponseDTO = userService.findById(id);
         if(userResponseDTO.isPresent()){
             return new ResponseEntity<>(userResponseDTO, HttpStatus.OK);
         }
@@ -64,7 +63,7 @@ public class UserController {
 
     @GetMapping("/firstName")
     public ResponseEntity<?> findByFirstname(@RequestParam String firstName){
-        Optional<List<UserRequestDTO>> optionalUsers = userService.findByFirstname(firstName);
+        Optional<List<UserResponseDTO>> optionalUsers = userService.findByFirstname(firstName);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
         } else {
@@ -74,7 +73,7 @@ public class UserController {
 
     @GetMapping("/email")
     public ResponseEntity<?> findByEmail(@RequestParam String email){
-        Optional<UserRequestDTO> optionalUsers = userService.findByEmail(email);
+        Optional<UserResponseDTO> optionalUsers = userService.findByEmail(email);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
         } else {
@@ -84,7 +83,7 @@ public class UserController {
 
     @GetMapping("/province")
     public ResponseEntity<?> findByProvince(@RequestParam String province){
-        Optional<List<UserRequestDTO>> optionalUsers = userService.findByProvince(province);
+        Optional<List<UserResponseDTO>> optionalUsers = userService.findByProvince(province);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
         } else {
@@ -94,7 +93,7 @@ public class UserController {
 
     @GetMapping("/city")
     public ResponseEntity<?> findByCity(@RequestParam String city){
-        Optional<List<UserRequestDTO>> optionalUsers = userService.findByCity(city);
+        Optional<List<UserResponseDTO>> optionalUsers = userService.findByCity(city);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
         } else {
@@ -104,7 +103,7 @@ public class UserController {
 
     @GetMapping("/profession")
     public ResponseEntity<?> findByProfession(@RequestParam String profession){
-        Optional<List<UserRequestDTO>> optionalUsers = userService.findByProfession(profession);
+        Optional<List<UserResponseDTO>> optionalUsers = userService.findByProfession(profession);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
         } else {
@@ -114,11 +113,22 @@ public class UserController {
 
     @GetMapping("/qualification/{qualification}")
     public ResponseEntity<?> findByQualification(@PathVariable int qualification){
-        Optional<List<UserRequestDTO>> optionalUsers = userService.findByQualification(qualification);
+        Optional<List<UserResponseDTO>> optionalUsers = userService.findByQualification(qualification);
         if (optionalUsers.isPresent()){
             return ResponseEntity.ok(optionalUsers.get());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron usuarios");
+        }
+    }
+
+    @GetMapping("/allActive")
+    public ResponseEntity<?> getAllUsersActives() {
+        List<UserResponseDTO> listUsersActives = userService.listAllActives();
+        try{
+            return ResponseEntity.ok(listUsersActives);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
