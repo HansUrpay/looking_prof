@@ -60,10 +60,10 @@ public class CommentController {
         }
     }*/
 
-    @PostMapping
-    public ResponseEntity<CommentResponseDto> createComment(@RequestBody Comment dto){
+    @PostMapping("/create")
+    public ResponseEntity<CommentResponseDto> createComment(@RequestBody Comment comment){
         try{
-            CommentResponseDto createdComment = commentService.createComment(dto);
+            CommentResponseDto createdComment = commentService.createComment(comment);
             return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

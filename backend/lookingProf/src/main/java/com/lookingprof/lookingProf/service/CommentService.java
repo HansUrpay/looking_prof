@@ -4,12 +4,16 @@ import com.lookingprof.lookingProf.dto.CommentResponseDto;
 import com.lookingprof.lookingProf.model.Comment;
 import com.lookingprof.lookingProf.model.User;
 import com.lookingprof.lookingProf.repository.ICommentRepository;
+import com.lookingprof.lookingProf.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +24,9 @@ import java.util.Optional;
 public class CommentService implements ICommentService{
 
     private final ICommentRepository iCommentRepository;
+
+    @Autowired
+    private IUserService userService;
 
 
     @Override
@@ -52,9 +59,16 @@ public class CommentService implements ICommentService{
 
     @Override
     @Transactional
-    public CommentResponseDto createComment(Comment dto) {
+    public CommentResponseDto createComment(Comment commentDto) {
         try{
-            Comment comment = iCommentRepository.save(dto);
+            Comment comment = new Comment();
+            comment.setCreatedAt(LocalDateTime.now());
+            comment.setDescription(commentDto.getDescription());
+            comment.setQualification(commentDto.getQualification());
+            comment.setUpdatedAt(LocalDateTime.now());
+            //comment.setUserDestination(userRepository.findById());
+            comment.setUserOrigin(commentDto.getUserOrigin());
+            iCommentRepository.save(comment);
             return new CommentResponseDto(comment);
         }catch (Exception e){
             throw new RuntimeException("Error creating comment");
