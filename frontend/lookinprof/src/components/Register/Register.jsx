@@ -52,16 +52,13 @@ const Register = () => {
   const checkEmailExists = async (email) => {
     try {
       const response = await axios.get(`http://localhost:8080/user/email?email=${email}`);
-      // Si el correo electrónico ya existe, establecer errores
-      if (response.data) {
+      if (response.data.email) {
         setFormErrors(prevErrors => ({ ...prevErrors, email: 'El correo electrónico ya está registrado.' }));
         return true; // Correo ya existe
       }
-      return false; // Correo no existe, todo bien
+      return; // Correo no existe, todo bien
     } catch (error) {
       console.error('Error al verificar el correo electrónico', error);
-      alert('Ocurrió un problema al verificar el correo electrónico.');
-      return true; // Devolver true puesto que no pudimos validar
     }
   };
 

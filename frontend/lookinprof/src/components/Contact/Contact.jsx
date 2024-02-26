@@ -15,7 +15,7 @@ const Contact = () => {
       <div className="shadow-2xl rounded-3xl shadow-gray-400 px-20 py-20 flex flex-col justify-between w-1/3 z-10  bg-white">
         <div>
           <Typography variant="h3" gutterBottom>
-            Contacto
+            Contactanos
           </Typography>
 
           <Typography paragraph={true}>
