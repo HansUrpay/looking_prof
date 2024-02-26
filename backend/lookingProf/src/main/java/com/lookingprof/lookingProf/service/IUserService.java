@@ -19,7 +19,7 @@ public interface IUserService extends UserDetailsService {
 
     public Optional<List<UserResponseDTO>> listAll();
     public Optional<UserResponseDTO> findById(Integer id);
-    public Optional<User> deleteUser(Integer id);
+    public String deleteUser(Integer id);
     public Optional<UserResponseDTO> updateUser(Integer id, UserResponseDTO userDTO);
     public Optional<List<UserResponseDTO>> findByFirstname(String firstName);
     public Optional<UserResponseDTO> findByEmail(String email);
@@ -32,5 +32,6 @@ public interface IUserService extends UserDetailsService {
     public AuthResponse loginUser(LoginRequest user);
     public AuthResponse registerUser(RegisterRequest user);
     public UserDetails loadUserByUsername(String username);
+    public List<UserResponseDTO> listAllActives();
 
 }
