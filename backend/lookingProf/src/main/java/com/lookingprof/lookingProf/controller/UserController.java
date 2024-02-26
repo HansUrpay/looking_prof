@@ -40,11 +40,11 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
-        Optional<User> deletedUser = userService.deleteUser(id);
-        if (deletedUser.isPresent()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron usuarios");
+        try{
+            String response = userService.deleteUser(id);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -124,6 +124,17 @@ public class UserController {
             return ResponseEntity.ok(optionalUsers.get());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron usuarios");
+        }
+    }
+
+    @GetMapping("/allActive")
+    public ResponseEntity<?> getAllUsersActives() {
+        List<UserResponseDTO> listUsersActives = userService.listAllActives();
+        try{
+            return ResponseEntity.ok(listUsersActives);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

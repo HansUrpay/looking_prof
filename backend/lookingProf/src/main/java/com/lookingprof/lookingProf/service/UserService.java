@@ -93,15 +93,14 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Optional<User> deleteUser(Integer id) {
+    public String deleteUser(Integer id) {
         Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()) {
-            return Optional.empty(); // No se encontró el usuario, devolvemos Optional.empty()
-        }
+
         User userDelete = user.get();
         try {
-            userRepository.delete(userDelete);
-            return user;
+            userDelete.setIsActive(false);
+            userRepository.save(userDelete);
+            return "Usuario eliminado correctamente";
         } catch (Exception e) {
             e.printStackTrace();
             throw new UserDeleteException("Error al eliminar el usuario con ID: " + id, e);
@@ -205,6 +204,7 @@ public class UserService implements IUserService {
         user.setLastName(request.getLastName());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.valueOf(String.valueOf(request.getRole())));
+        user.setIsActive(true);
         userRepository.save(user);
         String token = jwtService.getToken(user);
         return AuthResponse.builder()
@@ -222,6 +222,21 @@ public class UserService implements IUserService {
                 "",
                 userDetails.getAuthorities()
         );
+    }
+
+    @Override
+    public List<UserResponseDTO> listAllActives() {
+        List<User> userList = userRepository.findAllNotDeleted();
+        if(!userList.isEmpty()){
+            List<UserResponseDTO> listUsersDto = new ArrayList<>();
+            userList.forEach(user -> {
+                UserResponseDTO userResponseDTO = new UserResponseDTO(user);
+                listUsersDto.add(userResponseDTO);
+            });
+            return listUsersDto;
+        }else{
+            throw new RuntimeException("No hay usuarios activos registrados");
+        }
     }
 
 }
