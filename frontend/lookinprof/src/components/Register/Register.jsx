@@ -2,28 +2,28 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../redux/slices/userSlice";
 import deliveryMan from "../../assets/deliveryMan.png";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import FormHelperText from "@mui/material/FormHelperText"; // Import FormHelperText
+import {
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+  Typography,
+  TextField,
+  Button,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+} from "@mui/material";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link, useNavigate } from "react-router-dom";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import axios from "axios";
+import {FormHelperText} from "@mui/material";
 
 const Register = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [value, setValue] = useState('user');
-  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
@@ -31,102 +31,118 @@ const Register = () => {
     password: "",
     role: "USER",
   });
-  const [formErrors, setFormErrors] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    password: "",
-    role: "",
-  });
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (event) => {
-    setValue(event.target.value);
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-    setFormErrors({ ...formErrors, [name]: "" });
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    if (formErrors[name]) {
+      setFormErrors({ ...formErrors, [name]: "" });
+    }
   };
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
+  
+  const handleMouseDownPassword = (event) => event.preventDefault();
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+  const validateEmail = (email) => 
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.toLowerCase());
+
+  const checkEmailExists = async (email) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/user/email?email=${email}`);
+      // Si el correo electrónico ya existe, establecer errores
+      if (response.data) {
+        setFormErrors(prevErrors => ({ ...prevErrors, email: 'El correo electrónico ya está registrado.' }));
+        return true; // Correo ya existe
+      }
+      return false; // Correo no existe, todo bien
+    } catch (error) {
+      console.error('Error al verificar el correo electrónico', error);
+      alert('Ocurrió un problema al verificar el correo electrónico.');
+      return true; // Devolver true puesto que no pudimos validar
+    }
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    let isValid = true;
+
+    if (!formData.email) {
+      errors.email = "El correo electrónico es requerido";
+      isValid = false;
+    } else if (!validateEmail(formData.email)) {
+      errors.email = "El formato del correo electrónico no es correcto";
+      isValid = false;
+    }
+
+    if (!formData.firstName.trim()) {
+      errors.firstName = "El nombre es requerido";
+      isValid = false;
+    }
+
+    if (!formData.lastName.trim()) {
+      errors.lastName = "El apellido es requerido";
+      isValid = false;
+    }
+
+    if (!formData.password) {
+      errors.password = "La contraseña es requerida";
+      isValid = false;
+    } else if (formData.password.length < 8) {
+      errors.password = "La contraseña debe tener al menos 8 caracteres";
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    setValue(event.target.value);
-    let errors = {};
-    let formIsValid = true;
-    // Validation for email
-    if (!formData.email.trim() || formData.email.length === 0) {
-      errors.email = "El correo electrónico es requerido";
-      formIsValid = false;
+
+    if (!validateForm()) {
+      return;
     }
-    // Validation for firstName
-    if (!formData.firstName.trim() || formData.firstName.length === 0) {
-      errors.firstName = "El nombre es requerido";
-      formIsValid = false;
-    }
-    // Validation for lastName
-    if (!formData.lastName.trim() || formData.lastName.length === 0) {
-      errors.lastName = "El apellido es requerido";
-      formIsValid = false;
-    }
-    // Validation for password
-    if (!formData.password.trim() || formData.password.length < 8) {
-      errors.password = "Revisa la contraseña";
-      formIsValid = false;
+
+    const doesEmailExist = await checkEmailExists(formData.email);
+    if(doesEmailExist) {
+      return; // No continúa si el correo ya existe
     }
 
     try {
-      const responseData = await axios.post('http://localhost:8080/auth/register' ,formData)
-      const token = responseData.data.token;
-      localStorage.setItem('jwt', token)
-      const [header, payload, signature] = token.split('.');
-      const decodedPayload = JSON.parse(atob(payload));
-      dispatch(setCurrentUser(decodedPayload));
-      alert(`Gracias ${decodedPayload.firstName} por registrarte`)
+      const response = await axios.post('http://localhost:8080/auth/register', formData);
+      const token = response.data.token;
+      localStorage.setItem('jwt', token);
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      dispatch(setCurrentUser(payload));
+      alert(`Gracias ${payload.firstName} por registrarte`);
       navigate('/');
     } catch (error) {
-      console.log(error);
+      console.error("Error during registration", error);
     }
-
   };
-
-
-
   return (
     <div className="flex flex-row items-center justify-center p-10">
       <div className="flex justify-center">
         <div className="shadow-2xl rounded-3xl shadow-gray-400 bg-slate-300 h-[500px] flex flex-col items-center justify-center">
-          <img
-            src={deliveryMan}
-            alt="Man delivery"
-            className="relative h-[450px]"
-          ></img>
+          <img src={deliveryMan} alt="Man delivery" className="relative h-[450px]" />
         </div>
-
-        <div className="shadow-2xl rounded-3xl shadow-gray-400 p-8 flex flex-col justify-between h-[500px] relative right-16 bg-white">
-          <Typography variant="h3" gutterBottom>
+        <div className="shadow-2xl rounded-3xl shadow-gray-400 p-4 flex flex-col justify-between h-[500px] relative right-16 bg-white">
+          <Typography variant="h4" gutterBottom>
             Registrarse
           </Typography>
-          <form
-            className="flex flex-col align-items: center justify-content: center space-y-2"
-            onSubmit={handleFormSubmit}
-          >
-            <FormControl>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-              >
+          <form className="flex flex-col align-items: center justify-content: center space-y-2" onSubmit={handleFormSubmit}>
+            {/* Role Selection */}
+            <FormControl component="fieldset">
+              <RadioGroup row name="role" value={formData.role} onChange={handleChange}>
                 <FormControlLabel value="USER" control={<Radio />} label="Usuario" />
                 <FormControlLabel value="PROFESSIONAL" control={<Radio />} label="Professional" />
               </RadioGroup>
             </FormControl>
+
+            {/* Email Field */}
             <TextField
               name="email"
               label="Correo Electrónico"
@@ -135,10 +151,10 @@ const Register = () => {
               size="small"
               onChange={handleChange}
               error={!!formErrors.email}
-              helperText={formErrors.email ? !formErrors.email : ''}
+              helperText={formErrors.email || ''}
             />
-            <FormHelperText error className="text-xs">{formErrors.email}</FormHelperText>
 
+            {/* First Name Field */}
             <TextField
               name="firstName"
               label="Nombres"
@@ -147,73 +163,60 @@ const Register = () => {
               size="small"
               onChange={handleChange}
               error={!!formErrors.firstName}
+              helperText={formErrors.firstName || ''}
             />
-            <FormHelperText error className="text-xs">{formErrors.firstName}</FormHelperText>
 
+            {/* Last Name Field */}
             <TextField
               name="lastName"
               label="Apellidos"
-
               placeholder="Apellidos"
               variant="outlined"
               size="small"
               onChange={handleChange}
               error={!!formErrors.lastName}
+              helperText={formErrors.lastName || ''}
             />
-            <FormHelperText error>{formErrors.lastName}</FormHelperText>
 
-            <FormControl variant="outlined">
-              <InputLabel
-                htmlFor="outlined-adornment-password"
-                size="small"
-              >
-                Contraseña
-              </InputLabel>
+            {/* Password Field */}
+            <FormControl variant="outlined" size="small">
+              <InputLabel htmlFor="outlined-adornment-password">Contraseña</InputLabel>
               <OutlinedInput
                 name="password"
                 id="outlined-adornment-password"
                 type={showPassword ? "text" : "password"}
                 endAdornment={
-                  <InputAdornment position="end" size="small">
+                  <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
-                      size="small"
                     >
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 }
                 label="Contraseña"
-                size="small"
                 onChange={handleChange}
                 error={!!formErrors.password}
               />
+              <FormHelperText error>{formErrors.password || ''}</FormHelperText>
             </FormControl>
-            <FormHelperText error>{formErrors.password}</FormHelperText>
 
-            <Button
-              variant="contained"
-              className="shadow-2xl"
-              type="submit"
-            >
+            {/* Submit Button */}
+            <Button variant="contained" type="submit" className="shadow-2xl mt-4">
               Registrarme
             </Button>
           </form>
-          {loggedIn && (
-            <p className="pt-5 text-xs font-medium">
-              ¡Registro y login exitosos!
-            </p>
-          )}
-          <p className="pt-5 text-xs font-medium">
+
+          {/* Login Redirect */}
+          <Typography variant="body2" className="pt-5">
             Ya tienes una cuenta,{" "}
-            <Link to={`/login`} className="text-blue-700 blod font-semibold ">
+            <Link to="/login" className="text-blue-700 font-semibold">
               haz clic aquí
-            </Link>
-            .
-          </p>
+            </Link>.
+          </Typography>
         </div>
       </div>
     </div>
