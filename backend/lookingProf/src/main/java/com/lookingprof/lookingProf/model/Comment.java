@@ -41,4 +41,5 @@ public class Comment {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private LocalDateTime updatedAt;
+
 }
