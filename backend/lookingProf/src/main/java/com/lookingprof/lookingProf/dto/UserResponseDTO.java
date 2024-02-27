@@ -22,6 +22,10 @@ public class UserResponseDTO {
     private String lastName;
     private String imageUrl;
     private String phone;
+    private String profession;
+    private String province;
+    private String city;
+
 
     public UserResponseDTO (User user){
         this.idUser=user.getIdUser();
@@ -30,6 +34,9 @@ public class UserResponseDTO {
         this.email= user.getEmail();
         this.firstName= user.getFirstName();
         this.lastName= user.getLastName();
+        this.profession= user.getProfession().getNameProfession();
+        this.province= user.getProvince().getNameProvince();
+        this.city= user.getCity().getNameCity();
     }
 
 }
