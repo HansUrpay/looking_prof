@@ -56,7 +56,7 @@ const Register = () => {
         setFormErrors(prevErrors => ({ ...prevErrors, email: 'El correo electrónico ya está registrado.' }));
         return true; // Correo ya existe
       }
-      return; // Correo no existe, todo bien
+      return
     } catch (error) {
       console.error('Error al verificar el correo electrónico', error);
     }
