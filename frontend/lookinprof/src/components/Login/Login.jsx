@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import man from "../../assets/manLaptop.png";
 import bgCard from "../../assets/bgCard.svg";
+=======
+import React, { useState, useEffect } from "react";
+import mountain from "../../assets/montain.png";
+import manSettings from "../../assets/manSettings.svg";
+>>>>>>> f3414f538925c8ab5e4024a9c9db5855e843be0b
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -11,17 +17,22 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { setCurrentUser } from '../../redux/slices/userSlice';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+<<<<<<< HEAD
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+=======
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+>>>>>>> f3414f538925c8ab5e4024a9c9db5855e843be0b
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -101,6 +112,7 @@ const Login = () => {
     }
 
     try {
+<<<<<<< HEAD
       const responseData = await axios.post('http://localhost:8080/auth/login', { email, password });
       const token = responseData.data.token;
       localStorage.setItem('jwt', token);
@@ -116,9 +128,26 @@ const Login = () => {
         alert('Verifica correo y/o contraseña');
       }
     }
+=======
+      const responseData = await axios.post(
+        "http://localhost:8080/auth/login",
+        { username, password }
+      );
+      const token = responseData.data.token;
+      localStorage.setItem("jwt", token);
+      const [header, payload, signature] = token.split(".");
+      const decodedPayload = JSON.parse(atob(payload));
+      dispatch(setCurrentUser(decodedPayload));
+      alert(`Hola de nuevo!! ${decodedPayload.firstName}`);
+      navigate("/");
+    } catch (error) {}
+>>>>>>> f3414f538925c8ab5e4024a9c9db5855e843be0b
   };
 
+ 
+  
   return (
+<<<<<<< HEAD
     <div className="flex flex-row items-center justify-center p-10 h-[100vh]" style={{ backgroundImage: `url(${bgCard})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}>
       <div className="flex justify-between items-center w-[1100px]">
         {/* Aquí podrías colocar algo más si quisieras, por ejemplo la imagen o alguna decoración */}
@@ -129,16 +158,44 @@ const Login = () => {
           <h2 className="text-4xl text-[#004466] font-extrabold font-sans">
             Iniciar Sesión
           </h2>
+=======
+    <div className=" flex flex-col-reverse lg:relative h-screen flex lg:justify-center items-center" style={{
+      backgroundImage: `url(${mountain})`,
+      backgroundSize: "cover",
+    }}>
+
+<img
+        src={manSettings}
+        alt="manSettings"
+        className="absolute left-0 p-[43px] hidden lg:block"
+      />
+      <div className="lg:flex justify-center items-center">
+      
+        
+
+        <div className="h-auto relative sm:relative lg:rounded-3xl p-10 z-20  bg-white lg:bottom-[-1px] lg:h-[400px] justify-center">
+          <div className="sm:text-sm">
+            <Typography variant="h3" gutterBottom>
+              Iniciar Sesión
+            </Typography>
+          </div>
+
+>>>>>>> f3414f538925c8ab5e4024a9c9db5855e843be0b
           <form onSubmit={signIn} className="flex flex-col gap-5 z-10">
             <TextField
               label="Correo Electrónico"
               placeholder="Correo Electrónico"
               variant="outlined"
               size="small"
+<<<<<<< HEAD
               value={email}
               onChange={handleEmailChange}
               error={!!emailError}
               helperText={emailError}
+=======
+              value={username}
+              onChange={handleEmailChange}
+>>>>>>> f3414f538925c8ab5e4024a9c9db5855e843be0b
             />
             <FormControl variant="outlined" error={!!passwordError}>
               <InputLabel htmlFor="outlined-adornment-password" size="small">
@@ -169,7 +226,9 @@ const Login = () => {
               )}
             </FormControl>
 
-            <Button variant="contained" type="submit">Iniciar Sesión</Button>
+            <Button variant="contained" type="submit">
+              Iniciar Sesión
+            </Button>
           </form>
           <p className="pt-5 text-xs font-medium">
             No tienes una cuenta aún,{" "}
