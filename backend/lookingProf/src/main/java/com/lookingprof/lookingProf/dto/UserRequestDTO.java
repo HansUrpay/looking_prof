@@ -21,26 +21,14 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class UserRequestDTO {
-
-    private Integer idUser;
+//aca van los campos para editar y crear el usuario
     private String lastName;
     private String firstName;
-    private String email;
-    private String phone;
-    private String address;
-    private String country;
-    private Province province;
-    private City city;
+    private String province;
+    private String city;
     private Integer qualification;
-    private String imageUrl;
-    private Profession profession;
+    private String profession;
     @Enumerated(EnumType.STRING)
     private Role role;
     private String description;
-    private List<Comment> commentsSubmitted;
-    private List<Comment> commentsReceived;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
-    private String title;
-    private Boolean isActive;
 }
