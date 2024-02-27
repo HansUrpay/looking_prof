@@ -52,14 +52,17 @@ public class User implements UserDetails {
     private String address;
 //    @NotEmpty(message = "El país no puede estar vacío")
     private String country;
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name = "idProvince", referencedColumnName = "idProvince")
 //    @NotEmpty(message = "Debe seleccionar una provincia")
     private Province province;
-    @OneToOne
-    @JoinColumn(name = "city")
+
+    @ManyToOne
+    @JoinColumn(name = "idCity", referencedColumnName = "idCity")
 //    @NotEmpty(message = "Debe seleccionar una ciudad")
     private City city;
+
     private Integer qualification;
     private String imageUrl;
     @ManyToOne
