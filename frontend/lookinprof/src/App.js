@@ -8,7 +8,7 @@ import Register from './components/Register/Register'
 import NotFound from './components/NotFound/NotFound'
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/Footer'
-import ProtectedRoutes from './Routes/ProtectedRoutes'
+// import ProtectedRoutes from './Routes/ProtectedRoutes'
 import CheckOut from './components/Checkout/Checkout.jsx'
 function App() {
   return (
@@ -20,11 +20,11 @@ function App() {
       <Route path='login' element={<Login/>}/>
       <Route path='services' element={<Services/>}/>
       <Route path='register' element={<Register/>}/>
-       <Route path='/*' element={<ProtectedRoutes/>}>
+       {/* <Route path='/*' element={<ProtectedRoutes/>}> */}
         <Route path='services/:id' element={<ServicesDetails />} />
         <Route path='checkout' element={<CheckOut/>}/>
 
-      </Route> 
+      {/* </Route>  */}
       <Route path='*' element={<NotFound/>}/>
       </Routes>
       <Footer/>

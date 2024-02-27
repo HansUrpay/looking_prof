@@ -3,7 +3,8 @@
   import { servicesData } from '../../utils';
   import { Button } from '@mui/material';
   import { RiStarSFill, RiStarSLine } from "react-icons/ri";
-  import ServiciosImages from '../../assets/ServiciosImages.svg';
+  import mountain from "../../assets/montain.png";
+  import servicesImage from "../../assets/servicesImage.svg";
   import InputLabel from '@mui/material/InputLabel';
   import MenuItem from '@mui/material/MenuItem';
   import FormControl from '@mui/material/FormControl';
@@ -13,31 +14,41 @@
 
   const Services = () => {
     const [profesion, setProfesion] = useState('');
-    const [location, setLocation] = useState('');
+    const [provincia, setProvincia] = useState('');
+    const [ciudad, setCiudad] = useState('');
     const [stars, setStars] = useState('');
     const [sortOrder, setSortOrder] = useState('desc');
     const navigate = useNavigate();
 
     const uniqueProfessions = useMemo(() => [...new Set(servicesData.map(item => item.prof))], []);
-    const uniqueLocations = useMemo(() => {
+    const uniqueProvincias = useMemo(() => {
       if (profesion) {
-        const locations = servicesData.filter(item => item.prof === profesion).map(item => item.city);
-        return [...new Set(locations)];
+        const provincias = servicesData.filter(item => item.prof === profesion).map(item => item.city);
+        return [...new Set(provincias)];
       } else {
         return [];
       }
           // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [profesion, servicesData]);
 
+    const uniqueCiudades = useMemo(() => {
+      if (profesion && provincia) {
+        const ciudades = servicesData.filter(item => item.prof === profesion && item.provincia === provincia).map(item => item.city);
+        return [...new Set(ciudades)];
+      } else {
+        return [];
+      }
+    }, [profesion, provincia, servicesData]);
+
     const uniqueStars = useMemo(() => {
-      if (profesion && location) {
-        const starsArray = servicesData.filter(item => item.prof === profesion && item.city === location).map(item => item.starts.toString());
+      if (profesion && provincia) {
+        const starsArray = servicesData.filter(item => item.prof === profesion && item.city === provincia).map(item => item.starts.toString());
         return [...new Set(starsArray)];
       } else {
         return [];
       }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [profesion, location, servicesData]);
+    }, [profesion, provincia, servicesData]);
 
     const sortedServicesData = useMemo(() => {
       let data = [...servicesData];
@@ -51,12 +62,19 @@
 
     const handleProfessionChange = (event) => {
       setProfesion(event.target.value);
-      setLocation('');
+      setProvincia('');
+      setCiudad('');
       setStars('');
     };
 
-    const handleLocationChange = (event) => {
-      setLocation(event.target.value);
+    const handleProvinciaChange = (event) => {
+      setProvincia(event.target.value);
+      setCiudad('');
+      setStars('');
+    };
+
+    const handleCiudadChange = (event) => {
+      setCiudad(event.target.value);
       setStars('');
     };
 
@@ -73,23 +91,32 @@
       if (profesion) {
         filteredData = filteredData.filter(item => item.prof === profesion);
       }
-      if (location) {
-        filteredData = filteredData.filter(item => item.city === location);
+      if (provincia) {
+        filteredData = filteredData.filter(item => item.provincia === provincia);
+      }
+      if (ciudad) {
+        filteredData = filteredData.filter(item => item.city === ciudad);
       }
       if (stars) {
         filteredData = filteredData.filter(item => item.starts.toString() === stars);
       }
       return filteredData;
-    }, [profesion, location, stars, sortedServicesData]);
+    }, [profesion, provincia, ciudad, stars, sortedServicesData]);
 
     return (
       <section className='p-10 flex flex-col justify-center items-center'>
-        <div className='flex flex-row items-center justify-center w-[1100px]'>
-          <img src={ServiciosImages} alt="" className='w-[400px] h-[400px]'/>
-          <div className='flex flex-col items-start justify-center gap-y-10'>
-            <h2 className='lg:mt-4 text-3xl text-[#004466] font-black w-[350px]'>Encuentra a los mejores profesionales cerca de ti</h2>
+        <div className='flex flex-row items-center justify-center gap-[20px]'>
+        
+        <img
+        src={servicesImage}
+        alt="manSettings"
+        className=""
+      />
+          
+          <div className='flex flex-col items-start justify-center gap-y-10 '>
+            <h2 className='lg:mt-4 text-2xl text-[#004466] font-black w-[350px] '>Encuentra a los mejores profesionales cerca de ti</h2>
             <h5 className='text-[#223139] text-xl font-bold'>Filtrar profesionales por:</h5>
-            <div className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-6'>
               <FormControl className='w-[240px] text-[#004466]'>
                 <InputLabel id="profesion-select-label">Profesión</InputLabel>
                 <Select
@@ -108,23 +135,42 @@
                 </Select>
               </FormControl>
               <FormControl className='w-[240px] text-[#004466]'>
-                <InputLabel id="location-select-label">Ubicación</InputLabel>
+                <InputLabel id="provincia-select-label">Provincia</InputLabel>
                 <Select
-                  labelId="location-select-label"
-                  id="location-select-small"
-                  value={location}
-                  label="Ubicación"
-                  onChange={handleLocationChange}
+                  labelId="provincia-select-label"
+                  id="provincia-select-small"
+                  value={provincia}
+                  label="Provincia"
+                  onChange={handleProvinciaChange}
                   disabled={!profesion}
                 >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  {uniqueLocations.map((loc, index) => (
+                  {uniqueProvincias.map((loc, index) => (
                     <MenuItem key={index} value={loc}>{loc}</MenuItem>
                   ))}
                 </Select>
               </FormControl>
+
+              <FormControl className='w-[240px] text-[#004466]'>
+              <InputLabel id="ciudad-select-label">Ciudad</InputLabel>
+              <Select
+                labelId="ciudad-select-label"
+                id="ciudad-select-small"
+                value={ciudad}
+                label="Ciudad"
+                onChange={handleCiudadChange}
+                disabled={!provincia}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {uniqueCiudades.map((city, index) => (
+                  <MenuItem key={index} value={city}>{city}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
               <FormControl className='w-[240px] text-[#004466]'>
                 <InputLabel id="stars-select-label">Stars</InputLabel>
                 <Select
@@ -133,7 +179,7 @@
                   value={stars}
                   label="Stars"
                   onChange={handleStarsChange}
-                  disabled={!location}
+                  disabled={!provincia}
                 >
                   <MenuItem value="">
                     <em>None</em>

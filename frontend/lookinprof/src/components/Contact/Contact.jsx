@@ -1,21 +1,29 @@
 import React from "react";
-import man from "../../assets/manLaptop.png";
+import mountain from "../../assets/montain.png";
+import manSettings from "../../assets/manSettings.svg";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 
+
 const Contact = () => {
   return (
-    <div className="flex justify-center">
-      <div className="shadow-2xl rounded-3xl shadow-gray-400 bg-slate-200 w-1/3 flex items-center relative left-40">
-        <img src={man} alt="man with laptop" className="z-20"></img>
-      </div>
+    <div className=" flex flex-col-reverse lg:relative h-screen flex lg:justify-center items-center" style={{
+      backgroundImage: `url(${mountain})`,
+      backgroundSize: "cover",
+    }}>
+        <img
+        src={manSettings}
+        alt="manSettings"
+        className="absolute left-0 p-[43px] hidden lg:block"
+      />
+    
 
-      <div className="shadow-2xl rounded-3xl shadow-gray-400 px-20 py-20 flex flex-col justify-between w-1/3 z-10  bg-white">
+      <div className="shadow-2xl rounded-3xl shadow-gray-400 px-20 py-20 flex flex-col justify-between w-1/3 z-10  bg-white relative left-[390px]">
         <div>
           <Typography variant="h3" gutterBottom>
-            Contacto
+            Contactanos
           </Typography>
 
           <Typography paragraph={true}>
@@ -23,7 +31,7 @@ const Contact = () => {
           </Typography>
         </div>
 
-        <form className="flex flex-col align-items: center justify-content: center space-y-5">
+        <form className="flex flex-col align-items: center justify-content: center space-y-5 ">
           <TextField
             label="Nombre y Apellido"
             placeholder="Nombre y Apellido"
