@@ -12,7 +12,7 @@ public class UserData {
 
     public List<Map<String, Object>> jsonData() throws JsonProcessingException {
         String json =  "[" +
-                "{\"firstName\": \"Marcelo\", \"lastName\": \"Fernández\", \"email\": \"marcelofernandez@gmail.com\", \"password\": \"hashed_password_1\"," +
+                "{\"firstName\": \"Marcela\", \"lastName\": \"Fernández\", \"email\": \"marcelafernandez@gmail.com\", \"password\": \"hashed_password_1\"," +
                 " \"phone\": \"+5491252985471\", \"address\": \"Calle Principal 2678\", \"country\": \"Argentina\", \"imageUrl\": \"https://res.cloudinary.com/dlq0ud8ly/image/upload/v1709011331/LookingProf/adult-1851571_640_tvytca.jpg\"," +
                 "\"qualification\": 4, \"description\": \"Soy especialista en tal profesión y tengo tanto tiempo de experiencia\", \"city\": \"La Plata\"}," +
                 "{ \"firstName\": \"Alejandro\", \"lastName\": \"García\", \"email\": \"alejandrogarcia@gmail.com\", \"password\": \"hashed_password_2\"," +

@@ -4,6 +4,7 @@ import com.lookingprof.lookingProf.Auth.AuthResponse;
 import com.lookingprof.lookingProf.Auth.LoginRequest;
 import com.lookingprof.lookingProf.Auth.RegisterRequest;
 import com.lookingprof.lookingProf.dto.UserRequestDTO;
+import com.lookingprof.lookingProf.dto.UserResponseDTO;
 import com.lookingprof.lookingProf.exceptions.UserDeleteException;
 import com.lookingprof.lookingProf.exceptions.UserUpdateException;
 import com.lookingprof.lookingProf.jwt.JwtService;
@@ -48,51 +49,51 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<UserRequestDTO>> listAll() {
+    public Optional<List<UserResponseDTO>> listAll() {
         List<User> users = userRepository.findAll();
         if (users.isEmpty()) {
             return Optional.empty();
         }
-        List<UserRequestDTO> listUserDTO = new ArrayList<>();
+        List<UserResponseDTO> listUserDTO = new ArrayList<>();
         users.forEach(user -> {
-            UserRequestDTO userRequestDTO = new UserRequestDTO(user);
-            listUserDTO.add(userRequestDTO);
+            UserResponseDTO userResponseDTO = new UserResponseDTO(user);
+            listUserDTO.add(userResponseDTO);
         });
         return Optional.of(listUserDTO);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<UserRequestDTO>> findByFirstname(String firstName) {
+    public Optional<List<UserResponseDTO>> findByFirstname(String firstName) {
         List<User> users = userRepository.findByFirstName(firstName);
         if (users.isEmpty()) {
             return Optional.empty();
         }
-        List<UserRequestDTO> listUserDTO = new ArrayList<>();
+        List<UserResponseDTO> listUserDTO = new ArrayList<>();
         users.forEach(user -> {
-            UserRequestDTO userRequestDTO = new UserRequestDTO(user);
-            listUserDTO.add(userRequestDTO);
+            UserResponseDTO userResponseDTO = new UserResponseDTO(user);
+            listUserDTO.add(userResponseDTO);
         });
         return Optional.of(listUserDTO);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<UserRequestDTO> findByEmail(String email) {
+    public Optional<UserResponseDTO> findByEmail(String email) {
         Optional<User> user = userRepository.findByEmail(email);
-        return user.map(UserRequestDTO::new);
+        return user.map(UserResponseDTO::new);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<UserRequestDTO> findById(Integer id) {
+    public Optional<UserResponseDTO> findById(Integer id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
             return Optional.empty();
         }
         User user = userOptional.get();
 
-        return Optional.of(new UserRequestDTO(user));
+        return Optional.of(new UserResponseDTO(user));
     }
 
     @Override
@@ -113,7 +114,7 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Optional<UserRequestDTO> updateUser(Integer id, UserRequestDTO userUpdate) {
+    public Optional<UserResponseDTO> updateUser(Integer id, UserResponseDTO userUpdate) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()){
             return Optional.empty();
@@ -125,7 +126,7 @@ public class UserService implements IUserService {
             user.setPhone(userUpdate.getPhone());
             user.setPhone(userUpdate.getEmail());
             userRepository.save(user);
-            return Optional.of(new UserRequestDTO(user));
+            return Optional.of(new UserResponseDTO(user));
         } catch (Exception e) {
             e.printStackTrace();
             throw new UserUpdateException("Error al actualizar el usuario");
@@ -133,60 +134,60 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Optional<List<UserRequestDTO>> findByProfession(String profession) {
+    public Optional<List<UserResponseDTO>> findByProfession(String profession) {
         List<User> users = userRepository.findByProfession_NameProfession(profession);
         if (users.isEmpty()) {
             return Optional.empty();
         }
-        List<UserRequestDTO> listUserDTO = new ArrayList<>();
+        List<UserResponseDTO> listUserDTO = new ArrayList<>();
         users.forEach(user -> {
-            UserRequestDTO userRequestDTO = new UserRequestDTO(user);
-            listUserDTO.add(userRequestDTO);
+            UserResponseDTO userResponseDTO = new UserResponseDTO(user);
+            listUserDTO.add(userResponseDTO);
         });
         return Optional.of(listUserDTO);
     }
 
 
     @Override
-    public Optional<List<UserRequestDTO>> findByProvince(String province) {
+    public Optional<List<UserResponseDTO>> findByProvince(String province) {
         List<User> users = userRepository.findByProvince_NameProvince(province);
         if (users.isEmpty()) {
             return Optional.empty();
         } else {
-            List<UserRequestDTO> listUserDTO = new ArrayList<>();
+            List<UserResponseDTO> listUserDTO = new ArrayList<>();
             users.forEach(user -> {
-                UserRequestDTO userRequestDTO = new UserRequestDTO(user);
-                listUserDTO.add(userRequestDTO);
+                UserResponseDTO userResponseDTO = new UserResponseDTO(user);
+                listUserDTO.add(userResponseDTO);
             });
             return Optional.of(listUserDTO);
         }
     }
 
     @Override
-    public Optional<List<UserRequestDTO>> findByCity(String city) {
+    public Optional<List<UserResponseDTO>> findByCity(String city) {
             List<User> users = userRepository.findByCity_NameCity(city);
             if (users.isEmpty()) {
                 return Optional.empty();
             } else {
-                List<UserRequestDTO> listUserDTO = new ArrayList<>();
+                List<UserResponseDTO> listUserDTO = new ArrayList<>();
                 users.forEach(user -> {
-                    UserRequestDTO userRequestDTO = new UserRequestDTO(user);
-                    listUserDTO.add(userRequestDTO);
+                    UserResponseDTO userResponseDTO = new UserResponseDTO(user);
+                    listUserDTO.add(userResponseDTO);
                 });
                 return Optional.of(listUserDTO);
             }
         }
 
     @Override
-    public Optional<List<UserRequestDTO>> findByQualification(int qualification) {
+    public Optional<List<UserResponseDTO>> findByQualification(int qualification) {
         List<User> users = userRepository.findByQualification(qualification);
         if (users.isEmpty()) {
             return Optional.empty();
         } else {
-            List<UserRequestDTO> listUserDTO = new ArrayList<>();
+            List<UserResponseDTO> listUserDTO = new ArrayList<>();
             users.forEach(user -> {
-                UserRequestDTO userRequestDTO = new UserRequestDTO(user);
-                listUserDTO.add(userRequestDTO);
+                UserResponseDTO userResponseDTO = new UserResponseDTO(user);
+                listUserDTO.add(userResponseDTO);
             });
             return Optional.of(listUserDTO);
         }

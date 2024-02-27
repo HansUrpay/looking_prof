@@ -3,8 +3,7 @@ package com.lookingprof.lookingProf.service;
 import com.lookingprof.lookingProf.Auth.AuthResponse;
 import com.lookingprof.lookingProf.Auth.LoginRequest;
 import com.lookingprof.lookingProf.Auth.RegisterRequest;
-import com.lookingprof.lookingProf.dto.UserRequestDTO;
-import com.lookingprof.lookingProf.model.User;
+import com.lookingprof.lookingProf.dto.UserResponseDTO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -20,10 +19,10 @@ public interface IUserService extends UserDetailsService {
     public Optional<List<UserResponseDTO>> findByFirstname(String firstName);
     public Optional<UserResponseDTO> findByEmail(String email);
 
-    public Optional<List<UserRequestDTO>> findByProfession(String profession);
-    public Optional<List<UserRequestDTO>> findByProvince(String province);
-    public Optional<List<UserRequestDTO>> findByCity(String city);
-    public Optional<List<UserRequestDTO>> findByQualification(int qualification);
+    public Optional<List<UserResponseDTO>> findByProfession(String profession);
+    public Optional<List<UserResponseDTO>> findByProvince(String province);
+    public Optional<List<UserResponseDTO>> findByCity(String city);
+    public Optional<List<UserResponseDTO>> findByQualification(int qualification);
 
     public AuthResponse loginUser(LoginRequest user);
     public AuthResponse registerUser(RegisterRequest user);
