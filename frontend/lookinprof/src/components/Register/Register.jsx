@@ -1,29 +1,29 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../redux/slices/userSlice";
-import deliveryMan from "../../assets/deliveryMan.png";
-import {
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  IconButton,
-  Typography,
-  TextField,
-  Button,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from "@mui/material";
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import mountain from "../../assets/montain.png";
+import manWorking from "../../assets/manWorking.svg";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import FormHelperText from "@mui/material/FormHelperText"; // Import FormHelperText
 import { Link, useNavigate } from "react-router-dom";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import axios from "axios";
-import {FormHelperText} from "@mui/material";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [value, setValue] = useState("user");
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
@@ -32,7 +32,6 @@ const Register = () => {
     role: "USER",
   });
   const [formErrors, setFormErrors] = useState({});
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -62,7 +61,8 @@ const Register = () => {
     }
   };
 
-  const validateForm = () => {
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
     const errors = {};
     let isValid = true;
 
@@ -96,46 +96,46 @@ const Register = () => {
     return isValid;
   };
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    const doesEmailExist = await checkEmailExists(formData.email);
-    if(doesEmailExist) {
-      return; // No continúa si el correo ya existe
-    }
-
-    try {
-      const response = await axios.post('http://localhost:8080/auth/register', formData);
-      const token = response.data.token;
-      localStorage.setItem('jwt', token);
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      dispatch(setCurrentUser(payload));
-      alert(`Gracias ${payload.firstName} por registrarte`);
-      navigate('/');
-    } catch (error) {
-      console.error("Error during registration", error);
-    }
-  };
   return (
-    <div className="flex flex-row items-center justify-center p-10">
-      <div className="flex justify-center">
-        <div className="shadow-2xl rounded-3xl shadow-gray-400 bg-slate-300 h-[500px] flex flex-col items-center justify-center">
-          <img src={deliveryMan} alt="Man delivery" className="relative h-[450px]" />
-        </div>
-        <div className="shadow-2xl rounded-3xl shadow-gray-400 p-4 flex flex-col justify-between h-[500px] relative right-16 bg-white">
-          <Typography variant="h4" gutterBottom>
+    <div
+      className=" flex flex-col-reverse lg:relative h-screen flex lg:justify-center items-center"
+      style={{
+        backgroundImage: `url(${mountain})`,
+        backgroundSize: "cover",
+      }}
+    >
+      <img
+        src={manWorking}
+        alt="manWorking"
+        className="absolute left-0 p-[43px] hidden lg:block"
+      />
+      
+        <div className="flex flex-col lg:justify-center items-center relative sm:relative lg:rounded-3xl p-10 z-20  bg-white lg:bottom-[-1px] justify-center">
+          <Typography variant="h3" gutterBottom>
             Registrarse
           </Typography>
-          <form className="flex flex-col align-items: center justify-content: center space-y-2" onSubmit={handleFormSubmit}>
-            {/* Role Selection */}
-            <FormControl component="fieldset">
-              <RadioGroup row name="role" value={formData.role} onChange={handleChange}>
-                <FormControlLabel value="USER" control={<Radio />} label="Usuario" />
-                <FormControlLabel value="PROFESSIONAL" control={<Radio />} label="Professional" />
+          <form
+            className="flex flex-col align-items: center justify-content: center space-y-2"
+            onSubmit={handleFormSubmit}
+          >
+            <FormControl>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="role"
+                value={formData.role}
+                onChange={handleChange}
+              >
+                <FormControlLabel
+                  value="USER"
+                  control={<Radio />}
+                  label="Usuario"
+                />
+                <FormControlLabel
+                  value="professional"
+                  control={<Radio />}
+                  label="Professional"
+                />
               </RadioGroup>
             </FormControl>
 
@@ -148,8 +148,11 @@ const Register = () => {
               size="small"
               onChange={handleChange}
               error={!!formErrors.email}
-              helperText={formErrors.email || ''}
+              helperText={formErrors.email ? !formErrors.email : ""}
             />
+            <FormHelperText error className="text-xs">
+              {formErrors.email}
+            </FormHelperText>
 
             {/* First Name Field */}
             <TextField
@@ -162,6 +165,9 @@ const Register = () => {
               error={!!formErrors.firstName}
               helperText={formErrors.firstName || ''}
             />
+            <FormHelperText error className="text-xs">
+              {formErrors.firstName}
+            </FormHelperText>
 
             {/* Last Name Field */}
             <TextField
@@ -175,9 +181,10 @@ const Register = () => {
               helperText={formErrors.lastName || ''}
             />
 
-            {/* Password Field */}
-            <FormControl variant="outlined" size="small">
-              <InputLabel htmlFor="outlined-adornment-password">Contraseña</InputLabel>
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password" size="small">
+                Contraseña
+              </InputLabel>
               <OutlinedInput
                 name="password"
                 id="outlined-adornment-password"
@@ -201,8 +208,7 @@ const Register = () => {
               <FormHelperText error>{formErrors.password || ''}</FormHelperText>
             </FormControl>
 
-            {/* Submit Button */}
-            <Button variant="contained" type="submit" className="shadow-2xl mt-4">
+            <Button variant="contained" className="shadow-2xl" type="submit">
               Registrarme
             </Button>
           </form>
@@ -212,9 +218,10 @@ const Register = () => {
             Ya tienes una cuenta,{" "}
             <Link to="/login" className="text-blue-700 font-semibold">
               haz clic aquí
-            </Link>.
+            </Link>
+            .
           </Typography>
-        </div>
+       
       </div>
     </div>
   );

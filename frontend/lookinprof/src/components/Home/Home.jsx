@@ -30,7 +30,7 @@ const Home = () => {
   };
   window.scrollTo(0, 0);
   return (
-    <div className='w-full h-full flex flex-col justify-center items-center pt-2 py-6'>
+    <div className='flex flex-col justify-center items-center'>
       {/* Section 1 de la pagina principal */}
     <div style={{ backgroundImage: `url(${bgCard})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'top', backgroundSize: 'cover' }}>
       <div className='m-6 p-6 flex flex-col md:flex-row justify-center items-center lg:w-[1100px] min-w-[320px] p-auto '>
@@ -63,9 +63,11 @@ const Home = () => {
               <Cards className='flex flex-col items-center'>
                 <div>
                   <img src={item.image} alt={item.title} className='w-full h-[200px] object-cover rounded-t-lg mb-4' />
+                  <div className='pl-5'>
                   <h4 className='font-semibold text-xl'>{item.name}</h4>
                   <p className='text-sm'>{item.prof}</p>
                   <span className='text-xs'>{item.city}</span>
+                  
                   <div className='flex flex-row gap-1 items-center'>
                     {item.starts}{[...Array(Math.floor(item.starts))].map((_, i) => (
                       <RiStarSFill key={i} className='text-yellow-500' />
@@ -73,6 +75,7 @@ const Home = () => {
                     {item.starts % 1 !== 0 && (
                       <RiStarSLine className='text-yellow-500' />
                     )}
+                  </div>
                   </div>
                 </div>
                 
