@@ -46,7 +46,7 @@ public class SecurityConfig {
                             .requestMatchers("/auth/**", "/user/province", "/user/city", "/user/profession", "/user/qualification/{qualification}").permitAll()
                             .requestMatchers(HttpMethod.GET, "/user/{id}").authenticated()
                             .requestMatchers(HttpMethod.GET, "/user/firstName").authenticated()
-                            .anyRequest().authenticated();
+                            .anyRequest().permitAll();
                 })
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(sessionManager ->
@@ -60,7 +60,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
+        corsConfiguration.setAllowedOrigins(List.of(frontendUrl));
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.setAllowCredentials(true);

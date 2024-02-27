@@ -1,21 +1,12 @@
 package com.lookingprof.lookingProf.dto;
 
-import com.lookingprof.lookingProf.model.City;
-import com.lookingprof.lookingProf.model.Comment;
 import com.lookingprof.lookingProf.model.Enum.Role;
-import com.lookingprof.lookingProf.model.Profession;
-import com.lookingprof.lookingProf.model.Province;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
-import java.time.LocalDateTime;
-import java.util.List;
-
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,4 +22,5 @@ public class UserRequestDTO {
     @Enumerated(EnumType.STRING)
     private Role role;
     private String description;
+
 }

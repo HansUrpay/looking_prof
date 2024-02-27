@@ -25,8 +25,6 @@ public class ProfessionalResponseDTO {
     //nombre y apellido
     private String firstName;
     private String lastName;
-    //titulo
-    private String title;
     //imagen de perfil
     private String imageURL;
 
@@ -39,7 +37,6 @@ public class ProfessionalResponseDTO {
         this.profession = user.getProfession();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
-        this.title = user.getTitle();
         this.imageURL = user.getImageUrl();
         this.qualification = user.getQualification();
     }

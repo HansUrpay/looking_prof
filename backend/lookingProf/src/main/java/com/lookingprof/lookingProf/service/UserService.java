@@ -3,11 +3,14 @@ package com.lookingprof.lookingProf.service;
 import com.lookingprof.lookingProf.Auth.AuthResponse;
 import com.lookingprof.lookingProf.Auth.LoginRequest;
 import com.lookingprof.lookingProf.Auth.RegisterRequest;
+import com.lookingprof.lookingProf.dto.UserRequestDTO;
 import com.lookingprof.lookingProf.dto.UserResponseDTO;
 import com.lookingprof.lookingProf.exceptions.UserDeleteException;
 import com.lookingprof.lookingProf.exceptions.UserUpdateException;
 import com.lookingprof.lookingProf.jwt.JwtService;
+import com.lookingprof.lookingProf.model.City;
 import com.lookingprof.lookingProf.model.Enum.Role;
+import com.lookingprof.lookingProf.model.Province;
 import com.lookingprof.lookingProf.model.User;
 import com.lookingprof.lookingProf.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,12 @@ public class UserService implements IUserService {
 
     @Autowired
     JwtService jwtService;
+
+    @Autowired
+    CityService cityService;
+
+    @Autowired
+    ProvinceService provinceService;
 
     @Override
     @Transactional(readOnly = true)
@@ -194,12 +203,17 @@ public class UserService implements IUserService {
 
     @Override
     public AuthResponse registerUser(RegisterRequest request) {
+        Province province = provinceService.getProvinceById(request.getProvinceId());
+        City city = cityService.getCityById(request.getCityId());
+
         User user = new User();
         user.setEmail(request.getEmail());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.valueOf(String.valueOf(request.getRole())));
+        user.setProvince(province);
+        user.setCity(city);
         user.setIsActive(true);
         userRepository.save(user);
         String token = jwtService.getToken(user);
