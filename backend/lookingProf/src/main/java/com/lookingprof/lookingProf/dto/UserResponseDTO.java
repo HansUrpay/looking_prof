@@ -36,9 +36,13 @@ public class UserResponseDTO {
         this.lastName= user.getLastName();
         this.imageUrl= user.getImageUrl();
         this.phone=user.getPhone();
+
         this.profession= user.getProfession().getNameProfession();
         this.province= user.getProvince().getNameProvince();
         this.city= user.getCity().getNameCity();
-    }
 
+        this.profession = user.getProfession() != null ? user.getProfession().getNameProfession() : null;
+        this.province = user.getProvince() != null ? user.getProvince().getNameProvince() : null;
+        this.city = user.getCity() != null ? user.getCity().getNameCity() : null;
+    }
 }
