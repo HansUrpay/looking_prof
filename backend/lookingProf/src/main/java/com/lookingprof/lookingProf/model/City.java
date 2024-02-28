@@ -21,8 +21,6 @@ public class City {
     @JoinColumn(name="fk_province")
     private Province province;
 
-    @OneToMany(mappedBy = "city")
-    private List<User> users;
 
 
 }
