@@ -53,12 +53,12 @@ public class User implements UserDetails {
 //    @NotEmpty(message = "El país no puede estar vacío")
     private String country;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "idProvince", referencedColumnName = "idProvince")
 //    @NotEmpty(message = "Debe seleccionar una provincia")
     private Province province;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "idCity", referencedColumnName = "idCity")
 //    @NotEmpty(message = "Debe seleccionar una ciudad")
     private City city;
