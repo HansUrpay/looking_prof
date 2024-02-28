@@ -44,5 +44,6 @@ public class UserResponseDTO {
         this.profession = user.getProfession() != null ? user.getProfession().getNameProfession() : null;
         this.province = user.getProvince() != null ? user.getProvince().getNameProvince() : null;
         this.city = user.getCity() != null ? user.getCity().getNameCity() : null;
+
     }
 }
