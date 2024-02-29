@@ -2,7 +2,9 @@ package com.lookingprof.lookingProf.service;
 
 import com.lookingprof.lookingProf.dto.CityDTO;
 import com.lookingprof.lookingProf.model.City;
+import com.lookingprof.lookingProf.model.Province;
 import com.lookingprof.lookingProf.repository.ICityRepository;
+import com.lookingprof.lookingProf.repository.IProvincesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,10 @@ public class CityService implements ICityService{
 
     @Autowired
     private ICityRepository cityRepository;
+
+    @Autowired
+    IProvincesRepository provincesRepository;
+
     @Override
     public Optional<List<CityDTO>> getAllCities() {
         List<City> cityList = cityRepository.findAll();
@@ -33,6 +39,23 @@ public class CityService implements ICityService{
     @Override
     public City getCityById(Integer idCity) {
         return cityRepository.findById(idCity).orElse(null);
+    }
+
+    @Override
+    public City getCityByName(String name){
+        return cityRepository.findByNameCity(name).orElse(null);
+    }
+
+    @Override
+    public City createCity(CityDTO cityDTO){
+
+        Province province = provincesRepository.findByNameProvince(cityDTO.getProvince());
+
+        City city = new City();
+        city.setNameCity(cityDTO.getNameCity());
+        city.setProvince(province);
+        cityRepository.save(city);
+        return city;
     }
 
     @Override
