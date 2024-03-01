@@ -42,14 +42,9 @@ public class CityService implements ICityService{
     }
 
     @Override
-    public City getCityByName(String name){
-        return cityRepository.findByNameCity(name).orElse(null);
-    }
-
-    @Override
     public City createCity(CityDTO cityDTO){
 
-        Province province = provincesRepository.findByNameProvince(cityDTO.getProvince());
+        Province province = provincesRepository.findById(cityDTO.getIdProvince()).get();
 
         City city = new City();
         city.setNameCity(cityDTO.getNameCity());

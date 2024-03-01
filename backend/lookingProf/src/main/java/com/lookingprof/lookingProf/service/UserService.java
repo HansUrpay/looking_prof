@@ -57,9 +57,6 @@ public class UserService implements IUserService {
     @Autowired
     ImageService imageService;
 
-    @Autowired
-    ProfessionService professionService;
-
     @Override
     @Transactional(readOnly = true)
     public Optional<List<UserResponseDTO>> listAll() {
@@ -127,6 +124,7 @@ public class UserService implements IUserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Optional<UserResponseDTO> updateUser(Integer id, UserRequestDTO userUpdate) {
+        System.out.println("Usuario recibido:   " + userUpdate);
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()){
             return Optional.empty();
