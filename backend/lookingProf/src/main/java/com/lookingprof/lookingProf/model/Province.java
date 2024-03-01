@@ -21,5 +21,8 @@ public class Province {
     @Column(unique = true)
     private String nameProvince;
 
+    @OneToMany(mappedBy = "province")
+    List<User> users;
+
 
 }

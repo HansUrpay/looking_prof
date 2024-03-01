@@ -15,8 +15,11 @@ public interface ICityService {
     //get city by id
     public City getCityById(Integer idCity);
 
+    City createCity(CityDTO cityDTO);
+
     //get cityDTO by id
     public CityDTO getCityDTOById(Integer idCity);
 
     City getCityByName(String city);
+
 }

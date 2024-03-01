@@ -10,8 +10,10 @@ import com.lookingprof.lookingProf.exceptions.UserUpdateException;
 import com.lookingprof.lookingProf.jwt.JwtService;
 import com.lookingprof.lookingProf.model.City;
 import com.lookingprof.lookingProf.model.Enum.Role;
+import com.lookingprof.lookingProf.model.Profession;
 import com.lookingprof.lookingProf.model.Province;
 import com.lookingprof.lookingProf.model.User;
+import com.lookingprof.lookingProf.repository.ICityRepository;
 import com.lookingprof.lookingProf.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -46,11 +48,17 @@ public class UserService implements IUserService {
     CityService cityService;
 
     @Autowired
+    ICityRepository cityRepository;
+
+    @Autowired
     ProvinceService provinceService;
     @Autowired
     ProfessionService professionService;
     @Autowired
     ImageService imageService;
+
+    @Autowired
+    ProfessionService professionService;
 
     @Override
     @Transactional(readOnly = true)
