@@ -18,10 +18,12 @@ import java.util.List;
 public class CityDTO {
     private int idCity;
     private String nameCity;
+    private Integer idProvince;
 
     public CityDTO (City city){
         this.idCity=city.getIdCity();
         this.nameCity=city.getNameCity();
+        this.idProvince=city.getProvince().getIdProvince();
     }
 
 }

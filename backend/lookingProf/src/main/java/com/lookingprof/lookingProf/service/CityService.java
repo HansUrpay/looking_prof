@@ -40,4 +40,9 @@ public class CityService implements ICityService{
         CityDTO cityDTO = new CityDTO(cityRepository.findById(idCity).get());
         return cityDTO;
     }
+
+    @Override
+    public City getCityByName(String city) {
+        return cityRepository.findByNameCity(city);
+    }
 }
