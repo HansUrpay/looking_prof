@@ -44,9 +44,9 @@
 ### **4.1.1 Funcionalidades Principales**
 |Requisito|Descripción|Prioridad|Estado|
 | --- | --- | --- | --- |
-|RF-001|Registro y Autenticación de Usuarios y Profesionales|Alta|En Desarrollo
-|RF-002|Búsqueda y Filtrado de Profesionales por Tipo de Servicio|Alta|Pendiente
-|RF-003|Sistema de Solicitud de Contacto|Media|Pendiente|
+|RF-001|Registro y Autenticación de Usuarios y Profesionales|Alta|Finalizada
+|RF-002|Búsqueda y Filtrado de Profesionales por Tipo de Servicio|Alta|Finalizada
+|RF-003|Sistema de Solicitud de Contacto|Media|Finalizada|
 
 
 ### **4.1.2 Funcionalidades Iterativas (Según Iteraciones Posteriores)**
