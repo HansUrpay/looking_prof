@@ -99,7 +99,7 @@ El soporte para navegadores será limitado a las últimas versiones de Chrome, F
   -Giorgina Spezia <a href="https://www.linkedin.com/in/giorgina-spezia-072817257/" target="_blank">LinkedIn</a>
 ## Diseño UX/UI:
   - Lesly Sharom Cueto Tipte <a href="https://www.linkedin.com/in/lesly-cueto/" target="_blank">LinkedIn</a>
-  - Florencia Alvarez
+  - Florencia Alvarez <a href="https://www.linkedin.com/in/florencia-victoria-alvarez-532019158/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
 
 
 # **Tecnologías y herramientas a utilizar:**
