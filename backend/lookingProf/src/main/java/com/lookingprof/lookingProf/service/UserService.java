@@ -121,21 +121,65 @@ public class UserService implements IUserService {
         }
     }
 
+//    @Override
+//    @Transactional(rollbackFor = Exception.class)
+//    public Optional<UserResponseDTO> updateUser(Integer id, UserRequestDTO userUpdate) {
+//        Optional<User> userOptional = userRepository.findById(id);
+//        Province province = provinceService.getProvinceById((userUpdate.getProvince()));
+//
+//        if (userOptional.isEmpty()){
+//            return Optional.empty();
+//        }
+//        User user = userOptional.get();
+//        try {
+//            user.setProvince(provinceService.getProvinceById(Integer.parseInt(userUpdate.getProvince())));
+//            user.setCity(cityService.getCityById(Integer.parseInt(userUpdate.getCity())));
+//            user.setProfession(professionService.getById(Integer.parseInt(userUpdate.getProfession())));
+//            user.setDescription(userUpdate.getDescription());
+//            if(userUpdate.getImage() != null) user.setImageUrl(imageService.copyProfileImg(user.getImageUrl(), userUpdate.getImage()));
+//            userRepository.save(user);
+//            return Optional.of(new UserResponseDTO(user));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new UserUpdateException("Error al actualizar el usuario");
+//        }
+//
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Optional<UserResponseDTO> updateUser(Integer id, UserRequestDTO userUpdate) {
-        System.out.println("Usuario recibido:   " + userUpdate);
         Optional<User> userOptional = userRepository.findById(id);
+
         if (userOptional.isEmpty()){
             return Optional.empty();
         }
         User user = userOptional.get();
         try {
-            user.setProvince(provinceService.getProvinceById(Integer.parseInt(userUpdate.getProvince())));
-            user.setCity(cityService.getCityById(Integer.parseInt(userUpdate.getCity())));
-            user.setProfession(professionService.getById(Integer.parseInt(userUpdate.getProfession())));
-            user.setDescription(userUpdate.getDescription());
-            if(userUpdate.getImage() != null) user.setImageUrl(imageService.copyProfileImg(user.getImageUrl(), userUpdate.getImage()));
+            if (userUpdate.getProvince() != null) {
+                Province province = provinceService.getProvinceById(userUpdate.getProvince());
+                user.setProvince(province);
+            }
+            if (userUpdate.getCity() != null) {
+                City city = cityService.getCityByName(userUpdate.getCity());
+                if (city != null){
+                    user.setCity(city);
+                } else {
+                    Province province = provinceService.getProvinceById(userUpdate.getProvince());
+                    City city1 = new City();
+                    city1.setNameCity(userUpdate.getCity());
+                    city1.setProvince(province);
+                    cityRepository.save(city1);
+                    user.setCity(city1);
+                }
+            }
+            if (userUpdate.getProfession() != null) {
+                user.setProfession(professionService.getById(userUpdate.getProfession()));
+            }
+            if (userUpdate.getDescription() != null){
+                user.setDescription(userUpdate.getDescription());
+            }
+            if (userUpdate.getPhone() != null){
+                user.setPhone(userUpdate.getPhone());
+            }
             userRepository.save(user);
             return Optional.of(new UserResponseDTO(user));
         } catch (Exception e) {

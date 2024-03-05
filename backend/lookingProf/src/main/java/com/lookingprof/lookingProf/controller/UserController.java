@@ -54,15 +54,16 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Integer id,
-                                        @RequestParam("province") String province,
-                                        @RequestParam("city") String city,
-                                        @RequestParam("profession") String profession,
-                                        @RequestParam("role") String role,
-                                        @RequestParam("description") String description,
-                                        @RequestParam(value = "image", required = false) MultipartFile image
+                                        @RequestBody UserRequestDTO userRequestDTO
+//                                        @RequestParam(value = "phone", required = false) String phone,
+//                                        @RequestParam(value = "province", required = false) Integer province,
+//                                        @RequestParam(value = "city", required = false) String city,
+//                                        @RequestParam(value = "profession", required = false) Integer profession,
+//                                        @RequestParam(value = "description", required = false) String description
+                                        //@RequestParam(value = "image", required = false) MultipartFile image
                                         ) {
         try {
-            UserRequestDTO userRequestDTO = new UserRequestDTO( province, city, profession, role, description, image);
+            //UserRequestDTO userRequestDTO = new UserRequestDTO( phone, province, city, profession, description);
             Optional<UserResponseDTO> updatedUser = userService.updateUser(id, userRequestDTO);
             if (updatedUser.isPresent())    return ResponseEntity.ok(updatedUser);
             else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se ha encontrado el usuario");
