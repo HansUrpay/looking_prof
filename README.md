@@ -83,10 +83,23 @@ La plataforma estará disponible solo en español inicialmente.
 El soporte para navegadores será limitado a las últimas versiones de Chrome, Firefox y Safari.
 
 # **Roles:**
-- Backend: Rubén Ledesma / Lucas Caro / Mauro Caceres / Hans Urpay / Elián Bargaz
-- Frontend: Leandro Lanza / Jessica Ortiz Ospina
-- Tester: Giorgina Spezia /
-- Diseño UX/UI: Lesly Sharom Cueto Tipte / Florencia Alvarez
+## Backend:
+  - Rubén Ledesma <a href="https://www.linkedin.com/in/rub%C3%A9n-ledesma/">LinkedIn</a>
+  - Lucas Caro <a href="https://www.linkedin.com/in/lucas-nahuel-caro/">LinkedIn</a>
+  - Mauro Caceres <a href="https://www.linkedin.com/in/mauro-caceres-946696265/">LinkedIn</a>
+  - Hans Urpay <a href="https://www.linkedin.com/in/hans-urpay/">LinkedIn</a>
+  - Elián Bargaz <a href="https://www.linkedin.com/in/elianbargaz/">LinkedIn</a>
+    
+## Frontend:
+  - Leandro Lanza <a href="https://www.linkedin.com/in/leandro-lanza/">LinkedIn</a>
+    
+  - Jessica Ortiz Ospina
+    
+## Tester: 
+  -Giorgina Spezia <a href="https://www.linkedin.com/in/giorgina-spezia-072817257/">LinkedIn</a>
+## Diseño UX/UI:
+  - Lesly Sharom Cueto Tipte <a href="https://www.linkedin.com/in/lesly-cueto/">LinkedIn</a>
+  - Florencia Alvarez
 
 
 # **Tecnologías y herramientas a utilizar:**
