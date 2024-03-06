@@ -84,7 +84,13 @@ const Login = () => {
 
    
     try {
-      const responseData = await axios.post('http://localhost:8080/auth/login', { email, password });
+      const responseData = await axios.post('http://localhost:8080/auth/login', { email, password },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          }}
+      );
       const token = responseData.data.token;
       localStorage.setItem('jwt', token);
       const [header, payload, signature] = token.split('.');

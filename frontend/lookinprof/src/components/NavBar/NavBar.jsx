@@ -66,7 +66,11 @@ const NavBar = () => {
         dispatch(setCurrentUser(null)); // Despachar una acción para actualizar el usuario actual en el almacen de Redux
         navigate('/'); // Navegar al usuario a la página de inicio después de cerrar la sesión
     };
-
+    useEffect(() => {
+        // Itera sobre los enlaces y encuentra el índice del enlace actual en base a la URL
+        const currentIndex = links.findIndex(link => link.path === location.pathname);
+        setActive(currentIndex);
+    }, [location])
     // Renderización del componente de barra de navegación
     return (
         <nav ref={navRef} className='w-full h-24 sticky top-0 bg-white flex items-center justify-between px-4 md:px-20 z-50'>

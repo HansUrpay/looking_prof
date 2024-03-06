@@ -24,7 +24,11 @@ const Contact = () => {
         email: userEmail,
         description: userMessage,
         asunt: userSubject,
-      });
+      },{
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+        }
+    });
       window.confirm("Estas seguro de querer enviar el soporte?",{
         buttons: {
           confirm: {
@@ -56,18 +60,16 @@ const Contact = () => {
     <div className="flex flex-row lg:relative h-screen lg:justify-evenly items-center" style={{ backgroundImage: `url(${mountainImage})`, backgroundSize: 'cover',  backgroundRepeat:'no-repeat', backgroundColor:'50%'}}>
       <img src={manSettingsImage} alt="manSettings" className=" p-[43px] hidden lg:block" />
 
-      <div className="shadow-2xl rounded-3xl shadow-gray-400 px-20 py-20 flex flex-col justify-between w-1/4 bg-white">
+      <div className="shadow-2xl rounded-3xl shadow-gray-400 px-10 py-5 flex flex-col justify-between w-1/4 bg-white">
         <div>
           <h3 className='text-4xl text-[#004466] font-bold'>
             Contactanos
           </h3>
-
-          <Typography paragraph>
+          <p className='text-xs py-2'>
             Envianos tu consulta a nuestro mail
-          </Typography>
+          </p>
         </div>
-
-        <form className="flex flex-col align-items: center justify-content: center space-y-5 " onSubmit={handleSubmit}>
+        <form className="flex flex-col align-items: center justify-content: center space-y-2 " onSubmit={handleSubmit}>
           <TextField
             label="Nombre"
             placeholder="Nombre"

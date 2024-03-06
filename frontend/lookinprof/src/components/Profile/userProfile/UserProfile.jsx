@@ -83,6 +83,8 @@ const UserProfile = () => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
             Accept: "application/json",
+            'Access-Control-Allow-Origin': '*',
+            
           },
         }
       );
@@ -95,23 +97,25 @@ const UserProfile = () => {
 
   const formattedDate = userData?.createAt
     ? new Date(userData?.createAt).toLocaleDateString("es-ES", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      })
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    })
     : "";
 
-  return (
-    <div className="flex flex-col items-center justify-center w-full">
-      {/* Profile Image */}
-      <img
-        src={userData?.imageUrl || profile}
-        alt="User Profile"
-        className="max-w-64 mb-5 hidden md:block"
-      />
+  return ( 
+    <div className="flex flex-col md:flex-row items-center justify-center w-[600px] md:h-[600px] m-4 rounded-3xl md:bg-slate-300 p-2">
+      <div className='bg-white h-[450px] flex flex-row items-center justify-center rounded-3xl  w-full'>
+        <img
+          src={userData?.imageUrl || profile}
+          alt="User Profile"
+          className="max-w-64 mb-5 hidden md:block p-10 drop-shadow-2xl shadow-black"
+        />
+     
+
 
       {/* User Information Form */}
-      <div className="shadow-2xl rounded-3xl md:p-5 p-1 flex flex-col items-center justify-center md:w-[500px] w-full bg-white">
+      <div className="shadow-2xl shadow-black rounded-3xl md:p-5 p-1 flex flex-col items-center justify-center md:w-[500px] h-[450px] w-full bg-white">
         <div className="text-center space-y-5">
           {/* User Name */}
           <h2 className="md:text-2xl text-xl font-bold">
@@ -123,7 +127,7 @@ const UserProfile = () => {
           <p className="text-xs md-text-xl" gutterBottom>
             Contacto: {userData?.email}
           </p>
-         {/* <p className="text-xs md:text-xl font-semibold" gutterBottom>
+          {/* <p className="text-xs md:text-xl font-semibold" gutterBottom>
             {isEditing ? "Nueva Residencia: " : "Lugar de residencia"}
           </p>
           {isEditing ? (
@@ -179,6 +183,7 @@ const UserProfile = () => {
             {isEditing ? "Cancelar" : "Editar"}
           </Button>*/}
         </div>
+      </div>
       </div>
     </div>
   );

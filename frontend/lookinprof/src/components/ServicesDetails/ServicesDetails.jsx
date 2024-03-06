@@ -16,12 +16,14 @@ const ServicesDetails = () => {
     const itemsPerPage = 3;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
+    window.scroll(0, 0);
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get(`http://localhost:8080/user/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${jwt}`,
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
                 },
             });
             setServicesData(response.data);
@@ -31,7 +33,10 @@ const ServicesDetails = () => {
 
     useEffect(() => {
         const fetchSimilarServices = async () => {
-            const response = await axios.get(`http://localhost:8080/profession/get`);
+            const response = await axios.get(`http://localhost:8080/profession/get`,{
+                headers: {
+                    'Access-Control-Allow-Origin':'*'
+        }});
             setSimilarServices(response.data);
         };
         if (servicesData.nameProfession) {
@@ -73,7 +78,7 @@ const ServicesDetails = () => {
                         </div>
                         <div className='border-[1px] p-4 rounded-xl shadow-lg' >
                             <div className='flex flex-col items-center justify-center w-[300px]'>
-                                <img src={servicesData.imageUrl} alt="Descriptive text" className="rounded-full bg-center w-[200px] h-[200px]" />
+                                <img src={servicesData.imageUrl} alt="Descriptive text" className="rounded-xl bg-center w-[200px] h-[auto] pb-2" />
                                 <h5 className='font-bold text-xl'>{ }</h5>
                                 <p className='text-sm'>{ }</p>
                                 <p className='text-xs'>{ }</p>

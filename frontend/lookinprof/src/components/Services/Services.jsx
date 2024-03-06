@@ -29,10 +29,26 @@ const Services = () => {
         const fetchData = async () => {
             try {
                 const [servicesResponse, professionsResponse, provincesResponse, citiesResponse] = await Promise.all([
-                    axios.get('http://localhost:8080/user/all'),
-                    axios.get('http://localhost:8080/profession/get'),
-                    axios.get('http://localhost:8080/provinces/get'),
-                    axios.get('http://localhost:8080/city/get')
+                    axios.get('http://localhost:8080/user/all',{
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                        }
+                    }),
+                    axios.get('http://localhost:8080/profession/get',{
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                        }
+                    }),
+                    axios.get('http://localhost:8080/provinces/get',{
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                        }
+                    }),
+                    axios.get('http://localhost:8080/city/get',{
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                        }
+                    })
                 ]);
 
                 setServices(servicesResponse.data.filter(item => item.role === 'PROFESSIONAL'));
@@ -51,7 +67,6 @@ const Services = () => {
         const filteredCities = cities.filter(city => city.idProvince === filters.provincia);
         setSelectCity(filteredCities);
     }, [filters.provincia]);
-    console.log(selectCity)
 
     const handleFilterChange = (key, value) => {
         if (key === 'provincia') {
@@ -65,7 +80,6 @@ const Services = () => {
         }
     };
 
-    console.log(cities)
     const filterServices = (service) => {
         const { profession, provincia, selectedCityId } = filters;
 
@@ -97,7 +111,6 @@ const Services = () => {
         setServices(sortedServices);
         setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
     };
-    console.log(filters.provincia)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -113,7 +126,7 @@ const Services = () => {
     return (
         <section className='lg:p-10 flex flex-col justify-center items-center'>
             <div className='flex flex-row xs:flex-col items-center justify-between lg:max-w-[1100px] lg:w-full'>
-                <img src={ServiciosImages} alt="" className='w-full h-[500px] lg:block hidden rounded-xl' />
+                <img src={ServiciosImages} alt="" className='w-full h-[500px] lg:block hidden rounded-2xl' />
                 <div className='flex flex-col items-center justify-center lg:justify-start lg:items-start p-2  gap-y-2 md:w-[500px] '>
                     <h2 className='text-2xl text-[#004466] font-black  text-center lg:text-start'>Encuentra a los mejores profesionales cerca de ti</h2>
                     <h5 className='text-[#223139] text-xl font-bold'>Filtrar profesionales por:</h5>
@@ -217,7 +230,7 @@ const Services = () => {
                         )}
                     </div>
                 ) : (
-                    <div className='flex flex-col bg-slate-200 p-10 rounded-2xl'>
+                    <div className='flex flex-col bg-slate-200 p-10 rounded-2xl g-4'>
                     <h4  className='text-center text-4xl text-[#004466]'>OOOPP!!!!!!!</h4>
                     <p className='text-center text-xl'>No hay ningún profesional con los filtros que elegiste</p>
                     </div>
