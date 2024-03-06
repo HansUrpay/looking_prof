@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import mountain from "../../assets/montain.png";
-//import manSettings from "../../assets/manSettings.svg";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -46,6 +45,7 @@ const Login = () => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+  
   const validateEmail = (email) => {
     if (!email) {
       setEmailError('El correo electrónico es requerido');
@@ -70,8 +70,6 @@ const Login = () => {
     return true;
   };
 
- 
-
   const signIn = async (e) => {
     e.preventDefault();
 
@@ -82,7 +80,6 @@ const Login = () => {
       return;
     }
 
-   
     try {
       const responseData = await axios.post('http://localhost:8080/auth/login', { email, password },
         {
@@ -93,10 +90,9 @@ const Login = () => {
       );
       const token = responseData.data.token;
       localStorage.setItem('jwt', token);
-      const [ payload] = token.split('.');
-      const decodedPayload = JSON.parse(atob(payload));
-      dispatch(setCurrentUser(decodedPayload));
-      alert(`Hola de nuevo!! ${decodedPayload.firstName}`);
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      dispatch(setCurrentUser(payload));
+      alert(`Hola de nuevo!! ${payload.firstName}`);
       navigate('/');
     } catch (error) {
       console.log(error)
@@ -109,25 +105,18 @@ const Login = () => {
   };
 
  
-  
   return (
-    <div className=" flex flex-col-reverse lg:relative h-screen flex lg:justify-center items-center" style={{
+    <div className="flex flex-col-reverse lg:relative h-screen lg:justify-center items-center" style={{
       backgroundImage: `url(${mountain})`,
       backgroundSize: "cover",
     }}>
-
-
       <div className="lg:flex justify-center items-center">
-      
-        
-
-        <div className="h-auto relative sm:relative lg:rounded-3xl p-10 z-20  bg-white lg:bottom-[-1px] lg:h-[400px] justify-center">
+        <div className="h-auto relative sm:relative lg:rounded-3xl p-10 z-20 bg-white lg:bottom-[-1px] lg:h-[400px] justify-center">
           <div className="sm:text-sm">
             <Typography variant="h3" gutterBottom>
               Iniciar Sesión
             </Typography>
           </div>
-
           <form onSubmit={signIn} className="flex flex-col gap-5 z-10">
             <TextField
               label="Correo Electrónico"
@@ -167,7 +156,6 @@ const Login = () => {
                 <p className="text-sm text-red-500">{passwordError}</p>
               )}
             </FormControl>
-
             <Button variant="contained" type="submit">
               Iniciar Sesión
             </Button>

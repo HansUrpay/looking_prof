@@ -27,7 +27,6 @@ const Profile = () => {
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      
       {hasUserRole ? <UserProfile /> : <ServiceProfile />}
     </div>
   );

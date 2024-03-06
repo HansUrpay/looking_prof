@@ -45,7 +45,7 @@ const NavBar = () => {
         setMenuOpen(!menuOpen);
         
     };
-
+    console.log(currentUser)
     // Gancho de efecto para manejar clics fuera del menú para cerrarlo
     useEffect(() => {
         const closeMenuOnClickOutside = (e) => {
@@ -63,7 +63,7 @@ const NavBar = () => {
 
     // Función para cerrar la sesión del usuario
     const logout = () => {
-        dispatch(setCurrentUser(null)); // Despachar una acción para actualizar el usuario actual en el almacen de Redux
+        dispatch(setCurrentUser('')); // Despachar una acción para actualizar el usuario actual en el almacen de Redux
         navigate('/'); // Navegar al usuario a la página de inicio después de cerrar la sesión
     };
     useEffect(() => {

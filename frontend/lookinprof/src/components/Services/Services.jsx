@@ -214,8 +214,8 @@ const Services = () => {
                                         <img src={item.imageUrl} alt={item.profession} className='w-[9vw] h-[25vh] rounded-t-lg mb-4 cover' />
                                         <div className=''>
                                             <h4 className='font-semibold text-xl'>{item.firstName} {item.lastName}</h4>
-                                            <p className='text-sm'>{item.profession.length>10 ? `${item.profession.substring(0,8)}...`:item.profession}</p>
-                                            {item.city.length > 15 ? `${item.city.substring(0, 10)}...` : item.city}, {item.province}
+                                            <p className='text-sm'>{item.profession}</p>
+                                            <p>{item.city}, {item.province}</p>
                                         </div>
                                     </div>
                                     <div className='flex py-2'>

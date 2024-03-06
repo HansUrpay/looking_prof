@@ -52,16 +52,7 @@ const Home = () => {
     }
   };
 
-  const handleClickServiceRegister = () => {
-    const { role, id } = currentUser; // Destructuring currentUser
-  
-    if (role?.[0].authority === 'USER') {
-      dispatch(setCurrentUser(null));
-      navigate('/register');
-    } else {
-      navigate(`/profile/${id}`);
-    }
-  };
+
   return (
     <div className='flex flex-col justify-center items-center'>
       {/* Section 1 de la pagina principal */}
@@ -137,7 +128,7 @@ const Home = () => {
           <div className='flex flex-col justify-center items-center gap-10'>
             <h2 className='text-4xl font-bold'>¿Te animas a empezar?</h2>
             <div>
-              <Button variant='contained' color='primary' onClick={() => handleClickServiceRegister()}>Ofrecer Servicios</Button>
+              <Button variant='contained' color='primary' onClick={() => handleClickCard()}>Ofrecer Servicios</Button>
             </div>
           </div>
         </div>
