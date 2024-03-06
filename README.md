@@ -93,7 +93,7 @@ El soporte para navegadores será limitado a las últimas versiones de Chrome, F
 ## Frontend:
   - Leandro Lanza <a href="https://www.linkedin.com/in/leandro-lanza/" target="_blank">LinkedIn</a>
     
-  - Jessica Ortiz Ospina
+  - Jessica Ortiz Ospina <a href="http://www.linkedin.com/in/jessica-ortiz-ospina" target="_blank">LinkedIn</a>
     
 ## Tester: 
   -Giorgina Spezia <a href="https://www.linkedin.com/in/giorgina-spezia-072817257/" target="_blank">LinkedIn</a>
