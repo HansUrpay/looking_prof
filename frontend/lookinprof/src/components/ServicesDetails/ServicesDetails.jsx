@@ -85,17 +85,7 @@ const ServicesDetails = () => {
                                 </Button>                            </div>
                         </div>
                     </section>
-                    <section className='p-2'>
-                        <h4>Opiniones del servicio</h4>
-                        <div className='flex flex-row items-center gap-2 bg-yellow-200 w-[200px] rounded-full py-1 px-4'>
-                            <FaStar className='text-yellow-300' />
-                            <span className='text-black/40 text-xs' >{ }</span>
-
-                            <p className='text-xs'>{ } opiniones</p>
-                        </div>
-
-
-                    </section>
+                
                     {/* mostrar solo 3 perfiles random de la misma profesion*/}
                     {/* Pagination */}
 

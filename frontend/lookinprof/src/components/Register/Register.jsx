@@ -210,6 +210,7 @@ const Register = () => {
                 }
                 label="Contraseña"
                 onChange={handleChange}
+                size="small"
                 error={!!formErrors.password}
               />
               <FormHelperText error>{formErrors.password || ''}</FormHelperText>
@@ -221,13 +222,13 @@ const Register = () => {
           </form>
 
           {/* Login Redirect */}
-          <Typography variant="body2" className="pt-5">
+          <p className="pt-5 text-xs font-medium">
             Ya tienes una cuenta,{" "}
             <Link to="/login" className="text-blue-700 font-semibold">
               haz clic aquí
             </Link>
             .
-          </Typography>
+          </p>
        
       </div>
     </div>

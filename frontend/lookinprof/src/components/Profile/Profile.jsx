@@ -27,7 +27,7 @@ const Profile = () => {
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      {decodedPayload && <h1>Welcome {decodedPayload.firstName}</h1>}
+      
       {hasUserRole ? <UserProfile /> : <ServiceProfile />}
     </div>
   );

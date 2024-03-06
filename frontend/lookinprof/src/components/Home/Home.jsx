@@ -9,6 +9,7 @@ import { RiStarSFill, RiStarSLine } from "react-icons/ri";
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import axios from 'axios';
+import Home2 from '../../assets/Home-2.svg';
 
 const Home = () => {
   const { currentUser } = useSelector(({user}) => user);
@@ -50,11 +51,12 @@ const Home = () => {
   return (
     <div className='flex flex-col justify-center items-center'>
       {/* Section 1 de la pagina principal */}
-    <div style={{ backgroundImage: `url(${bgCard})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'top', backgroundSize: 'cover' }}>
+    <div >
       <div className='m-6 p-6 flex flex-col md:flex-row justify-center items-center lg:w-[1100px] min-w-[320px] p-auto '>
+        
         <div className=' lg:p-6 w-full md:w-[60%] flex flex-col items-center lg:items-start lg:justify-between gap-6'>          
           <h2 className='lg:mt-4 text-3xl text-[#004466] font-black'>¿Necesitas ayuda? Encuentra al profesional perfecto aquí</h2>
-          <p className='text-white'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus nullam eget felis eget nunc lobortis mattis aliquam. </p>
+          <p className='text-[#004466] bg-slate-100/20'>LookingProf te permite no solo encontrar el profesional más cercano, sino también el mejor puntuando por otros usuarios que ya han requerido sus servicios. La plataforma permite conectar de forma simple e intuitiva a las personas interesadas en contratar un servicio con un profecional que lo brinda. </p>
           <div className='w-26'>
             <Button variant='contained' color='primary' onClick={handleClickContact}>Quiero Contratar</Button>
           </div>
@@ -62,11 +64,10 @@ const Home = () => {
             <div className='bg-yellow-500 w-8 h-8 flex items-center justify-center rounded-xl'>
               <FaStar />
             </div>
-            <span className='text-xs'>Nuestra valoración  4.9 de 1200 reviews</span>
           </div>
         </div >
         <div  className='m-4 hidden lg:block max-h-[400px] md:max-h-[500px] rounded-xl' >
-
+        <img src={Home2} alt=''/>
         </div>
         {/* <img src={ImageHome} alt="Home" className='m-4 hidden lg:block max-h-[400px] md:max-h-[500px] rounded-xl' /> */}
       </div>
@@ -77,10 +78,10 @@ const Home = () => {
         <h3 className='text-[#004466] text-xl text-center p-4'>Nuestra selección de profesionales</h3>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-auto max-w-[1100px] min-w-[320px] p-2 justify-center'>
           {servicesHome.map((item) => (
-            <div key={item.idUser} className='m-2 border-[#004466] border-2 rounded-lg h-auto'>
+            <div key={item.idUser} className='p-4 lg:m-10 m-4  border-[#004466] border-2 rounded-lg h-auto'>
               <Cards className='flex flex-col items-center'>
-                <div>
-                  <img src={item.imageUrl} alt={item.title} className='w-full h-[200px] object-cover rounded-t-lg mb-4' />
+              <div className='flex flex-col justify-center items-center'>
+                  <img src={item.imageUrl} alt={item.profession} className='w-[9vw] h-[25vh] rounded-t-lg mb-4 cover' />
                   <div className='pl-5'>
                   <h4 className='font-semibold text-xl'>{item.firstName}</h4>
                   <p className='text-sm'>{item.profession}</p>
