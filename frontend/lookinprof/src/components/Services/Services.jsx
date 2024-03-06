@@ -66,7 +66,7 @@ const Services = () => {
         // Filtrar ciudades según el id de la provincia seleccionada
         const filteredCities = cities.filter(city => city.idProvince === filters.provincia);
         setSelectCity(filteredCities);
-    }, [filters.provincia]);
+    }, [filters.provincia, cities]);
 
     const handleFilterChange = (key, value) => {
         if (key === 'provincia') {

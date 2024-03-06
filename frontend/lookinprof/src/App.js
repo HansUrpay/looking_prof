@@ -9,7 +9,6 @@ import NotFound from './components/NotFound/NotFound'
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/Footer'
 import ProtectedRoutes from './Routes/ProtectedRoutes'
-import CheckOut from './components/Checkout/Checkout.jsx'
 import Profile from './components/Profile/Profile.jsx'
 
 

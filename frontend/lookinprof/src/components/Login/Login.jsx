@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import mountain from "../../assets/montain.png";
-import manSettings from "../../assets/manSettings.svg";
+//import manSettings from "../../assets/manSettings.svg";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -93,7 +93,7 @@ const Login = () => {
       );
       const token = responseData.data.token;
       localStorage.setItem('jwt', token);
-      const [header, payload, signature] = token.split('.');
+      const [ payload] = token.split('.');
       const decodedPayload = JSON.parse(atob(payload));
       dispatch(setCurrentUser(decodedPayload));
       alert(`Hola de nuevo!! ${decodedPayload.firstName}`);

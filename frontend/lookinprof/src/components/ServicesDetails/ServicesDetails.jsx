@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom'; // Combined imports
 import { Button } from '@mui/material';
-import { FaStar } from "react-icons/fa";
+//import { FaStar } from "react-icons/fa";
 import Cards from '../../UI/cards/Cards';
-import { RiStarSFill, RiStarSLine } from "react-icons/ri";
+//import { RiStarSFill, RiStarSLine } from "react-icons/ri";
 import { FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
 import axios from 'axios';
 const ServicesDetails = () => {

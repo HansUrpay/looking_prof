@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+//import { useDispatch } from "react-redux";
 import axios from "axios";
-import {
-  Typography,
-  Button,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-  TextField,
-} from "@mui/material";
+//import {   Typography,  Button,  Select,  MenuItem,  InputLabel,  FormControl,  TextField } from "@mui/material";
 import { useParams } from "react-router-dom";
 import profile from "../../../assets/profile.svg";
 
@@ -18,12 +10,12 @@ const UserProfile = () => {
   const token = localStorage.getItem("jwt");
 
   const [userData, setUserData] = useState(null);
-  const [provinces, setProvinces] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedData, setEditedData] = useState({
-    city: "",
-    province: "",
-  });
+ // const [provinces, setProvinces] = useState([]);
+ // const [isEditing, setIsEditing] = useState(false);
+  // const [editedData, setEditedData] = useState({
+  //   city: "",
+  //   province: "",
+  // });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,55 +37,55 @@ const UserProfile = () => {
     fetchData();
   }, [id, token]);
 
-  useEffect(() => {
-    const fetchProvinces = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/provinces/get");
-        setProvinces(response.data);
-      } catch (error) {
-        console.error("Error fetching provinces:", error);
-      }
-    };
-    fetchProvinces();
-  }, []);
+  // useEffect(() => {
+  //   const fetchProvinces = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:8080/provinces/get");
+  //       setProvinces(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching provinces:", error);
+  //     }
+  //   };
+  //   fetchProvinces();
+  // }, []);
 
-  const handleProvinceChange = (event) => {
-    const selectedProvinceName = event.target.value;
-    setEditedData((prevData) => ({
-      ...prevData,
-      province: selectedProvinceName,
-    }));
-  };
+  // const handleProvinceChange = (event) => {
+  //   const selectedProvinceName = event.target.value;
+  //   setEditedData((prevData) => ({
+  //     ...prevData,
+  //     province: selectedProvinceName,
+  //   }));
+  // };
 
-  const handleCityChange = (event) => {
-    const enteredCity = event.target.value;
-    setEditedData((prevData) => ({
-      ...prevData,
-      city: enteredCity,
-    }));
-  };
+  // const handleCityChange = (event) => {
+  //   const enteredCity = event.target.value;
+  //   setEditedData((prevData) => ({
+  //     ...prevData,
+  //     city: enteredCity,
+  //   }));
+  // };
 
-  const handleSaveChanges = async () => {
-    try {
-      const response = await axios.put(
-        `http://localhost:8080/user/${id}`,
-        editedData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            'Access-Control-Allow-Origin': '*',
+  // const handleSaveChanges = async () => {
+  //   try {
+  //     const response = await axios.put(
+  //       `http://localhost:8080/user/${id}`,
+  //       editedData,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           "Content-Type": "application/json",
+  //           Accept: "application/json",
+  //           'Access-Control-Allow-Origin': '*',
             
-          },
-        }
-      );
-      setUserData(response.data);
-      setIsEditing(false);
-    } catch (error) {
-      console.error("Error updating user data:", error);
-    }
-  };
+  //         },
+  //       }
+  //     );
+  //     setUserData(response.data);
+  //     setIsEditing(false);
+  //   } catch (error) {
+  //     console.error("Error updating user data:", error);
+  //   }
+  // };
 
   const formattedDate = userData?.createAt
     ? new Date(userData?.createAt).toLocaleDateString("es-ES", {

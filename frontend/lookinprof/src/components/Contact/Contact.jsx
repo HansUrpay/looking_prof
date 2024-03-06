@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import mountainImage from '../../assets/montain.png';
 import manSettingsImage from '../../assets/manSettings.svg';
-import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
@@ -18,7 +17,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/supportContact/create', {
+     await axios.post('http://localhost:8080/supportContact/create', {
         userName,
         lastName: userLastName,
         email: userEmail,

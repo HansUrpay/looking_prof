@@ -1,15 +1,14 @@
 import { Button } from '@mui/material';
 import React from 'react';
 import { FaStar } from "react-icons/fa";
-import bgCard from './../../assets/bgCardHome.svg';
 import ImageHome2 from './../../assets/ImageHomeSection2.svg';
 import Cards from '../../UI/cards/Cards';
 import { useNavigate } from 'react-router-dom';
-import { RiStarSFill, RiStarSLine } from "react-icons/ri";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import axios from 'axios';
 import Home2 from '../../assets/Home-2.svg';
+import { setCurrentUser } from '../../redux/slices/userSlice';
 
 const Home = () => {
   const { currentUser } = useSelector(({user}) => user);
@@ -18,7 +17,7 @@ const Home = () => {
  // const sortedServicesData = servicesData.sort((a, b) => b.starts - a.starts);
   const professionals = servicesData.filter((item) => item.role === 'PROFESSIONAL');
   const servicesHome = professionals.slice(0, 6);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     let didCancel = false; 
     const fetchServicesData = async () => {
@@ -41,8 +40,9 @@ const Home = () => {
     };
 }, []);
   const handleClickContact = () => {
+    if(currentUser) {
     navigate('/services');
-  };
+  };}
   //Boton para ir a la pagina de detalle de servicio. Si el usuario no esta logueado, redirecciona a la pagina de login. Si el usuario esta logueado, redirecciona a la pagina de detalle de servicio.
   const handleClickCard = (id) => {
     if(currentUser) {
@@ -51,7 +51,17 @@ const Home = () => {
       navigate('/login');
     }
   };
-  window.scrollTo(0, 0);
+
+  const handleClickServiceRegister = () => {
+    const { role, id } = currentUser; // Destructuring currentUser
+  
+    if (role?.[0].authority === 'USER') {
+      dispatch(setCurrentUser(null));
+      navigate('/register');
+    } else {
+      navigate(`/profile/${id}`);
+    }
+  };
   return (
     <div className='flex flex-col justify-center items-center'>
       {/* Section 1 de la pagina principal */}
@@ -127,7 +137,7 @@ const Home = () => {
           <div className='flex flex-col justify-center items-center gap-10'>
             <h2 className='text-4xl font-bold'>¿Te animas a empezar?</h2>
             <div>
-              <Button variant='contained' color='primary' onClick={() => navigate('/register')}>Ofrecer Servicios</Button>
+              <Button variant='contained' color='primary' onClick={() => handleClickServiceRegister()}>Ofrecer Servicios</Button>
             </div>
           </div>
         </div>
