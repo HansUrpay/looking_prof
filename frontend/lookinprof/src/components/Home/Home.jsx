@@ -83,7 +83,7 @@ const Home = () => {
         <h3 className='text-[#004466] text-xl text-center p-4'>Nuestra selección de profesionales</h3>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-auto max-w-[1100px] min-w-[320px] p-2 justify-center'>
           {servicesHome.map((item) => (
-            <div key={item.idUser} className='p-4 lg:m-10 m-4  border-[#004466] border-2 rounded-lg h-auto'>
+            <div key={item.idUser} className='p-4 m-4 border-[#004466] w-[300px]  shadow-slate-400 shadow-xl border-2 rounded-lg h-auto'>
               <Cards className='flex flex-col items-center'>
               <div className='flex flex-col justify-center items-center'>
                   <img src={item.imageUrl} alt={item.profession} className='w-[9vw] h-[25vh] rounded-t-lg mb-4 cover' />

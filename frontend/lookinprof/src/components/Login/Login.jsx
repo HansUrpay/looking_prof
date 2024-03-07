@@ -106,12 +106,12 @@ const Login = () => {
 
  
   return (
-    <div className="flex flex-col-reverse lg:relative h-screen lg:justify-center items-center" style={{
+    <div className="flex flex-col h-full sm:h-screen justify-center items-center" style={{
       backgroundImage: `url(${mountain})`,
       backgroundSize: "cover",
     }}>
-      <div className="lg:flex justify-center items-center">
-        <div className="h-auto relative sm:relative lg:rounded-3xl p-10 z-20 bg-white lg:bottom-[-1px] lg:h-[400px] justify-center">
+      <div className="flex flex-col justify-center items-center">
+        <div className="lg:rounded-3xl p-10  bg-white  justify-center">
           <div className="sm:text-sm">
             <Typography variant="h3" gutterBottom>
               Iniciar Sesión

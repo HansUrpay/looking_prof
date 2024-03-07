@@ -94,7 +94,6 @@ const NavBar = () => {
                 </Link>
             </div>
             <div className='flex items-center'>
-                {/* Menú hamburguesa para vista móvil */}
                 <div className="lg:hidden p-2">
                     <button className="text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none" onClick={toggleMenu}>
                         
@@ -102,7 +101,6 @@ const NavBar = () => {
                        
                     </button>
                 </div>
-                {/* Enlaces de navegación */}
                 <div className={`hidden lg:flex flex-row items-center justify-center md:gap-2`}>
                     {links.map((item, index) => (
                         <div key={index} className={`${active === index && 'text-[#004466] after:w-full after:bg-[#004466] font-bold'} ${item.name !== "Iniciar sesión" && item.name !== "Registrarme" && 'after:h-[2px] after:w-0 after:bg-[#004466] relative after:absolute after:-bottom-1 after:left-0'}`}>
@@ -127,7 +125,6 @@ const NavBar = () => {
                             )}
                         </div>
                     ))}
-                    {/* Renderizado condicional de componentes específicos del usuario */}
                     {currentUser && (
                         <div className='ml-4 relative'>
                             <p className='font-bold cursor-pointer flex flex-row items-center justifr-center px-8 py-2 rounded-full bg-[#004466] text-white' onClick={toggleMenu}>
@@ -136,7 +133,6 @@ const NavBar = () => {
                                     <path d="M7 10l5 5 5-5z"/>
                                 </svg>
                             </p>
-                            {/* Menú desplegable para acciones del usuario */}
                             {menuOpen && (
                                 <div className="absolute top-10 right-0 z-10 text-end p-2">
                                     <NavLink to={`/profile/${currentUser.id}`} className='block py-2 px-4 text-green-600 hover:bg-gray-800/10 rounded-xl font-bold'>
@@ -151,7 +147,6 @@ const NavBar = () => {
                     )}
                 </div>
             </div>
-            {/* Menú desplegable para vista móvil */}
             {menuOpen && (
                 <div className="lg:hidden absolute top-20 right-4 bg-white shadow-md rounded-xl z-10">
                      {links.map((item, index) => (
@@ -176,20 +171,14 @@ const NavBar = () => {
                                 <p>{currentUser.firstName}</p>
                                 
                             </p>
-                            
-                            <NavLink to={'/profile'} className='block py-2 px-4 text-green-600 hover:bg-gray-800/10 rounded-xl font-bold'>
+                            <NavLink to={`/profile/${currentUser.id}`} className='block py-2 px-4 text-green-600 hover:bg-gray-800/10 rounded-xl font-bold'>
                                         Perfil
                                     </NavLink>
                                     <NavLink to={'/login'} className='block py-2 px-4 text-red-600 hover:bg-gray-800/10 rounded-xl font-bold' onClick={logout}>
                                         Cerrar sesión
                                     </NavLink>
-
-                                    
-                            
                         </div>
                     )}
-                   
-                    {/* Renderizado condicional de componentes específicos del usuario */}
                    
                 </div>
             )}

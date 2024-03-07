@@ -4,7 +4,6 @@ import mountainImage from '../../assets/montain.png';
 import manSettingsImage from '../../assets/manSettings.svg';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
 import axios from 'axios';
 
 const Contact = () => {
@@ -13,65 +12,48 @@ const Contact = () => {
   const [userEmail, setUserEmail] = useState('');
   const [userMessage, setUserMessage] = useState('');
   const [userSubject, setUserSubject] = useState('');
-  const navi = useNavigate();
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-     await axios.post('http://localhost:8080/supportContact/create', {
-        userName,
-        lastName: userLastName,
-        email: userEmail,
-        description: userMessage,
-        asunt: userSubject,
-      },{
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-        }
-    });
-      window.confirm("Estas seguro de querer enviar el soporte?",{
-        buttons: {
-          confirm: {
-            label: 'Si',
-            className: 'btn-success'
+      await axios.post('http://localhost:8080/supportContact/send', {
+        fromName: userName,
+        fromEmail: userEmail,
+        subject: userSubject,
+        text: userMessage,
+      });
 
-        },
-        cancel: {
-            label: 'No',
-            className: 'btn-danger'}
-
-      },
-      }, setTimeout(
-        () => {
-          alert("Sera redirrecionado al Home")
-          navi('/');
-        }, 3000
-      ));
+      const confirm = window.confirm("¿Estás seguro de querer enviar el mensaje de soporte?");
+      if (confirm) {
+        setTimeout(() => {
+          alert("Serás redirigido al inicio");
+          navigate('/');
+        }, 3000);
+      }
       
-      // Optionally handle successful response here
     } catch (error) {
       console.error('Error sending data:', error);
-      // Optionally handle error here
     }
   };
- 
 
   return (
-    <div className="flex flex-row lg:relative h-screen lg:justify-evenly items-center" style={{ backgroundImage: `url(${mountainImage})`, backgroundSize: 'cover',  backgroundRepeat:'no-repeat', backgroundColor:'50%'}}>
-      <img src={manSettingsImage} alt="manSettings" className=" p-[43px] hidden lg:block" />
+    <div className="flex flex-col lg:flex-row lg:relative h-full lg:h-screen lg:justify-evenly items-center" style={{ backgroundImage: `url(${mountainImage})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundColor: '50%' }}>
+      <img src={manSettingsImage} alt="manSettings" className="p-4 lg:p-0 hidden lg:block" />
 
-      <div className="shadow-2xl rounded-3xl shadow-gray-400 px-10 py-5 flex flex-col justify-between w-1/4 bg-white">
+      <div className="shadow-2xl rounded-3xl shadow-gray-400 px-10 py-5 flex flex-col justify-between lg:w-1/4 bg-white">
         <div>
           <h3 className='text-4xl text-[#004466] font-bold'>
-            Contactanos
+            Contáctanos
           </h3>
           <p className='text-xs py-2'>
-            Envianos tu consulta a nuestro mail
+            Envíanos tu consulta por correo electrónico
           </p>
         </div>
-        <form className="flex flex-col align-items: center justify-content: center space-y-2 " onSubmit={handleSubmit}>
+        <form className="flex flex-col space-y-2" onSubmit={handleSubmit}>
           <TextField
-            label="Nombre"
-            placeholder="Nombre"
+            label="Nombre y Apellido"
+            placeholder="Nombre y Apellido"
             variant="outlined"
             type='text'
             required
@@ -79,17 +61,7 @@ const Contact = () => {
             onChange={(e) => setUserName(e.target.value)}
             size='small'
           />
-          <TextField
-            label="Apellido"
-            placeholder="Apellido"
-            variant="outlined"
-            type='text'
-
-            required
-            value={userLastName}
-            onChange={(e) => setUserLastName(e.target.value)}
-            size='small'
-          />
+          
           <TextField
             label="Correo Electrónico"
             placeholder="Correo Electrónico"
@@ -112,11 +84,10 @@ const Contact = () => {
           />
           
           <textarea
-             minRows={3}
-            variant="outlined"
+            rows={3}
             className='border-2 border-gray-400 rounded-md p-1 hover:border-[#004466] selection:border-[#004466]'
-            aria-label="maximum height"
-            placeholder="Descripción"
+            aria-label="Mensaje"
+            placeholder="Mensaje"
             required
             value={userMessage}
             onChange={(e) => setUserMessage(e.target.value)}

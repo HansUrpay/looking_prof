@@ -210,11 +210,12 @@ const Services = () => {
                             <div key={item.idUser} className='p-4 lg:m-10 m-4 border-[#004466]  shadow-slate-400 shadow-xl border-2 rounded-lg h-auto'>
                                 <Cards className='flex flex-col items-center'>
                                     <div className='flex flex-col justify-center items-center'>
-                                        <img src={item.imageUrl} alt={item.profession} className='w-[9vw] h-[25vh] rounded-t-lg mb-4 cover' />
+                                        <img src={item.imageUrl} alt={item.profession} className='w-full  md:w-[9vw] h-full md:h-[25vh] rounded-t-lg mb-4 cover' />
                                         <div className=''>
                                             <h4 className='font-semibold text-xl'>{item.firstName} {item.lastName}</h4>
                                             <p className='text-sm'>{item.profession}</p>
-                                            <p>{item.city}, {item.province}</p>
+                                            <p>{item.city},</p>
+                                            <p> {item.province}</p>
                                         </div>
                                     </div>
                                     <div className='flex py-2'>

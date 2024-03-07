@@ -96,7 +96,7 @@ const UserProfile = () => {
     : "";
 
   return ( 
-    <div className="flex flex-col md:flex-row items-center justify-center w-[600px] md:h-[600px] m-4 rounded-3xl md:bg-slate-300 p-2">
+    <div className="flex flex-col md:flex-row items-center justify-center w-[300px] md:h-[600px] m-4 rounded-3xl md:bg-slate-300 p-2">
       <div className='bg-white h-[450px] flex flex-row items-center justify-center rounded-3xl  w-full'>
         <img
           src={userData?.imageUrl || profile}
