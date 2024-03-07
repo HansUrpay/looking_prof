@@ -135,40 +135,50 @@ public class DataLoader implements CommandLineRunner {
             userRepository.save(user2);
 
             /**
-             * User 3
+             * Professional Users
              */
-            List<Map<String, Object>> mapList = userData.jsonData();
+            List<Map<String, Object>> userDataList1 = userData.jsonData();
+            loadUserInDatabase(userDataList1);
 
-            List<Province> provinces = provincesRepository.findAll();
-            List<Profession> professions = professionRepository.findAll();
-            List<City> cities = cityRepository.findAll();
+            List<Map<String, Object>> userDataList2 = userData.jsonData2();
+            loadUserInDatabase(userDataList2);
 
-            for (int i = 0; i < mapList.size(); i++) {
-                City city3 = new City();
-                city3.setNameCity((String) mapList.get(i).get("city"));
-                city3.setProvince(provinces.get(i));
-                cityRepository.save(city3);
+            List<Map<String, Object>> userDataList3 = userData.jsonData3();
+            loadUserInDatabase(userDataList3);
 
-                User user3 = new User();
-                user3.setFirstName((String) mapList.get(i).get("firstName"));
-                user3.setLastName((String) mapList.get(i).get("lastName"));
-                user3.setEmail((String) mapList.get(i).get("email"));
-                user3.setPassword(passwordEncoder.encode((String) mapList.get(i).get("password")));
-                user3.setPhone((String) mapList.get(i).get("phone"));
-                user3.setAddress((String) mapList.get(i).get("address"));
-                user3.setCountry((String) mapList.get(i).get("country"));
-                user3.setProvince(provinces.get(i));
-                user3.setCity(city3);
-                user3.setImageUrl((String) mapList.get(i).get("imageUrl"));
-                user3.setQualification((Integer) mapList.get(i).get("qualification"));
-                user3.setRole(Role.PROFESSIONAL);
-                user3.setProfession(professions.get(i));
-                user3.setDescription((String) mapList.get(i).get("description"));
-
-                userRepository.save(user3);
-            }
-
+            List<Map<String, Object>> userDataList4 = userData.jsonData4();
+            loadUserInDatabase(userDataList4);
         }
 
+    }
+
+    public void loadUserInDatabase(List<Map<String, Object>> userDataList){
+        List<Province> provinces = provincesRepository.findAll();
+        List<Profession> professions = professionRepository.findAll();
+
+        for (int i = 0; i < userDataList.size(); i++) {
+            City city3 = new City();
+            city3.setNameCity((String) userDataList.get(i).get("city"));
+            city3.setProvince(provinces.get(i));
+            cityRepository.save(city3);
+
+            User user3 = new User();
+            user3.setFirstName((String) userDataList.get(i).get("firstName"));
+            user3.setLastName((String) userDataList.get(i).get("lastName"));
+            user3.setEmail((String) userDataList.get(i).get("email"));
+            user3.setPassword(passwordEncoder.encode((String) userDataList.get(i).get("password")));
+            user3.setPhone((String) userDataList.get(i).get("phone"));
+            user3.setAddress((String) userDataList.get(i).get("address"));
+            user3.setCountry((String) userDataList.get(i).get("country"));
+            user3.setProvince(provinces.get(i));
+            user3.setCity(city3);
+            user3.setImageUrl((String) userDataList.get(i).get("imageUrl"));
+            user3.setQualification((Integer) userDataList.get(i).get("qualification"));
+            user3.setRole(Role.PROFESSIONAL);
+            user3.setProfession(professions.get(i));
+            user3.setDescription((String) userDataList.get(i).get("description"));
+
+            userRepository.save(user3);
+        }
     }
 }

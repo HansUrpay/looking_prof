@@ -27,7 +27,7 @@ public class UserData {
                 "{\"firstName\":\"Sofía\",\"lastName\":\"García\",\"email\":\"sofiagarcia@gmail.com\",\"password\":\"hashed_password_6\"," +
                 "\"phone\":\"+5491556677999\",\"address\":\"Avenida San Martín 123\",\"country\":\"Argentina\",\"imageUrl\":\"https://res.cloudinary.com/dlq0ud8ly/image/upload/v1709574374/LookingProf/jimmy-fermin-bqe0J0b26RQ-unsplash_ndf07h.jpg\"," +
                 "\"qualification\":5,\"description\":\"Experiencia en resolver problemas complejos de manera efectiva.\",\"city\":\"Córdoba\"}," +
-        "{\"firstName\": \"Carlos\", \"lastName\": \"González\", \"email\": \"carlosgonzalez@gmail.com\", \"password\": \"hashed_password_6\"," +
+                "{\"firstName\": \"Carlos\", \"lastName\": \"González\", \"email\": \"carlosgonzalez@gmail.com\", \"password\": \"hashed_password_6\"," +
                 "\"phone\": \"+5491777665544\", \"address\": \"Avenida San Martín 789\", \"country\": \"Argentina\", \"imageUrl\": \"https://res.cloudinary.com/dlq0ud8ly/image/upload/v1709574374/LookingProf/joseph-gonzalez-iFgRcqHznqg-unsplash_wug3h8.jpg\"," +
                 " \"qualification\": 3, \"description\": \"Siempre buscando nuevas formas de ayudar a mis clientes.\", \"city\": \"Corrientes\"}," +
                 "{\"firstName\": \"Ana\", \"lastName\": \"Díaz\", \"email\": \"anadiaz@gmail.com\", \"password\": \"hashed_password_7\", " +
@@ -57,4 +57,59 @@ public class UserData {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(json, List.class);
     }
+
+    public List<Map<String, Object>> jsonData2() throws JsonProcessingException {
+        String json = "[" +
+                "{\"firstName\": \"Mónica\", \"lastName\": \"Velarde\", \"email\": \"monicavelarde@gmail.com\", \"password\": \"hashed_password_1\"," +
+                " \"phone\": \"+5491252985471\", \"address\": \"Calle Principal 2678\", \"country\": \"Argentina\", \"imageUrl\": \"https://res.cloudinary.com/dlq0ud8ly/image/upload/v1709768052/LookingProf/adam-winger-ZsUbK9zSgMo-unsplash_rxorlr.jpg\"," +
+                " \"qualification\": 4, \"description\": \"Soy especialista en tal profesión y tengo tanto tiempo de experiencia\", \"city\": \"Bahía Blanca\"}," +
+                "{\"firstName\": \"Juan\", \"lastName\": \"Pérez\", \"email\": \"juanperez@example.com\", \"password\": \"hashed_password_2\"," +
+                " \"phone\": \"+5491123456789\", \"address\": \"Avenida Principal 123\", \"country\": \"Argentina\", \"imageUrl\": \"https://res.cloudinary.com/dlq0ud8ly/image/upload/v1709768053/LookingProf/jimmy-nilsson-masth-xXytHCOv9ck-unsplash_myxx1j.jpg\"," +
+                " \"qualification\": 5, \"description\": \"Soy experto en tal área y tengo experiencia en tal y tal\", \"city\": \"Andalgalá\"}," +
+                "{\"firstName\": \"Carlos\", \"lastName\": \"Torres\", \"email\": \"carlostorres@example.com\", \"password\": \"hashed_password_3\"," +
+                " \"phone\": \"+5491234567890\", \"address\": \"Calle Secundaria 456\", \"country\": \"Argentina\", \"imageUrl\": \"https://res.cloudinary.com/dlq0ud8ly/image/upload/v1709768052/LookingProf/james-kovin-qqLxF3M-MA8-unsplash_ag4dy1.jpg\"," +
+                " \"qualification\": 3, \"description\": \"Tengo experiencia en esta área y me gusta aprender cosas nuevas\", \"city\": \"Barranqueras\"}" +
+                "]"
+                ;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(json, List.class);
+    }
+
+    public List<Map<String, Object>> jsonData3() throws JsonProcessingException {
+        String json = "[" +
+                "{\"firstName\": \"Ana\", \"lastName\": \"Martínez\", \"email\": \"anamartinez@example.com\", \"password\": \"hashed_password_4\"," +
+                "\"phone\": \"+5491357924680\", \"address\": \"Avenida Central 789\", \"country\": \"Argentina\", \"imageUrl\": \"https://res.cloudinary.com/dlq0ud8ly/image/upload/v1709768052/LookingProf/daria-pimkina-tYaccl19A3Q-unsplash_tc40ft.jpg\"," +
+                "\"qualification\": 4, \"description\": \"Tengo experiencia en esta área y me gusta aprender cosas nuevas\", \"city\": \"Pinamar\"}," +
+                "{\"firstName\": \"José\", \"lastName\": \"López\", \"email\": \"joselopez@example.com\", \"password\": \"hashed_password_5\"," +
+                "\"phone\": \"+5491447952368\", \"address\": \"Calle Principal 456\", \"country\": \"Argentina\", \"imageUrl\": \"https://res.cloudinary.com/dlq0ud8ly/image/upload/v1709768052/LookingProf/jimmy-nilsson-masth-LOtb6vKN3Ac-unsplash_ehkdj2.jpg\"," +
+                "\"qualification\": 3, \"description\": \"Tengo experiencia en tal profesión y tengo tanto tiempo de experiencia\", \"city\": \"Belén\"}," +
+                "{\"firstName\": \"Martín\", \"lastName\": \"García\", \"email\": \"martingarcia@example.com\", \"password\": \"hashed_password_6\"," +
+                "\"phone\": \"+5491569874123\", \"address\": \"Avenida Secundaria 789\", \"country\": \"Argentina\", \"imageUrl\": \"https://res.cloudinary.com/dlq0ud8ly/image/upload/v1709768052/LookingProf/ai-generated-8306280_640_hwqm4x.jpg\"," +
+                "\"qualification\": 5, \"description\": \"Soy especialista en tal área y tengo tanto tiempo de experiencia\", \"city\": \"Presidencia Roque Sáenz Peña\"}" +
+                "]"
+                ;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(json, List.class);
+    }
+
+    public List<Map<String, Object>> jsonData4() throws JsonProcessingException {
+        String json = "[" +
+                "{\"firstName\": \"Laura\", \"lastName\": \"Rodríguez\", \"email\": \"laurarodriguez@example.com\", \"password\": \"hashed_password_7\"," +
+                "\"phone\": \"+5491789562341\", \"address\": \"Calle Secundaria 789\", \"country\": \"Argentina\", \"imageUrl\": \"https://res.cloudinary.com/dlq0ud8ly/image/upload/v1709768052/LookingProf/helena-lopes-_SzvRwdFo6o-unsplash_cnznx8.jpg\"," +
+                "\"qualification\": 4, \"description\": \"Tengo experiencia en esta área y me gusta aprender cosas nuevas\", \"city\": \"Tandil\"}," +
+                "{\"firstName\": \"Diego\", \"lastName\": \"Hernández\", \"email\": \"pedrogomez@example.com\", \"password\": \"hashed_password_8\"," +
+                "\"phone\": \"+5491998765432\", \"address\": \"Avenida Central 456\", \"country\": \"Argentina\", \"imageUrl\": \"https://res.cloudinary.com/dlq0ud8ly/image/upload/v1709768053/LookingProf/ryno-marais-W4fQVj2iPpI-unsplash_tzwljv.jpg\"," +
+                "\"qualification\": 3, \"description\": \"Soy experto en tal área y tengo experiencia en tal y tal\", \"city\": \"Tinogasta\"}," +
+                "{\"firstName\": \"Isabel\", \"lastName\": \"Gómez\", \"email\": \"isabelhernandez@example.com\", \"password\": \"hashed_password_9\"," +
+                "\"phone\": \"+5491897654321\", \"address\": \"Calle Principal 789\", \"country\": \"Argentina\", \"imageUrl\": \"https://res.cloudinary.com/dlq0ud8ly/image/upload/v1709768052/LookingProf/builder-5170548_640_izci5e.jpg\"," +
+                "\"qualification\": 5, \"description\": \"Tengo experiencia en esta área y me gusta aprender cosas nuevas\", \"city\": \"Villa Ángela\"}" +
+                "]"
+                ;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(json, List.class);
+    }
+
 }
