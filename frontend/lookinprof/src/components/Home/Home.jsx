@@ -125,10 +125,11 @@ const Home = () => {
         </div>
         <div className='flex flex-row w-full'>
           <img src={ImageHome2} alt="Home2" className='hidden md:block w-[50%] h-[400px] ml-36' />
-          <div className='flex flex-col justify-center items-center gap-10'>
+          <div className='flex flex-col justify-center items-center gap-4 w-2/3'>
             <h2 className='text-4xl font-bold'>¿Te animas a empezar?</h2>
+            <h3 className='text-xl font-semibold'>Ofrece tus servicios!!!</h3>
             <div>
-              <Button variant='contained' color='primary' onClick={() => handleClickCard()}>Ofrecer Servicios</Button>
+              <Button variant='contained' color='primary' onClick={() => navigate('/support')}>Contactanos</Button>
             </div>
           </div>
         </div>

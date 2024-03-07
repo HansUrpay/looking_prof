@@ -155,11 +155,11 @@ const Register = () => {
               size="small"
               onChange={handleChange}
               error={!!formErrors.email}
-              helperText={formErrors.email ? !formErrors.email : ""}
+              helperText={formErrors.email ? formErrors.email : ""}
             />
-            <FormHelperText error className="text-xs">
+            {/* <FormHelperText error className="text-xs">
               {formErrors.email}
-            </FormHelperText>
+            </FormHelperText> */}
 
             {/* First Name Field */}
             <TextField
@@ -172,9 +172,9 @@ const Register = () => {
               error={!!formErrors.firstName}
               helperText={formErrors.firstName || ''}
             />
-            <FormHelperText error className="text-xs">
-              {formErrors.firstName}
-            </FormHelperText>
+            {/* <FormHelperText error className="text-xs">
+              //{formErrors.firstName}
+            </FormHelperText> */}
 
             {/* Last Name Field */}
             <TextField

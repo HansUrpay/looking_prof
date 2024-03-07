@@ -45,21 +45,34 @@ const NavBar = () => {
         setMenuOpen(!menuOpen);
         
     };
-    console.log(currentUser)
     // Gancho de efecto para manejar clics fuera del menú para cerrarlo
     useEffect(() => {
         const closeMenuOnClickOutside = (e) => {
             if (navRef.current && !navRef.current.contains(e.target)) {
+                const currentIndex = links.findIndex(link => link.path === location.pathname);
+                setActive(currentIndex);
                 setMenuOpen(false);
             }
         };
 
-        document.addEventListener('mousedown', closeMenuOnClickOutside);
+        const closeMenuOnScroll = () => {
+            setMenuOpen(false);
+        };
+
+        if (menuOpen) {
+            document.addEventListener('mousedown', closeMenuOnClickOutside);
+            window.addEventListener('scroll', closeMenuOnScroll);
+        } else {
+            document.removeEventListener('mousedown', closeMenuOnClickOutside);
+            window.removeEventListener('scroll', closeMenuOnScroll);
+        }
 
         return () => {
             document.removeEventListener('mousedown', closeMenuOnClickOutside);
+            window.removeEventListener('scroll', closeMenuOnScroll);
+            
         };
-    }, []);
+    }, [menuOpen, location.pathname]);
 
     // Función para cerrar la sesión del usuario
     const logout = () => {

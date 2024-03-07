@@ -10,26 +10,29 @@ import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/Footer'
 import ProtectedRoutes from './Routes/ProtectedRoutes'
 import Profile from './components/Profile/Profile.jsx'
-
+import ScrollToTop from './UI/ScrollToTop.jsx'
 
 function App() {
   return (
+    <>
     <BrowserRouter>
       <NavBar/>
+      <ScrollToTop /> {/* Mueve esta línea dentro del BrowserRouter */}
       <Routes>
-      <Route index element={<Home/>}/>
-      <Route path='support' element={<Contact/>}/>
-      <Route path='login' element={<Login/>}/>
-      <Route path='services' element={<Services/>}/>
-      <Route path='register' element={<Register/>}/>
-      <Route element={<ProtectedRoutes/>}> 
-        <Route path='services/:id' element={<ServicesDetails />} />
-        <Route path='profile/:id' element={<Profile/>}/>  
-      </Route> 
-      <Route path='*' element={<NotFound/>}/>
+        <Route index element={<Home/>}/>
+        <Route path='support' element={<Contact/>}/>
+        <Route path='login' element={<Login/>}/>
+        <Route path='services' element={<Services/>}/>
+        <Route path='register' element={<Register/>}/>
+        <Route element={<ProtectedRoutes/>}> 
+          <Route path='services/:id' element={<ServicesDetails />} />
+          <Route path='profile/:id' element={<Profile/>}/>  
+        </Route> 
+        <Route path='*' element={<NotFound/>}/>
       </Routes>
       <Footer/>
     </BrowserRouter>
+    </>
   );
 }
 

@@ -11,6 +11,7 @@ import axios from 'axios';
 import Cards from '../../UI/cards/Cards';
 
 const Services = () => {
+ 
     const [filters, setFilters] = useState({
         profession: '',
         provincia: '',
@@ -24,7 +25,7 @@ const Services = () => {
     const [sortOrder, setSortOrder] = useState('asc');
     const [selectProv, setSelectProv] = useState('');
     const [selectCity, setSelectCity] = useState('');
-    window.scroll(0, 0);
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -101,12 +102,10 @@ const Services = () => {
         setFilters({ profession: '', province: '', selectedCityId: '' });
     };
     const handleSortOrderChange = () => {
-        const sortedServices = [...services].sort((a, b) => {
-            if (sortOrder === 'asc') {
-                return a.province.localeCompare(b.province);
-            } else {
-                return b.province.localeCompare(a.province);
-            }
+        const sortedServices = services.slice().sort((a, b) => {
+            const provinceA = a.province || ''; // Handle potential null value
+            const provinceB = b.province || ''; // Handle potential null value
+            return (sortOrder === 'asc' ? 1 : -1) * provinceA.localeCompare(provinceB);
         });
         setServices(sortedServices);
         setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -204,7 +203,7 @@ const Services = () => {
                     Ordenar {sortOrder === 'desc' ? <IoMdArrowRoundDown /> : <IoMdArrowRoundUp />}
                 </Button>
             </div>
-            <div className='flex flex-col items-center justify-center w-full'>
+            <div class='services' className='flex flex-col items-center justify-center w-full'>
                 {services.filter(filterServices).length > 0 ? (
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:w-full max-w-[1100px] lg:min-w-[320px] p-2 justify-center'>
                         {Array.isArray(services) && services.filter(filterServices).length > 0 ? (services.filter(filterServices).map((item) => (

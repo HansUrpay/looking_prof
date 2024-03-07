@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import UserProfile from './userProfile/UserProfile';
 import ServiceProfile from './serviceProfile/ServiceProfile';
 import { setCurrentUser } from '../../redux/slices/userSlice';
-
+import NotFound from '../NotFound/NotFound';
 const Profile = () => {
   const dispatch = useDispatch();
   const [decodedPayload, setDecodedPayload] = useState(null);
@@ -27,7 +27,7 @@ const Profile = () => {
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      {hasUserRole ? <UserProfile /> : <ServiceProfile />}
+      {hasUserRole ? <UserProfile /> : <NotFound />}
     </div>
   );
 };
