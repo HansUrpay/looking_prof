@@ -23,15 +23,10 @@ const Contact = () => {
         subject: userSubject,
         text: userMessage,
       });
-
-      const confirm = window.confirm("¿Estás seguro de querer enviar el mensaje de soporte?");
-      if (confirm) {
-        setTimeout(() => {
-          alert("Serás redirigido al inicio");
-          navigate('/');
-        }, 3000);
-      }
-      
+      setTimeout(() => {
+  
+        navigate('/');
+      }, 1000);
     } catch (error) {
       console.error('Error sending data:', error);
     }
