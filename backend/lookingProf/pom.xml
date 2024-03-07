@@ -89,7 +89,11 @@
 			<artifactId>jackson-core</artifactId>
 			<version>2.16.1</version>
 		</dependency>
-
+		<!--Dependencia para el envio de email -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
