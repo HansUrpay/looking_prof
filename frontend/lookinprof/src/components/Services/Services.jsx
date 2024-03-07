@@ -112,12 +112,13 @@ const Services = () => {
     };
     useEffect(() => {
         const fetchData = async () => {
+            if(filters.provincia){
             try {
                 const response = await axios.get(`http://localhost:8080/provinces/get/${filters.provincia}`);
                 setSelectProv(response.data.nameProvince)
             } catch (error) {
                 console.error('Error fetching province data:', error);
-            }
+            }}
         }
         fetchData()
     }, [filters.provincia]);
