@@ -81,7 +81,7 @@ const Login = () => {
     }
 
     try {
-      const responseData = await axios.post('http://localhost:8080/auth/login', { email, password },
+      const responseData = await axios.post('http://3.142.156.194:8080/auth/login', { email, password },
         {
           headers: {
             'Content-Type': 'application/json',

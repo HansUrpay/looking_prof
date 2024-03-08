@@ -15,7 +15,7 @@ const ServicesDetails = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(`http://localhost:8080/user/${id}`, {
+            const response = await axios.get(`http://3.142.156.194:8080/user/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${jwt}`,
                     'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ const ServicesDetails = () => {
 
     useEffect(() => {
         const fetchSimilarServices = async () => {
-            const { data } = await axios.get('http://localhost:8080/user/all');
+            const { data } = await axios.get('http://3.142.156.194:8080/user/all');
             const filteredServices = data.filter(item =>
                 item.role === 'PROFESSIONAL' &&
                 item.profession === servicesData.profession &&
@@ -77,8 +77,8 @@ const ServicesDetails = () => {
                                 <span>{servicesData.city}, {servicesData.province}</span>
                             </div>
                             <div>
-                                <h5 className='font-semibold'>Acerca de {servicesData.description}</h5>
-                                <p>{ }</p>
+                                <h5 className='font-semibold'>Acerca de </h5>
+                                <p>{ servicesData.description}</p>
                             </div>
                         </div>
                         <div className='border-[1px] p-4 rounded-xl shadow-lg w-full md:w-[400px]'>
@@ -103,7 +103,7 @@ const ServicesDetails = () => {
                 <section className=' flex flex-col md:flex-row items-center justify-center lg:w-[1100px]'>
                     {currentItems.length > 0 ? (
                         currentItems.map((item) => (
-                            <div key={item.idUser} className='lg:p-4 lg:m-4 border-[#004466] w-full shadow-slate-400 shadow-xl border-2 rounded-lg h-auto'>
+                            <div key={item.idUser} className='lg:p-4 lg:m-4 border-[#004466] w-[300px] shadow-slate-400 shadow-xl border-2 rounded-lg h-auto'>
                                 <div className='flex flex-col justify-center items-center'>
                                     <img src={item.imageUrl} alt={item.profession} className='w-full lg:w-[9vw] h-[30%] lg:h-[25vh] rounded-t-lg mb-4 cover' />
                                     <div>

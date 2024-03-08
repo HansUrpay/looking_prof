@@ -30,22 +30,22 @@ const Services = () => {
         const fetchData = async () => {
             try {
                 const [servicesResponse, professionsResponse, provincesResponse, citiesResponse] = await Promise.all([
-                    axios.get('http://localhost:8080/user/all',{
+                    axios.get('http://3.142.156.194:8080/user/all',{
                         headers: {
                             'Access-Control-Allow-Origin': '*',
                         }
                     }),
-                    axios.get('http://localhost:8080/profession/get',{
+                    axios.get('http://3.142.156.194:8080/profession/get',{
                         headers: {
                             'Access-Control-Allow-Origin': '*',
                         }
                     }),
-                    axios.get('http://localhost:8080/provinces/get',{
+                    axios.get('http://3.142.156.194:8080/provinces/get',{
                         headers: {
                             'Access-Control-Allow-Origin': '*',
                         }
                     }),
-                    axios.get('http://localhost:8080/city/get',{
+                    axios.get('http://3.142.156.194:8080/city/get',{
                         headers: {
                             'Access-Control-Allow-Origin': '*',
                         }
@@ -114,7 +114,7 @@ const Services = () => {
         const fetchData = async () => {
             if(filters.provincia){
             try {
-                const response = await axios.get(`http://localhost:8080/provinces/get/${filters.provincia}`);
+                const response = await axios.get(`http://3.142.156.194:8080/provinces/get/${filters.provincia}`);
                 setSelectProv(response.data.nameProvince)
             } catch (error) {
                 console.error('Error fetching province data:', error);

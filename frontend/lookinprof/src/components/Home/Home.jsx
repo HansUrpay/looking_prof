@@ -22,7 +22,7 @@ const Home = () => {
     let didCancel = false; 
     const fetchServicesData = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/user/all',{
+            const response = await axios.get('http://3.142.156.194:8080/user/all',{
               headers: {
                   'Access-Control-Allow-Origin': '*',
               }

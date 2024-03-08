@@ -92,7 +92,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8080/auth/register', formData);
+      const response = await axios.post('http://3.142.156.194:8080/auth/register', formData);
       const token = response.data.token;
       localStorage.setItem('jwt', token);
       const payload = JSON.parse(atob(token.split('.')[1]));

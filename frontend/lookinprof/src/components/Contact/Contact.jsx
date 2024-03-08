@@ -17,7 +17,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/supportContact/send', {
+      await axios.post('http://3.142.156.194:8080/supportContact/send', {
         fromName: userName,
         fromEmail: userEmail,
         subject: userSubject,
