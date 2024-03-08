@@ -1,5 +1,5 @@
-import React from "react";
-import man from "../../assets/manLaptop.png";
+import React, { useState, useEffect } from "react";
+import mountain from "../../assets/montain.png";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -7,39 +7,129 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Typography } from "@mui/material";
 
 const Login = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (storedUser) {
+      setEmail(storedUser.username);
+    }
+  }, []);
+
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  return (
-    <div className="flex justify-center">
-      <div className="shadow-2xl rounded-3xl shadow-gray-400 bg-slate-300/10 w-1/3 flex items-center">
-        <img src={man} alt="man with laptop" ></img>
-      </div>
-      
-      <div className="shadow-2xl rounded-3xl shadow-gray-400 px-20 py-20 flex flex-col justify-between w-1/3">
-          <Typography variant="h3" gutterBottom >
-            Iniciar Sesión
-          </Typography>
 
-          <form className="flex flex-col align-items: center justify-content: center space-y-5">
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+  
+  const validateEmail = (email) => {
+    if (!email) {
+      setEmailError('El correo electrónico es requerido');
+      return false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError('El formato del correo electrónico no es válido');
+      return false;
+    }
+    setEmailError('');
+    return true;
+  };
+
+  const validatePassword = (password) => {
+    if (!password) {
+      setPasswordError('La contraseña es requerida');
+      return false;
+    } else if (password.length < 8) {
+      setPasswordError('La contraseña debe tener al menos 8 caracteres');
+      return false;
+    }
+    setPasswordError('');
+    return true;
+  };
+
+  const signIn = async (e) => {
+    e.preventDefault();
+
+    const isEmailValid = validateEmail(email);
+    const isPasswordValid = validatePassword(password);
+
+    if (!isEmailValid || !isPasswordValid) {
+      return;
+    }
+
+    try {
+      const responseData = await axios.post('http://3.142.156.194:8080/auth/login', { email, password },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          }}
+      );
+      const token = responseData.data.token;
+      localStorage.setItem('jwt', token);
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      dispatch(setCurrentUser(payload));
+      alert(`Hola de nuevo!! ${payload.firstName}`);
+      navigate('/');
+    } catch (error) {
+      console.log(error)
+      if (error.response && error.response.status === 401) {
+        setPasswordError('La contraseña es incorrecta.');
+      } else {
+        alert('Verifica correo y/o contraseña');
+      }
+    }
+  };
+
+ 
+  return (
+    <div className="flex flex-col h-full sm:h-screen justify-center items-center" style={{
+      backgroundImage: `url(${mountain})`,
+      backgroundSize: "cover",
+    }}>
+      <div className="flex flex-col justify-center items-center">
+        <div className="lg:rounded-3xl p-10  bg-white  justify-center">
+          <div className="sm:text-sm">
+            <Typography variant="h3" gutterBottom>
+              Iniciar Sesión
+            </Typography>
+          </div>
+          <form onSubmit={signIn} className="flex flex-col gap-5 z-10">
             <TextField
               label="Correo Electrónico"
               placeholder="Correo Electrónico"
               variant="outlined"
+              size="small"
+              value={email}
+              onChange={handleEmailChange}
+              error={!!emailError}
+              helperText={emailError}
             />
-
-            <FormControl variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">
+            <FormControl variant="outlined" error={!!passwordError}>
+              <InputLabel htmlFor="outlined-adornment-password" size="small">
                 Password
               </InputLabel>
               <OutlinedInput
@@ -58,19 +148,26 @@ const Login = () => {
                   </InputAdornment>
                 }
                 label="Password"
+                size="small"
+                value={password}
+                onChange={handlePasswordChange}
               />
+              {passwordError && (
+                <p className="text-sm text-red-500">{passwordError}</p>
+              )}
             </FormControl>
-
-            <Button variant="contained">Iniciar Sesión</Button>
+            <Button variant="contained" type="submit">
+              Iniciar Sesión
+            </Button>
           </form>
-          <p >
+          <p className="pt-5 text-xs font-medium">
             No tienes una cuenta aún,{" "}
-            <Link to={`/register`} className="text-blue-700 blod font-semibold">
+            <Link to={`/register`} className="text-blue-700 bold font-semibold">
               click aquí.
             </Link>
           </p>
         </div>
-      
+      </div>
     </div>
   );
 };
