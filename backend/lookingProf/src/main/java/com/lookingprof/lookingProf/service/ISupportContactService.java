@@ -1,9 +1,11 @@
 package com.lookingprof.lookingProf.service;
 
 
+import com.lookingprof.lookingProf.dto.SupportContactDTO;
 import com.lookingprof.lookingProf.model.SupportContact;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ISupportContactService {
     public List<SupportContact> getAllSupportContact();
@@ -19,5 +21,9 @@ public interface ISupportContactService {
 
     //edit publication
     public void editSupportContact(SupportContact supportContact);
+
+    public Optional<List<SupportContactDTO>> getSupportContactDTO();
+
+    public SupportContactDTO getSupportContactDTOById(Integer idSupportContact);
 }
 

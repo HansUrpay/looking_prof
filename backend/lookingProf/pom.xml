@@ -90,14 +90,18 @@
 			<version>2.16.1</version>
 		</dependency>
 
-		<!-- Jackson para parsear en el DataLoader-->
+		<!--Dependencia para el envio de email -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<!-- POSTGRESQL -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.7.2</version>
 		</dependency>
-
-
 
 	</dependencies>
 
