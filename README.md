@@ -105,4 +105,4 @@ El soporte para navegadores será limitado a las últimas versiones de Chrome, F
 # **Tecnologías y herramientas a utilizar:**
 - Frontend: React, Tailwindcss
 - Backend: Java, Spring Boot, MySQL
-- Desing UX/Ui Figma <a href="https://www.figma.com/proto/remhOuchz3PG2YVHd7pJW8/LOOKINGPROF-SITIO-WEB---No-Country-C16-52-T-JAVA?type=design&node-id=3117-2428&scaling=min-zoom&page-id=3117%3A203" target="_blank">Link Prototipo Figma</a>
+- Desing UX/Ui Figma <a href="[https://www.figma.com/proto/remhOuchz3PG2YVHd7pJW8/LOOKINGPROF-SITIO-WEB---No-Country-C16-52-T-JAVA?type=design&node-id=3117-2428&scaling=min-zoom&page-id=3117%3A203](https://www.figma.com/file/wxjN5zlGEI7QmCtHlXdODC/LookingProf-SITIO---Simulaci%C3%B3n-No-Country-C16-52-T-JAVA?type=design&node-id=0-1&mode=design&t=o3QpRYz8gcG1jlbW-0)https://www.figma.com/file/wxjN5zlGEI7QmCtHlXdODC/LookingProf-SITIO---Simulaci%C3%B3n-No-Country-C16-52-T-JAVA?type=design&node-id=0-1&mode=design&t=o3QpRYz8gcG1jlbW-0" target="_blank">Link Prototipo Figma</a>
