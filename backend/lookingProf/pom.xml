@@ -83,11 +83,24 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Jackson para parsear en el DataLoader-->
+		<!-- Jackson para parsear en el UserData-->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 			<version>2.16.1</version>
+		</dependency>
+
+		<!--Dependencia para el envio de email -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<!-- POSTGRESQL -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.7.2</version>
 		</dependency>
 
 	</dependencies>

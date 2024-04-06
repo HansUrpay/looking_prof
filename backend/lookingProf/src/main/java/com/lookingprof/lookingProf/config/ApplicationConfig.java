@@ -40,7 +40,7 @@ public class ApplicationConfig {
     }
 
     /**
-     * Personaliza el encriptador que va usar la apliccción para las contraseñas de usuarios antes de alamacenar en la BD
+     * Personaliza el encriptador que va usar la aplicación para las contraseñas de usuarios antes de alamacenar en la BD
      * @return devuelve una instancia de BCryptPasswordEncoder
      */
     @Bean

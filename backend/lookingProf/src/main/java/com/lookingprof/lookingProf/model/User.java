@@ -30,6 +30,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "user_entity")
 public class User implements UserDetails {
 
     @Id
