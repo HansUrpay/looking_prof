@@ -65,7 +65,7 @@ public class DataLoader implements CommandLineRunner {
 
         if (professionRepository.count() == 0) {
             List<String> professions = List.of("Ama de llaves", "Albañil", "Carpintero(a)", "Cerrajero(a)", "Cocinera(o)",
-                    "Costurera(o)", "Cuidadora de niños", "Cuidadora de personas mayores", "Decorador", "Electricista",
+                    "Costurera(o)", "Cuidadora de niños", "Cuidador(a) de personas mayores", "Decorador(a)", "Electricista",
                     "Fontanero(a)", "Fumigador(a)", "Gasfitero(a)", "Jardinero(a)", "Lavaplatos", "Limpiador(a)", "Mecánico",
                     "Mozo(a) de limpieza", "Pintor(a)", "Plomero(a)", "Reparador(a) de electrodomésticos", "Reparador(a) de muebles",
                     "Reparador(a) de tejados", "Reparador(a) de ventanas", "Restaurador(a)", "Sastre", "Tapicero(a)",
