@@ -24,6 +24,7 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const backendUrl = "https://looking-prof.onrender.com";
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -81,7 +82,7 @@ const Login = () => {
     }
 
     try {
-      const responseData = await axios.post('http://3.142.156.194:8080/auth/login', { email, password },
+      const responseData = await axios.post(`${backendUrl}/auth/login`, { email, password },
         {
           headers: {
             'Content-Type': 'application/json',

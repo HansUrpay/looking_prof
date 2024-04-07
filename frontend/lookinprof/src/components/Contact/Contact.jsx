@@ -13,11 +13,12 @@ const Contact = () => {
   const [userMessage, setUserMessage] = useState('');
   const [userSubject, setUserSubject] = useState('');
   const navigate = useNavigate();
+  const backendUrl = "https://looking-prof.onrender.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://3.142.156.194:8080/supportContact/send', {
+      await axios.post(`${backendUrl}/supportContact/send`, {
         fromName: userName,
         fromEmail: userEmail,
         subject: userSubject,
