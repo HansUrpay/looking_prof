@@ -33,7 +33,7 @@ public class SecurityConfig {
     @Autowired
     JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    @Value("FRONTEND_URL")
+    @Value("frontendUrl")
     private String frontendUrl;
 
     @Bean
@@ -61,7 +61,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("https://c16-52-t-java.vercel.app/"));
+        corsConfiguration.setAllowedOrigins(List.of(frontendUrl));
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.setAllowCredentials(true);
