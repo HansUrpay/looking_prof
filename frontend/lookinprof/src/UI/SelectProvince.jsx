@@ -8,18 +8,19 @@ const SelectProvince = ({ onProvinciaChange }) => {
     const [selectedProvName, setSelectedProvName] = useState('');
     const [cities, setCities] = useState([]);
     const [selectedCityId, setSelectedCityId] = useState('');
+    const backendUrl = "https://looking-prof.onrender.com";
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const provincesRes = await axios.get("http://localhost:8080/provinces/get");
+                const provincesRes = await axios.get(`${backendUrl}/provinces/get`);
                 setProvincias(provincesRes.data || []);
             } catch (error) {
                 console.error('Error al obtener las provincias:', error);
             }
 
             try {
-                const citiesRes = await axios.get("http://localhost:8080/city/get");
+                const citiesRes = await axios.get(`${backendUrl}/city/get`);
                 setCities(citiesRes.data || []);
             } catch (error) {
                 console.error('Error al obtener las ciudades:', error);

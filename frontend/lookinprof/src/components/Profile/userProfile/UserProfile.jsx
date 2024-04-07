@@ -16,11 +16,12 @@ const UserProfile = () => {
   //   city: "",
   //   province: "",
   // });
+  const backendUrl = "https://looking-prof.onrender.com";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://3.142.156.194:8080/user/${id}`, {
+        const response = await axios.get(`${backendUrl}/user/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -40,7 +41,7 @@ const UserProfile = () => {
   // useEffect(() => {
   //   const fetchProvinces = async () => {
   //     try {
-  //       const response = await axios.get("http://localhost:8080/provinces/get");
+        // const response = await axios.get(`${backendUrl}/provinces/get`);
   //       setProvinces(response.data);
   //     } catch (error) {
   //       console.error("Error fetching provinces:", error);
@@ -68,7 +69,7 @@ const UserProfile = () => {
   // const handleSaveChanges = async () => {
   //   try {
   //     const response = await axios.put(
-  //       `http://localhost:8080/user/${id}`,
+        // `${backendUrl}/user/${id}`,
   //       editedData,
   //       {
   //         headers: {

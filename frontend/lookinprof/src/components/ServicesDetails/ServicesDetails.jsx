@@ -12,10 +12,11 @@ const ServicesDetails = () => {
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = window.innerWidth < 1024 ? 1 : 3; // Show 1 item on mobile, 3 items on desktop
+    const backendUrl = "https://looking-prof.onrender.com";
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(`http://3.142.156.194:8080/user/${id}`, {
+            const response = await axios.get(`${backendUrl}/user/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${jwt}`,
                     'Content-Type': 'application/json',
@@ -29,7 +30,7 @@ const ServicesDetails = () => {
 
     useEffect(() => {
         const fetchSimilarServices = async () => {
-            const { data } = await axios.get('http://3.142.156.194:8080/user/all');
+            const { data } = await axios.get(`${backendUrl}/user/all`);
             const filteredServices = data.filter(item =>
                 item.role === 'PROFESSIONAL' &&
                 item.profession === servicesData.profession &&

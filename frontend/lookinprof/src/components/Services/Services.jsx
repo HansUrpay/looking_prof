@@ -25,27 +25,28 @@ const Services = () => {
     const [sortOrder, setSortOrder] = useState('asc');
     const [selectProv, setSelectProv] = useState('');
     const [selectCity, setSelectCity] = useState('');
+    const backendUrl = 'https://looking-prof.onrender.com'
     
     useEffect(() => {
         const fetchData = async () => {
-            try {
+          try {
                 const [servicesResponse, professionsResponse, provincesResponse, citiesResponse] = await Promise.all([
-                    axios.get('http://3.142.156.194:8080/user/all',{
-                        headers: {
-                            'Access-Control-Allow-Origin': '*',
-                        }
+                    axios.get(`${backendUrl}/user/all`,{
+                      headers: {
+                        'Access-Control-Allow-Origin': '*',
+                      }
                     }),
-                    axios.get('http://3.142.156.194:8080/profession/get',{
-                        headers: {
-                            'Access-Control-Allow-Origin': '*',
-                        }
+                    axios.get(`${backendUrl}/profession/get`,{
+                      headers: {
+                        'Access-Control-Allow-Origin': '*',
+                      }
                     }),
-                    axios.get('http://3.142.156.194:8080/provinces/get',{
-                        headers: {
-                            'Access-Control-Allow-Origin': '*',
-                        }
+                    axios.get(`${backendUrl}/provinces/get`,{
+                      headers: {
+                        'Access-Control-Allow-Origin': '*',
+                      }
                     }),
-                    axios.get('http://3.142.156.194:8080/city/get',{
+                    axios.get(`${backendUrl}/city/get`,{
                         headers: {
                             'Access-Control-Allow-Origin': '*',
                         }
@@ -113,8 +114,8 @@ const Services = () => {
     useEffect(() => {
         const fetchData = async () => {
             if(filters.provincia){
-            try {
-                const response = await axios.get(`http://3.142.156.194:8080/provinces/get/${filters.provincia}`);
+              try {
+                const response = await axios.get(`${backendUrl}/provinces/get/${filters.provincia}`);
                 setSelectProv(response.data.nameProvince)
             } catch (error) {
                 console.error('Error fetching province data:', error);

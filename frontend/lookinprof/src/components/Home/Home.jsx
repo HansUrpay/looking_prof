@@ -18,15 +18,17 @@ const Home = () => {
   const professionals = servicesData.filter((item) => item.role === 'PROFESSIONAL');
   const servicesHome = professionals.slice(0, 6);
   const dispatch = useDispatch();
+  const backendUrl = "https://looking-prof.onrender.com";
+
   useEffect(() => {
     let didCancel = false; 
     const fetchServicesData = async () => {
         try {
-            const response = await axios.get('http://3.142.156.194:8080/user/all',{
+            const response = await axios.get(`${backendUrl}/user/all`, {
               headers: {
-                  'Access-Control-Allow-Origin': '*',
-              }
-          });
+                "Access-Control-Allow-Origin": "*",
+              },
+            });
             if (!didCancel) { 
                 setServicesData(response.data);
             }
